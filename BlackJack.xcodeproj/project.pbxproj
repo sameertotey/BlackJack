@@ -14,7 +14,7 @@
 		05C12E0A1A7FEA980055D264 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C12E091A7FEA980055D264 /* Images.xcassets */; };
 		05C12E0D1A7FEA980055D264 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C12E0B1A7FEA980055D264 /* LaunchScreen.xib */; };
 		05C12E191A7FEA980055D264 /* BlackJackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E181A7FEA980055D264 /* BlackJackTests.swift */; };
-		05C12E231A8003B00055D264 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E221A8003B00055D264 /* PlayingCard.swift */; };
+		05C12E231A8003B00055D264 /* BlackjackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E221A8003B00055D264 /* BlackjackCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +39,7 @@
 		05C12E121A7FEA980055D264 /* BlackJackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackJackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C12E171A7FEA980055D264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05C12E181A7FEA980055D264 /* BlackJackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackJackTests.swift; sourceTree = "<group>"; };
-		05C12E221A8003B00055D264 /* PlayingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
+		05C12E221A8003B00055D264 /* BlackjackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackjackCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +119,7 @@
 		05C12E241A8003C00055D264 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				05C12E221A8003B00055D264 /* PlayingCard.swift */,
+				05C12E221A8003B00055D264 /* BlackjackCard.swift */,
 				05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */,
 			);
 			name = Model;
@@ -244,7 +244,7 @@
 			files = (
 				05C12E051A7FEA980055D264 /* GameViewController.swift in Sources */,
 				05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */,
-				05C12E231A8003B00055D264 /* PlayingCard.swift in Sources */,
+				05C12E231A8003B00055D264 /* BlackjackCard.swift in Sources */,
 				05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
