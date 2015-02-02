@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12DFF1A7FEA980055D264 /* AppDelegate.swift */; };
 		05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */; };
-		05C12E051A7FEA980055D264 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E041A7FEA980055D264 /* ViewController.swift */; };
+		05C12E051A7FEA980055D264 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E041A7FEA980055D264 /* GameViewController.swift */; };
 		05C12E081A7FEA980055D264 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05C12E061A7FEA980055D264 /* Main.storyboard */; };
 		05C12E0A1A7FEA980055D264 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C12E091A7FEA980055D264 /* Images.xcassets */; };
 		05C12E0D1A7FEA980055D264 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C12E0B1A7FEA980055D264 /* LaunchScreen.xib */; };
 		05C12E191A7FEA980055D264 /* BlackJackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E181A7FEA980055D264 /* BlackJackTests.swift */; };
+		05C12E231A8003B00055D264 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E221A8003B00055D264 /* PlayingCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +32,14 @@
 		05C12DFE1A7FEA980055D264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05C12DFF1A7FEA980055D264 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05C12E021A7FEA980055D264 /* BlackJack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BlackJack.xcdatamodel; sourceTree = "<group>"; };
-		05C12E041A7FEA980055D264 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		05C12E041A7FEA980055D264 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		05C12E071A7FEA980055D264 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05C12E091A7FEA980055D264 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05C12E0C1A7FEA980055D264 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		05C12E121A7FEA980055D264 /* BlackJackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackJackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C12E171A7FEA980055D264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05C12E181A7FEA980055D264 /* BlackJackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackJackTests.swift; sourceTree = "<group>"; };
+		05C12E221A8003B00055D264 /* PlayingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,11 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				05C12DFF1A7FEA980055D264 /* AppDelegate.swift */,
-				05C12E041A7FEA980055D264 /* ViewController.swift */,
-				05C12E061A7FEA980055D264 /* Main.storyboard */,
+				05C12E261A8004530055D264 /* Controllers */,
+				05C12E251A8003E20055D264 /* View */,
+				05C12E241A8003C00055D264 /* Model */,
 				05C12E091A7FEA980055D264 /* Images.xcassets */,
-				05C12E0B1A7FEA980055D264 /* LaunchScreen.xib */,
-				05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */,
 				05C12DFD1A7FEA980055D264 /* Supporting Files */,
 			);
 			path = BlackJack;
@@ -113,6 +114,32 @@
 				05C12E171A7FEA980055D264 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05C12E241A8003C00055D264 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05C12E221A8003B00055D264 /* PlayingCard.swift */,
+				05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		05C12E251A8003E20055D264 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				05C12E061A7FEA980055D264 /* Main.storyboard */,
+				05C12E0B1A7FEA980055D264 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		05C12E261A8004530055D264 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				05C12E041A7FEA980055D264 /* GameViewController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,8 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05C12E051A7FEA980055D264 /* ViewController.swift in Sources */,
+				05C12E051A7FEA980055D264 /* GameViewController.swift in Sources */,
 				05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */,
+				05C12E231A8003B00055D264 /* PlayingCard.swift in Sources */,
 				05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
