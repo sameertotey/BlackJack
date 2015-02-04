@@ -10,8 +10,10 @@ import UIKit
 
 class BlackjackCard: NSObject {
     // nested Suit enumeration
-    enum Suit: Character {
+    enum Suit: String {
         case Spades = "♠", Hearts = "♡", Diamonds = "♢", Clubs = "♣"
+        
+        static let allSuits = ["♠", "♡", "♢", "♣"]
     }
     
     // nested Rank enumeration
@@ -37,6 +39,34 @@ class BlackjackCard: NSObject {
     let rank: Rank, suit: Suit
     override var description: String {
         var output = "suit is \(suit.rawValue),"
+        switch rank {
+        case .Two:
+            output += " rank is Two,"
+        case .Three:
+            output += " rank is Three,"
+        case .Four:
+            output += " rank is Four"
+        case .Five:
+            output += " rank is Five"
+        case .Six:
+            output += " rank is Six"
+        case .Seven:
+            output += " rank is Seven"
+        case .Eight:
+            output += " rank is Eight"
+        case .Nine:
+            output += " rank is Nine"
+        case .Ten:
+            output += " rank is Ten"
+        case .Jack:
+            output += " rank is Jack"
+        case .Queen:
+            output += " rank is Queen"
+        case .King:
+            output += " rank is King"
+        case .Ace:
+            output += " rank is Ace"
+        }
         output += " value is \(rank.values.first)"
         if let second = rank.values.second {
             output += " or \(second)"
@@ -47,5 +77,6 @@ class BlackjackCard: NSObject {
     init (rank: Rank, suit: Suit) {
         self.rank = rank
         self.suit = suit
+        super.init()
     }
 }

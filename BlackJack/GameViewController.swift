@@ -19,6 +19,10 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func returnToGameViewController(segue:UIStoryboardSegue) {
+        
+    }
 
 
 }
