@@ -11,9 +11,9 @@ import UIKit
 class BlackjackCard: NSObject {
     // nested Suit enumeration
     enum Suit: String {
-        case Spades = "♠", Hearts = "♡", Diamonds = "♢", Clubs = "♣"
+        case Spades = "♠️", Hearts = "♥️", Diamonds = "♦️", Clubs = "♣️"
         
-        static let allSuits = ["♠", "♡", "♢", "♣"]
+        static let allSuits = ["♠️", "♥️", "♦️", "♣️"]
     }
     
     // nested Rank enumeration
@@ -32,6 +32,21 @@ class BlackjackCard: NSObject {
             default:
                 return Values(first: self.rawValue, second: nil)
             }
+        }
+        var shortDescription: String {
+            switch self {
+            case .Ace:
+                return "A"
+            case .Jack:
+                return "J"
+            case .Queen:
+                return "Q"
+            case .King:
+                return "K"
+            default:
+                return "\(rawValue)"
+            }
+            
         }
     }
     

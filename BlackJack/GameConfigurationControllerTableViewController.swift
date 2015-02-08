@@ -37,7 +37,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "Save" {
+        if segue.identifier == "SaveFromConfiguration" {
             gameConfiguration.save()
         }
     }
@@ -143,14 +143,5 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     }
     */
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
