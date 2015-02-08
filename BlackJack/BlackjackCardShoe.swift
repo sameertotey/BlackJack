@@ -19,7 +19,7 @@ class BlackjackCardShoe: NSObject {
     convenience init(numDecks: Int) {
         self.init()
         assert(numDecks > 0, "The Shoe needs atleast one deck of cards")
-        let cardsInBlackJackDeck = BlackjackCardDeck().cards
+        let cardsInBlackJackDeck: [BlackjackCard] = PlayingCardDeck().cards
         for _ in 0..<numDecks {
            cards += cardsInBlackJackDeck
         }

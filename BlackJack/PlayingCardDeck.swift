@@ -38,14 +38,14 @@ extension Array {
     }
 }
 
-class BlackjackCardDeck: NSObject {
-     let cards: [BlackjackCard]
+class PlayingCardDeck<T: PlayingCard>: NSObject {
+     let cards: [T]
     
     override init() {
         self.cards = []
-        for rawSuit in BlackjackCard.Suit.allSuits  {
+        for rawSuit in T.Suit.allSuits  {
             for var rawRank = 2; rawRank <= 14; rawRank++ {
-                self.cards.append(BlackjackCard(rank: BlackjackCard.Rank(rawValue: rawRank)!, suit: BlackjackCard.Suit(rawValue: rawSuit)!))
+                self.cards.append(T(rank: T.Rank(rawValue: rawRank)!, suit: T.Suit(rawValue: rawSuit)!))
             }
             
         }
