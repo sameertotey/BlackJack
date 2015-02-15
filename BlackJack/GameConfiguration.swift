@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class GameConfiguration: NSObject {
     // we use the key constants to store value in NSUserDefaults

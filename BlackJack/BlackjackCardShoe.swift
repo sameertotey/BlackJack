@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class BlackjackCardShoe: NSObject {
     var cards: [BlackjackCard]
-    
+    var initialCount: Int = 0
     override init() {
         cards = []
         super.init()
@@ -23,6 +23,17 @@ class BlackjackCardShoe: NSObject {
         for _ in 0..<numDecks {
            cards += cardsInBlackJackDeck
         }
+        cards.shuffle()
+    }
+    
+    func newShoe(numDecks: Int) {
+        assert(numDecks > 0, "The Shoe needs atleast one deck of cards")
+        cards = []
+        let cardsInBlackJackDeck: [BlackjackCard] = PlayingCardDeck().cards
+        for _ in 0..<numDecks {
+            cards += cardsInBlackJackDeck
+        }
+        initialCount = cards.count
         cards.shuffle()
     }
     

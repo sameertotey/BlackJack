@@ -10,6 +10,8 @@ import UIKit
 
 class PlayingCardView: UIView {
     
+    @IBInspectable var textColor: UIColor?
+
     var faceCardScaleFactor: CGFloat = 0.90
     var card: BlackjackCard! {
         didSet {
@@ -24,7 +26,7 @@ class PlayingCardView: UIView {
 
     
     let cornerFixedFontStandardHeight = 180.0
-    let cornerFixedRadius = 12.0
+    let cornerFixedRadius = 6.0
     
     var cornerScaleFactor: CGFloat! = 0.8
     var cornerRadius: CGFloat {  return CGFloat(cornerFixedRadius) * CGFloat(cornerScaleFactor) }
@@ -35,13 +37,28 @@ class PlayingCardView: UIView {
         opaque = false
         contentMode = .Redraw
         cornerScaleFactor = CGFloat (CGFloat(self.bounds.size.height) / CGFloat(cornerFixedFontStandardHeight))
-
+        /*
+        let bundle = NSBundle(forClass: self.dynamicType)
+        let nib = UINib(nibName: "PlayingCardView", bundle: bundle)
+        // Assumes UIView is top level and only object in PlayingCardView.xib file
+        let view = nib.instantiateWithOwner(self, options: nil)[0] as UIView
+        */
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "cardTapped:")
+        self.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+
+    func cardTapped(sender: UITapGestureRecognizer) {
+        if sender.state == .Ended {
+            // handling code
+            faceUp = !faceUp
+        }
+    }
+
     // MARK: - initializers
     override init() {
         super.init()
         setup()
+        
     }
     
     required init(coder aDecoder: NSCoder) {

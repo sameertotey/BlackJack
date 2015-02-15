@@ -1,12 +1,12 @@
 //
-//  BlackjackCardDeck.swift
+//  PlayingCardDeckUtilities.swift
 //  BlackJack
 //
 //  Created by Sameer Totey on 2/2/15.
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 
 func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
@@ -39,7 +39,7 @@ extension Array {
 }
 
 class PlayingCardDeck<T: PlayingCard>: NSObject {
-     let cards: [T]
+    let cards: [T]
     
     override init() {
         self.cards = []

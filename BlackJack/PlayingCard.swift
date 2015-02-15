@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class PlayingCard: NSObject {
     // nested Suit enumeration
@@ -20,9 +20,6 @@ class PlayingCard: NSObject {
     enum Rank: Int {
         case Two = 2, Three, Four, Five, Six, Seven, Eight, Nine, Ten
         case Jack, Queen, King, Ace
-        struct Values {
-            let first: Int, second: Int?
-        }
         var shortDescription: String {
             switch self {
             case .Ace:
@@ -35,8 +32,7 @@ class PlayingCard: NSObject {
                 return "K"
             default:
                 return "\(rawValue)"
-            }
-            
+            }            
         }
     }
     
@@ -46,9 +42,9 @@ class PlayingCard: NSObject {
         var output = "suit is \(suit.rawValue),"
         switch rank {
         case .Two:
-            output += " rank is Two,"
+            output += " rank is Two"
         case .Three:
-            output += " rank is Three,"
+            output += " rank is Three"
         case .Four:
             output += " rank is Four"
         case .Five:

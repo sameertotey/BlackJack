@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Sameer Totey. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-// Rank enumeration extension
-private extension PlayingCard.Rank {
+// Playing Card Rank enumeration extension
+extension PlayingCard.Rank {
+    struct Values {
+        let first: Int, second: Int?
+    }
     var values: Values {
         switch self {
         case .Ace:
@@ -27,7 +30,7 @@ class BlackjackCard: PlayingCard {
     // BlackjackCard properties and methods
     override var description: String {
         var output = super.description
-        output += " value is \(rank.values.first)"
+        output += ", value is \(rank.values.first)"
         if let second = rank.values.second {
             output += " or \(second)"
         }
