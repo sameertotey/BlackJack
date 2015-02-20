@@ -8,13 +8,13 @@
 
 import UIKit
 
-class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerObserver {
+class BlackjackGameViewController: UIViewController, CardPlayerObserver, BlackjackGameDelegate {
     
     lazy var modalTransitioningDelegate = ModalPresentationTransitionVendor()
     
     var blackjackGame: BlackjackGame!
     var currentPlayer: Player!
-    var gameConfiguraton: GameConfiguration!
+    var gameConfiguration: GameConfiguration!
     var theDealer: Dealer!
     var currentBet: Double = 0.0 {
         didSet {
@@ -25,25 +25,30 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        gameConfiguraton = GameConfiguration()
         blackjackGame = BlackjackGame()
-        blackjackGame.gameConfiguration = gameConfiguraton
-        
+        blackjackGame.blackjackGameDelegate = self
         currentPlayer = Player(name: "Sameer")
         currentPlayer.observer = self
         currentPlayer.bankRoll = 100.00
         currentPlayer.delegate = blackjackGame
         playerBankRollLabel.text = "\(currentPlayer.bankRoll)"
         theDealer = Dealer()
-        theDealer.gameConfiguration = gameConfiguraton
+        setGameConfiguration()
         theDealer.cardSource = blackjackGame
-        theDealer.observer = self
+        theDealer.observer = dealerHandContainerViewController
         blackjackGame.dealer = theDealer
         
-//        setupButtons()
+        setupSubViews()
+        setupButtons()
         blackjackGame.play()
     }
 
+    func setGameConfiguration() {
+        gameConfiguration = GameConfiguration()
+        blackjackGame.gameConfiguration = gameConfiguration
+        theDealer.gameConfiguration = gameConfiguration
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -57,19 +62,34 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     
     @IBAction func returnToGameViewController(segue:UIStoryboardSegue) {
         // return here from game configuration using unwind segue
-        if (segue.identifier == "CancelFromConfiguration") || (segue.identifier == "SaveFromConfiguration") {
-            dismissViewControllerAnimated(true, completion: nil)
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "SaveFromConfiguration":
+                setGameConfiguration()
+                fallthrough
+            case "CancelFromConfiguration":
+                dismissViewControllerAnimated(true, completion: nil)
+            default: break
+            }
         }
     }
 
+    var dealerHandContainerViewController: DealerHandContainerViewController?
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "Present Game Configuration" {
-            if segue.destinationViewController is UINavigationController {
-                let toVC = segue.destinationViewController as UINavigationController
-                toVC.modalPresentationStyle = .Custom
-                toVC.transitioningDelegate = self.modalTransitioningDelegate
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Present Game Configuration":
+                if segue.destinationViewController is UINavigationController {
+                    let toVC = segue.destinationViewController as UINavigationController
+                    toVC.modalPresentationStyle = .Custom
+                    toVC.transitioningDelegate = self.modalTransitioningDelegate
+                }
+            case "Dealer Container":
+                println("This is a dealer container...")
+                dealerHandContainerViewController = segue.destinationViewController as? DealerHandContainerViewController
+            default: break
             }
-
         }
     }
     
@@ -77,22 +97,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     
     @IBOutlet weak var dealerContainerView: UIView!
     var dealerCardViews: [PlayingCardView] = []
+    @IBOutlet weak var dealerHandView: UIView!
+    
     @IBOutlet weak var playerContainerView: UIView!
     var currentPlayerViews: [PlayingCardView] = []
-    @IBOutlet weak var playerScoreLabel: UILabel!
-    
-    @IBOutlet weak var dealerScoreLabel: UILabel!
-    
-    @IBOutlet weak var playerBankRollLabel: UILabel!
-    @IBOutlet weak var doubleDownButton: UIButton!
-    @IBOutlet weak var currenBetLabel: UILabel!
-    
-    @IBOutlet weak var splitHandButton: UIButton!
-    @IBOutlet weak var surrenderButton: UIButton!
-    
-    @IBOutlet weak var buyInsuranceButton: UIButton!
-    
-    @IBOutlet weak var declineInsuranceButton: UIButton!
+    @IBOutlet weak var playerHandView: UIView!
     
     @IBOutlet var finishedHandContainerViews: [UIView]!
     var finishedHandViews: [[PlayingCardView]] = []
@@ -100,36 +109,174 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     @IBOutlet var splitHandContainerViews: [UIView]!
     var splitHandViews: [PlayingCardView] = []       // There is only one card per split hand view
     
+    @IBOutlet weak var playerScoreLabel: UILabel!
+    @IBOutlet weak var currenBetLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var playerBankRollLabel: UILabel!
     
+    @IBOutlet weak var playerButtonContainerView: UIView!
+    
+    @IBOutlet weak var doubleDownButton: GameActionButton!
+    @IBOutlet weak var splitHandButton: GameActionButton!
+    @IBOutlet weak var surrenderButton: UIButton!
+    @IBOutlet weak var buyInsuranceButton: UIButton!
+    @IBOutlet weak var declineInsuranceButton: UIButton!
     @IBOutlet weak var betButton: UIButton!
     @IBOutlet weak var dealButton: UIButton!
-    @IBOutlet weak var hitButton: UIButton!
-    @IBOutlet weak var standButton: UIButton!
+    @IBOutlet weak var hitButton: GameActionButton!
+    @IBOutlet weak var standButton: GameActionButton!
+    
+    @IBOutlet weak var dealerHandViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var dealerHandViewWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var playerHandViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var playerHandViewWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var finishedHandsViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var finishedHandsViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var splitHandsViewHeightContraint: NSLayoutConstraint!
+    @IBOutlet weak var splitHandsViewWidthConstraint: NSLayoutConstraint!
     
     // Actions
+
+    func setupSubViews() {
+        playerContainerView.clipsToBounds = true
+        dealerContainerView.clipsToBounds = true
+        
+    }
     
     func setupButtons() {
-        while currentBet <= gameConfiguraton.minimumBet {
-            statusLabel.text = "Minimum bet: \(gameConfiguraton.minimumBet)"
-            doubleDownButton.hidden = true
-            splitHandButton.hidden = true
-            surrenderButton.hidden = true
-            buyInsuranceButton.hidden = true
-            declineInsuranceButton.hidden = true
-            betButton.hidden = false
-            dealButton.hidden = true
-            hitButton.hidden = true
-            standButton.hidden = true
-        }
+        if currentBet < gameConfiguration.minimumBet {
+            self.statusLabel.text = "Minimum bet: \(self.gameConfiguration.minimumBet)"
+            self.doubleDownButton.hidden = true
+            self.splitHandButton.hidden = true
+            self.surrenderButton.hidden = true
+            self.buyInsuranceButton.hidden = true
+            self.declineInsuranceButton.hidden = true
+            self.betButton.hidden = true
+            self.dealButton.hidden = true
+            self.hitButton.hidden = true
+            self.standButton.hidden = true
 
+            UIView.transitionWithView(betButton, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromBottom, animations: {
+                self.betButton.hidden = false
+                 }, completion: { status in
+                    println("Done")
+                })
+        } else {
+            switch currentPlayer.previousAction! {
+            case .Wager:
+                enableNewGameButtons()
+            case .Bet:
+                statusLabel.text = "Play!"
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            case .Hit:
+                statusLabel.text = ""
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            case .Stand:
+                statusLabel.text = ""
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            case .Split:
+                statusLabel.text = ""
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            case .DoubleDown:
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            case .Surrender:
+                statusLabel.text = ""
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+
+            case .BuyInsurance:
+                statusLabel.text = ""
+                if blackjackGame.gameState == .Players {
+                    enablePlayButtons()
+                } else {
+                    enableNewGameButtons()
+                }
+            }
+        }
+        
+    }
+    
+    func enablePlayButtons() {
+        statusLabel.text = ""
+            UIView.transitionWithView(playerButtonContainerView, duration: 0.55, options: .CurveEaseOut | .TransitionFlipFromBottom, animations: {
+            self.playerScoreLabel.text = self.currentPlayer.currentHand?.valueDescription
+            self.doubleDownButton.hidden = !(self.currentPlayer.currentHand?.cards.count == 2) ?? true
+            self.splitHandButton.hidden = !(self.currentPlayer.currentHand?.initialCardPair == true) ?? true
+            self.surrenderButton.hidden = !self.currentPlayer.surrenderOptionAvailabe
+            self.buyInsuranceButton.hidden = !self.currentPlayer.insuranceAvailable
+            if self.gameConfiguration.surrenderAllowed {
+                self.declineInsuranceButton.hidden = !self.currentPlayer.insuranceAvailable}
+            self.betButton.hidden = true
+            self.dealButton.hidden = true
+            self.hitButton.hidden = false
+            self.standButton.hidden = false
+            }, completion: {  status in
+//                self.playerScoreLabel.text = self.currentPlayer.currentHand?.valueDescription
+//                self.doubleDownButton.hidden = !(self.currentPlayer.currentHand?.cards.count == 2) ?? true
+//                self.splitHandButton.hidden = !(self.currentPlayer.currentHand?.initialCardPair == true) ?? true
+//                self.surrenderButton.hidden = !self.currentPlayer.surrenderOptionAvailabe
+//                self.buyInsuranceButton.hidden = !self.currentPlayer.insuranceAvailable
+//                if self.gameConfiguration.surrenderAllowed {
+//                    self.declineInsuranceButton.hidden = !self.currentPlayer.insuranceAvailable}
+//                self.betButton.hidden = true
+//                self.dealButton.hidden = true
+//                self.hitButton.hidden = false
+//                self.standButton.hidden = false
+                println("Done2")
+})
+     }
+    
+    func enableNewGameButtons() {
+        self.statusLabel.text = "Ready to Deal"
+        self.doubleDownButton.hidden = true
+        self.splitHandButton.hidden = true
+        self.surrenderButton.hidden = true
+        self.buyInsuranceButton.hidden = true
+        self.declineInsuranceButton.hidden = true
+        self.betButton.hidden = true
+        self.dealButton.hidden = true
+        self.hitButton.hidden = true
+        self.standButton.hidden = true
+
+        UIView.transitionWithView(dealButton, duration: 0.55, options: .CurveEaseOut | .TransitionFlipFromBottom, animations: {
+            self.dealButton.hidden = false
+            }, completion: {status in
+                println("Done3")
+        })
     }
     
     @IBAction func dealButtonTouchUpInside(sender: UIButton) {
-        if blackjackGame.gameState == .Deal && currentPlayer.bet(currentBet){
+        if blackjackGame.gameState == .Deal {
             resetCardViews()
             blackjackGame.deal()
             blackjackGame.update()
+            setupButtons()
         }
     }
     
@@ -147,7 +294,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
             }
         }
         dealerCardViews.removeAll(keepCapacity: true)
-        dealerScoreLabel.hidden = true
         //            doubleDownButton.hidden = true
         for viewContainer in finishedHandContainerViews {
             for view in viewContainer.subviews {
@@ -157,12 +303,15 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
             }
         }
         finishedHandViews.removeAll(keepCapacity: true)
+        
+        dealerHandContainerViewController?.reset()
     }
     
     func displayPlayerCard(card: BlackjackCard, index: Int) {
         println("player index \(index)")
-        let xOffset = CGFloat(10 + 50 * index)
-        let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, 90, 150))
+        let cardWidth = CGFloat(playerHandViewWidthConstraint.constant / 2.0)
+        let xOffset = cardWidth * CGFloat(index) / 3.0
+        let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, playerHandViewHeightConstraint.constant))
         playingCardView.faceUp = true
         playingCardView.card = card
         playerContainerView.addSubview(playingCardView)
@@ -170,48 +319,56 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     }
     
     func displayDealerCard(card: BlackjackCard, faceup: Bool, index: Int) {
-        println("dealer index \(index)")
-        let xOffset = CGFloat(10 + 50 * index)
-        let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, 90, 150))
-        playingCardView.faceUp = faceup
-        playingCardView.card = card
-        dealerContainerView.addSubview(playingCardView)
-        dealerCardViews.insert(playingCardView, atIndex: index)
+//        println("dealer index \(index)")
+//        let cardWidth = CGFloat(dealerHandViewWidthConstraint.constant / 2.0)
+//        let xOffset = cardWidth * CGFloat(index) / 3.0
+//        let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, dealerHandViewHeightConstraint.constant))
+//        playingCardView.faceUp = faceup
+//        playingCardView.card = card
+//        dealerContainerView.addSubview(playingCardView)
+//        dealerCardViews.insert(playingCardView, atIndex: index)
     }
     
     @IBAction func hitButtonTouchUpInside(sender: UIButton) {
         currentPlayer.hit()
-//        setupButtons()
+        setupButtons()
     }
     
     @IBAction func standButtonTouchUpInside(sender: UIButton) {
         currentPlayer.stand()
+        setupButtons()
     }
     
     @IBAction func doubleButtonTouchUpInside(sender: UIButton) {
         currentPlayer.doubleDown()
+        setupButtons()
     }
 
     @IBAction func splitHandButtonTouchUpInside(sender: UIButton) {
         currentPlayer.split()
+        setupButtons()
     }
     
     @IBAction func surrenderButtonTouchUpInside(sender: UIButton) {
         currentPlayer.surrenderHand()
+        setupButtons()
     }
     
     @IBAction func buyInsuranceButtonTouchUpInside(sender: UIButton) {
         currentPlayer.buyInsurance()
+        setupButtons()
     }
     
     @IBAction func declineInsuranceButtonTouchUpInside(sender: UIButton) {
         currentPlayer.declineInsurance()
-
+        setupButtons()
     }
     
     @IBAction func betButtonTouchUpInside(sender: UIButton) {
         // add logic to alter bets lated
-        currentBet = gameConfiguraton.minimumBet
+        currentBet = gameConfiguration.minimumBet
+        currentPlayer.bet(currentBet)
+        setupButtons()
     }
     // MARK: - Card Player Observer
     
@@ -227,7 +384,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     func addnewlySplitHand(card: BlackjackCard) {
         var cardView = currentPlayerViews.removeLast()
         cardView.removeFromSuperview()
-        cardView.frame = CGRectMake(0, 0, 40, 60)
+        cardView.frame = CGRectMake(0, 0, splitHandsViewWidthConstraint.constant / 3.0, splitHandsViewHeightContraint.constant)
         let splitHandsCount = splitHandViews.count
         splitHandContainerViews[splitHandsCount].addSubview(cardView)
         splitHandViews.insert(cardView, atIndex: splitHandsCount)
@@ -237,24 +394,21 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
         println("Advance to next hand....")
         let finishedHandsCount = finishedHandViews.count
         var finishedHandView: [PlayingCardView] = []
-        var index: Int = 0
+        var cardIndex: Int = 0
         while !currentPlayerViews.isEmpty {
             let cardView = currentPlayerViews.removeAtIndex(0)
             cardView.removeFromSuperview()
-            let xoffset: CGFloat = CGFloat(14 * index)
-            cardView.frame = CGRectMake(xoffset, 0, 40, 60)
+            let xoffset: CGFloat = finishedHandsViewWidthConstraint.constant / 18.0 * CGFloat(cardIndex)
+            cardView.frame = CGRectMake(xoffset, 0, finishedHandsViewWidthConstraint.constant / 6.0, finishedHandsViewHeightConstraint.constant)
             finishedHandContainerViews[finishedHandsCount].addSubview(cardView)
-            finishedHandView.insert(cardView, atIndex: index)
-            index++
+            finishedHandView.insert(cardView, atIndex: cardIndex)
+            cardIndex++
         }
         finishedHandViews.append(finishedHandView)
         println(finishedHandViews)
         var cardView = splitHandViews.removeAtIndex(0)
         cardView.removeFromSuperview()
-        cardView.frame = CGRectMake(0, 0, 90, 150)
-        playerContainerView.addSubview(cardView)
-        currentPlayerViews.insert(cardView, atIndex: 0)
-        
+        addCardToCurrentHand(cardView.card)
         
         // Now that we have switched the hand, we should hit on the split hand
         currentPlayer.hit()
@@ -265,28 +419,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, DealerO
     }
     
 
-    // MARK: - Dealer Observer
-    func currentDealerHandUpdate(hand: BlackjackHand) {
-        dealerScoreLabel.text = hand.valueDescription
-    }
-
-    func flipHoleCard() {
-        dealerScoreLabel.hidden = false
-        // hole card is always the dealer hand card at index 1
-        let holeCard = theDealer.hand!.cards[1]
-        let holeCardView = dealerCardViews[1]
-        holeCardView.faceUp = true
-    }
-    func addCardToDealerHand(card: BlackjackCard) {
-        println("added dealer card \(card)")
-        var holeCard: Bool {
-            return theDealer.hand!.cards.count == 2
-        }
-        displayDealerCard(card, faceup: !holeCard, index: theDealer.hand!.cards.count - 1)
-    }
+    // MARK: - Blackjack Game Delegate
     
     func gameCompleted() {
         currentBet = 0.0
+        statusLabel.text = "Game Over!"
     }
 }
 

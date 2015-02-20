@@ -83,9 +83,7 @@ class BlackjackHand: NSObject {
             if (cards[0].rank == BlackjackCard.Rank.Ace) && split  {
                 // split aces hand is automatically stood after two cards
                 handState = .Stood
-                break
             }
-            initialCardPair = false
 
         case 3...11:         // you can never have more than 11 cards in any non busted blackjack hand
             initialCardPair = false

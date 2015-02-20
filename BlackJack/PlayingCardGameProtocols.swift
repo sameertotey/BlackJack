@@ -25,6 +25,7 @@ protocol CardPlayerDelegate: class {
     func updated(player: Player)
     func getCard() -> BlackjackCard
     func insured(player: Player)
+    func declinedInsurance(player: Player)
 }
     
 protocol CardPlayerObserver: class {
@@ -39,6 +40,12 @@ protocol DealerObserver: class {
     func currentDealerHandUpdate(hand: BlackjackHand)
     func flipHoleCard()
     func addCardToDealerHand(card: BlackjackCard)
+    func addUpCardToDealerHand(card: BlackjackCard)
+    func addHoleCardToDealerHand(card: BlackjackCard)
+    func gameCompleted()
+}
+
+protocol BlackjackGameDelegate: class {
     func gameCompleted()
 }
 

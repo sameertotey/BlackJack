@@ -13,16 +13,29 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     let gameConfiguration = GameConfiguration()
 
     @IBOutlet weak var numDecksLabel: UILabel!
-    @IBOutlet weak var numDecksStepper: UIStepper!
+    @IBOutlet weak var numDecksSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var redealThresholdLabel: UILabel!
     @IBOutlet weak var redealThresholdSlider: UISlider!
     
     @IBOutlet weak var blackjackPayoutMultiplierLabel: UILabel!
-    @IBOutlet weak var blackjackPayoutMultiplierTextField: UITextField!
+    @IBOutlet weak var blackjackPayoutMultiplierSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var splitsAllowedLabel: UILabel!
     @IBOutlet weak var splitsAllowedSwitch: UISwitch!
+    
+    @IBOutlet weak var maxHandsAfterSplitsLabel: UILabel!
+    @IBOutlet weak var maxHandsAfterSplitsSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var doubleDownAllowedLabel: UILabel!
+    @IBOutlet weak var doubleDownAllowedSwitch: UISwitch!
+    
+    @IBOutlet weak var insuranceAllowedSwitch: UISwitch!
+    @IBOutlet weak var surrenderAllowedSwitch: UISwitch!
+    @IBOutlet weak var checkHoleCardSwitch: UISwitch!
+    
+    @IBOutlet weak var minimumBetAmountTextField: UITextField!
+    @IBOutlet weak var maximumBetAmountTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,11 +63,54 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     
     func setupCurrentValues() {
         numDecksLabel.text = "Number of Decks: \(gameConfiguration.numDecks)"
-        numDecksStepper.value = Double(gameConfiguration.numDecks)
+        switch Int(gameConfiguration.numDecks) {
+        case 1:
+            numDecksSegmentedControl.selectedSegmentIndex = 0
+        case 2:
+            numDecksSegmentedControl.selectedSegmentIndex = 1
+        case 4:
+            numDecksSegmentedControl.selectedSegmentIndex = 2
+        case 6:
+            numDecksSegmentedControl.selectedSegmentIndex = 3
+        case 8:
+            numDecksSegmentedControl.selectedSegmentIndex = 4
+        default:
+            println("Error: found number decks = \(gameConfiguration.numDecks)")
+        }
+        
         redealThresholdLabel.text = "Redeal Threhold: \(gameConfiguration.redealThreshold)"
         redealThresholdSlider.value = Float(gameConfiguration.redealThreshold)
-        blackjackPayoutMultiplierTextField.text = "\(gameConfiguration.multipleForPlayerBlackjack)"
+        blackjackPayoutMultiplierLabel.text = "Blackjack Payout Multiple: \(gameConfiguration.multipleForPlayerBlackjack)"
+        switch gameConfiguration.multipleForPlayerBlackjack {
+        case 1.0:
+            blackjackPayoutMultiplierSegmentedControl.selectedSegmentIndex = 2
+        case 1.2:
+            blackjackPayoutMultiplierSegmentedControl.selectedSegmentIndex = 1
+        case 1.5:
+            blackjackPayoutMultiplierSegmentedControl.selectedSegmentIndex = 0
+        default:
+            println("Error: found Blackjack payout = \(gameConfiguration.multipleForPlayerBlackjack)")
+        }
+
         splitsAllowedSwitch.on = gameConfiguration.splitsAllowed
+        
+        maxHandsAfterSplitsLabel.text = "Max Hands After Splits: \(gameConfiguration.maxHandsWithSplits)"
+        switch gameConfiguration.maxHandsWithSplits {
+        case 2:
+            maxHandsAfterSplitsSegmentedControl.selectedSegmentIndex = 0
+        case 3:
+            maxHandsAfterSplitsSegmentedControl.selectedSegmentIndex = 1
+        case 4:
+            maxHandsAfterSplitsSegmentedControl.selectedSegmentIndex = 2
+        default:
+            println("Error: found max hands after splits = \(gameConfiguration.maxHandsWithSplits)")
+        }
+        doubleDownAllowedSwitch.on = gameConfiguration.doublingDownAllowed
+        insuranceAllowedSwitch.on = gameConfiguration.insuranceAllowed
+        surrenderAllowedSwitch.on = gameConfiguration.surrenderAllowed
+        checkHoleCardSwitch.on = gameConfiguration.checkHoleCardForDealerBlackJack
+        minimumBetAmountTextField.text = "\(gameConfiguration.minimumBet)"
+        maximumBetAmountTextField.text = "\(gameConfiguration.maximumBet)"
     }
 
     // MARK: - Table view data source
@@ -68,12 +124,39 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 8
+        return 12
     }
-
-    @IBAction func numDecksStepperValueChanged(sender: UIStepper) {
-        numDecksLabel.text = "Number of Decks: \(Int(sender.value))"
-        gameConfiguration.numDecks = Int(sender.value)
+    
+    @IBAction func numDecksSegmentedControlValueChanged(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            gameConfiguration.numDecks = 1
+        case 1:
+            gameConfiguration.numDecks = 2
+        case 2:
+            gameConfiguration.numDecks = 4
+        case 3:
+            gameConfiguration.numDecks = 6
+        case 4:
+            gameConfiguration.numDecks = 8
+        default:
+            println("Error index received for numDecks")
+        }
+        numDecksLabel.text = "Number of Decks: \(gameConfiguration.numDecks)"
+    }
+    
+    @IBAction func blackjackPayoutMultiplierSegmentedControlValueChanged(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            gameConfiguration.multipleForPlayerBlackjack = 1.5
+        case 1:
+            gameConfiguration.multipleForPlayerBlackjack = 1.2
+        case 2:
+            gameConfiguration.multipleForPlayerBlackjack = 1.0
+        default:
+            println("Error index received for blackjack payout multiplier")
+        }
+        blackjackPayoutMultiplierLabel.text = "Blackjack Payout Multiple: \(gameConfiguration.multipleForPlayerBlackjack)"
     }
     
     @IBAction func redealThresholdSliderValueChanged(sender: UISlider) {
@@ -81,18 +164,60 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         gameConfiguration.redealThreshold = Int(sender.value)
     }
     
-    @IBAction func splitsAllowedSwitchValueChanged(sender: UISwitch) {
-        if sender === splitsAllowedSwitch {
+    
+    @IBAction func maxHandsAfterSplitsSegmentedControlValueChanged(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            gameConfiguration.maxHandsWithSplits = 2
+        case 1:
+            gameConfiguration.maxHandsWithSplits = 3
+        case 2:
+            gameConfiguration.maxHandsWithSplits = 4
+        default:
+            println("Error index received for max hands after split")
+        }
+        maxHandsAfterSplitsLabel.text = "Max Hands After Splits: \(gameConfiguration.maxHandsWithSplits)"
+    }
+    
+    @IBAction func SwitchValueChanged(sender: UISwitch) {
+        switch sender {
+        case doubleDownAllowedSwitch:
+            gameConfiguration.doublingDownAllowed = sender.on
+        case splitsAllowedSwitch:
             gameConfiguration.splitsAllowed = sender.on
+        case insuranceAllowedSwitch:
+            gameConfiguration.insuranceAllowed = sender.on
+        case surrenderAllowedSwitch:
+            gameConfiguration.surrenderAllowed = sender.on
+        case checkHoleCardSwitch:
+            gameConfiguration.checkHoleCardForDealerBlackJack = sender.on
+        default: break
         }
     }
+    
     
     // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if let number = NSNumberFormatter().numberFromString(blackjackPayoutMultiplierTextField.text) {
-            gameConfiguration.multipleForPlayerBlackjack = number.doubleValue
+        switch textField {
+        case minimumBetAmountTextField:
+            if let number = NSNumberFormatter().numberFromString(textField.text) {
+                gameConfiguration.minimumBet = number.doubleValue
+                if gameConfiguration.minimumBet > gameConfiguration.maximumBet {
+                    gameConfiguration.minimumBet = gameConfiguration.maximumBet
+                }
+            }
+        case maximumBetAmountTextField:
+            if let number = NSNumberFormatter().numberFromString(textField.text) {
+                gameConfiguration.maximumBet = number.doubleValue
+                if gameConfiguration.maximumBet < gameConfiguration.minimumBet {
+                    gameConfiguration.maximumBet = gameConfiguration.minimumBet
+                }
+            }
+
+        default: break
+
         }
         
         return true

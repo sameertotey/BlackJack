@@ -8,17 +8,18 @@
 
 import UIKit
 
+@IBDesignable
 class PlayingCardView: UIView {
     
     @IBInspectable var textColor: UIColor?
 
-    var faceCardScaleFactor: CGFloat = 0.90
+    @IBInspectable var faceCardScaleFactor: CGFloat = 0.90
     var card: BlackjackCard! {
         didSet {
             setNeedsDisplay()
         }
     }
-    var faceUp: Bool = false {
+    @IBInspectable var faceUp: Bool = false {
         didSet {
             setNeedsDisplay()
         }
@@ -50,7 +51,9 @@ class PlayingCardView: UIView {
     func cardTapped(sender: UITapGestureRecognizer) {
         if sender.state == .Ended {
             // handling code
-            faceUp = !faceUp
+            UIView.transitionWithView(self, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                self.faceUp = !self.faceUp
+            }, completion: nil)
         }
     }
 

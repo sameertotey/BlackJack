@@ -14,10 +14,11 @@ class GameConfiguration: NSObject {
     let redealThresholdKey = "RedealThresholdKey"
     let multipleForPlayerBlackjackKey = "MultipleForPlayerBlackjackKey"
     let splitsAllowedKey = "SplitsAllowedKey"
-    let maxSplitsAllowedKey = "MaxSplitsAllowedKey"
+    let maxHandsWithSplitsKey = "maxHandsWithSplitsKey"
     let doublingDownAllowedKey = "DoublingDownAllowedKey"
     let insuranceAllowedKey = "InsuranceAllowedKey"
     let surrenderAllowedKey = "SurrenderAllowedKey"
+    let checkHoleCardForDealerBlackJackKey = "checkHoleCardForDealerBlackJackKey"
     let minimumBetKey = "MinimumBetKey"
     let maximumBetKey = "MaximumBetKey"
     let maxPlayersKey = "MaxPlayersKey"
@@ -26,10 +27,11 @@ class GameConfiguration: NSObject {
     var redealThreshold = 25
     var multipleForPlayerBlackjack = 1.5
     var splitsAllowed = true
-    var maxSplitsAllowed = 3
+    var maxHandsWithSplits = 4
     var doublingDownAllowed = true
     var insuranceAllowed = true
     var surrenderAllowed = false
+    var checkHoleCardForDealerBlackJack = true
     var minimumBet = 5.0
     var maximumBet = 100.0
     var maxPlayers = 1
@@ -49,10 +51,12 @@ class GameConfiguration: NSObject {
             multipleForPlayerBlackjack = 1.5
         }
         splitsAllowed = defaults.boolForKey(splitsAllowedKey)
-        maxSplitsAllowed = defaults.integerForKey(maxSplitsAllowedKey)
+        maxHandsWithSplits = defaults.integerForKey(maxHandsWithSplitsKey)
         doublingDownAllowed = defaults.boolForKey(doublingDownAllowedKey)
         insuranceAllowed = defaults.boolForKey(insuranceAllowedKey)
         surrenderAllowed = defaults.boolForKey(surrenderAllowedKey)
+        checkHoleCardForDealerBlackJack = defaults.boolForKey(checkHoleCardForDealerBlackJackKey)
+
         minimumBet = defaults.doubleForKey(minimumBetKey)
         if minimumBet == 0 {
             minimumBet = 5.0
@@ -68,7 +72,6 @@ class GameConfiguration: NSObject {
         if maxPlayers == 0 {
             maxPlayers = 1
         }
-        
         super.init()
     }
     
@@ -78,10 +81,11 @@ class GameConfiguration: NSObject {
         defaults.setInteger(redealThreshold, forKey: redealThresholdKey)
         defaults.setDouble(multipleForPlayerBlackjack, forKey: multipleForPlayerBlackjackKey)
         defaults.setBool(splitsAllowed, forKey: splitsAllowedKey)
-        defaults.setInteger(maxSplitsAllowed, forKey: maxSplitsAllowedKey)
+        defaults.setInteger(maxHandsWithSplits, forKey: maxHandsWithSplitsKey)
         defaults.setBool(doublingDownAllowed, forKey: doublingDownAllowedKey)
         defaults.setBool(insuranceAllowed, forKey: insuranceAllowedKey)
         defaults.setBool(surrenderAllowed, forKey: surrenderAllowedKey)
+        defaults.setBool(checkHoleCardForDealerBlackJack, forKey: checkHoleCardForDealerBlackJackKey)
         defaults.setDouble(minimumBet, forKey: minimumBetKey)
         defaults.setDouble(maximumBet, forKey: maximumBetKey)
         defaults.setInteger(maxPlayers, forKey: maxPlayersKey)

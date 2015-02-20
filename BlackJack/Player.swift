@@ -15,18 +15,12 @@ class Player: NSObject {
     var currentBet = 0.0
     var insuranceAvailable: Bool = false {
         didSet {
-            if currentHand != nil {
-                observer?.currentHandStatusUpdate(currentHand!)
+            if insuranceAvailable == true {
+                surrenderOptionAvailabe = false
             }
         }
     }
-    var surrenderOptionAvailabe: Bool = false {
-        didSet {
-            if currentHand != nil {
-                observer?.currentHandStatusUpdate(currentHand!)
-            }
-        }
-    }
+    var surrenderOptionAvailabe: Bool = false
     var hands = [BlackjackHand]()
     var currentHand: BlackjackHand?
     var currentHandIndex = 0
@@ -45,7 +39,7 @@ class Player: NSObject {
     var previousAction: Action?
     
     func bet(amount: Double) -> Bool {
-        previousAction = .Bet
+        previousAction = .Wager
         if (bankRoll - amount) >= 0.0 {
             bankRoll -= amount
             currentBet = amount
@@ -56,6 +50,7 @@ class Player: NSObject {
     }
     
     func createNewCurrentHand() {
+        previousAction = .Bet
         hands = []
         currentHandIndex = 0
         currentHand = BlackjackHand()
@@ -71,6 +66,7 @@ class Player: NSObject {
     
     func hit() {
         insuranceAvailable = false
+        surrenderOptionAvailabe = false
         if let card = delegate?.getCard() {
             addCardToCurrentHand(card)
         }
@@ -80,6 +76,7 @@ class Player: NSObject {
     
     func stand() {
         insuranceAvailable = false
+        surrenderOptionAvailabe = false
         currentHand!.handState = .Stood
         previousAction = .Stand
         delegate?.updated(self)
@@ -88,11 +85,13 @@ class Player: NSObject {
     func split() {
         previousAction = .Split
         insuranceAvailable = false
+        surrenderOptionAvailabe = false
         if (bankRoll - currentBet) >= 0.0 {
             bankRoll -= currentBet
             var newHand = BlackjackHand()
             newHand.bet = currentBet
             var secondCard = currentHand!.cards.removeLast()
+            currentHand!.initialCardPair = false
             newHand.cards.append(secondCard)
             newHand.split = true
             currentHand!.split = true
@@ -120,6 +119,8 @@ class Player: NSObject {
     func doubleDown() {
         previousAction = .DoubleDown
         insuranceAvailable = false
+        surrenderOptionAvailabe = false
+        insuranceAvailable = false
         if (bankRoll - currentBet) >= 0.0 {
             bankRoll -= currentBet
             currentHand!.bet += currentBet
@@ -135,29 +136,26 @@ class Player: NSObject {
     }
     
     func insuranceOffered() {
-        if let hand = currentHand? {
-            observer?.currentHandStatusUpdate(hand)
-        }
         insuranceAvailable = true
+        surrenderOptionAvailabe = false
     }
     
     func buyInsurance() {
         println("buying insurance")
         if (bankRoll - currentBet * 0.5 ) >= 0.0 {
             bankRoll -= currentBet * 0.5
-            observer?.bankrollUpdate()
             delegate?.insured(self)
+            observer?.bankrollUpdate()
         }
     }
     
     func declineInsurance() {
-        insuranceAvailable = false
+        println("declining insurance")
+        delegate?.declinedInsurance(self)
     }
     
     func surrenderOptionOffered() {
-        if let hand = currentHand? {
-            observer?.currentHandStatusUpdate(hand)
-        }
+        surrenderOptionAvailabe = true
     }
     
     func surrenderHand() {

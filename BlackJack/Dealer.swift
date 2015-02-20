@@ -32,49 +32,57 @@ class Dealer: NSObject {
             let card = cardSource!.drawACard()
             if i == 0 {
                 upCard = card
+                self.hand!.cards.append(card)
+                observer?.addUpCardToDealerHand(card)
+            } else {
+                holeCard = card
+                self.hand!.cards.append(card)
+                observer?.addHoleCardToDealerHand(card)
             }
-            self.hand!.cards.append(card)
-            observer?.addCardToDealerHand(card)
+        }
+        if hand!.handState != .NaturalBlackjack {
+            offerSurrender(players)
         }
         if upCard.rank.values.first == 10 {
             checkForDealerBlackjack(players)
         } else if upCard.rank == .Ace {
             offerInsurance(players)
         }
-        if hand!.handState != .NaturalBlackjack {
-            offerSurrender(players)
-        }
-    }
+     }
     
     func checkForDealerBlackjack(players: [Player]) {
         println("Checking For Dealer Blackjack")
         // if we have no hole card rule in game options then we should skip this step
-        if hand!.handState == .NaturalBlackjack {
-            println("Dealer has a blackjack, sorry players")
-            // we have to have special payout here
-            for player in players {
-                switch player.currentHand!.handState {
-                case .NaturalBlackjack:
-                    player.currentHand!.handState = .Tied
-                default:
-                    player.currentHand!.handState = .Lost
+        if gameConfiguration!.checkHoleCardForDealerBlackJack {
+            if hand!.handState == .NaturalBlackjack {
+                println("Dealer has a blackjack, sorry players")
+                // we have to have special payout here
+                for player in players {
+                    switch player.currentHand!.handState {
+                    case .NaturalBlackjack:
+                        player.currentHand!.handState = .Tied
+                    default:
+                        player.currentHand!.handState = .Lost
+                    }
                 }
             }
         }
     }
     
     func offerInsurance(players: [Player]) {
-        println("Offering Insurance for players")
-        insuranceOffered = true
-        for player in players {
-            player.insuranceOffered()
+        if gameConfiguration!.insuranceAllowed {
+            println("Offering Insurance for players")
+            insuranceOffered = true
+            for player in players {
+                player.insuranceOffered()
+            }
         }
     }
     
     func offerSurrender(players: [Player]) {
         // Check game configuration if surrender is allowed and if insurance is not active.....
-        println("Offering surrender option to players")
-        if !insuranceOffered {
+        if gameConfiguration!.surrenderAllowed {
+            println("Offering surrender option to players")
             for player in players {
                 player.surrenderOptionOffered()
             }
@@ -164,8 +172,8 @@ class Dealer: NSObject {
         while hand!.handState == .Active {
             let card = cardSource!.drawACard()
             hand!.cards.append(card)
-            observer?.addCardToDealerHand(card)
             evaluateHand()
+            observer?.addCardToDealerHand(card)
         }
     }
     func checkNeedToComplete(players: [Player]) -> Bool {
