@@ -31,7 +31,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     }
     
     func flipHoleCard() {
-       
+       println("why bother flipping???")
     }
     
     func reset() {
@@ -50,6 +50,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     }
     
     func addUpCardToDealerHand(card: BlackjackCard) {
+        println("added dealer up card \(card)")
         displayCard(card)
         upCardView = cardViews[0]
         upCardView!.faceUp = false
@@ -57,6 +58,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     }
     
     func addHoleCardToDealerHand(card: BlackjackCard) {
+        println("added dealer hole card \(card)")
         displayCard(card)
         holeCardView = cardViews[1]
         holeCardView!.faceUp = false

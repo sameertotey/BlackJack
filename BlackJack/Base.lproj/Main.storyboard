@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cpD-kA-fvP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M28-ZO-E3Z" userLabel="Dealer Container">
-                                <rect key="frame" x="0.0" y="64" width="600" height="178.5"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="193"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYI-dJ-5Kp">
                                         <rect key="frame" x="0.0" y="144" width="49.5" height="20.5"/>
@@ -73,7 +73,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
-                                <rect key="frame" x="0.0" y="242" width="600" height="357.5"/>
+                                <rect key="frame" x="0.0" y="213" width="600" height="387"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wT6-6P-Lsc">
                                         <rect key="frame" x="300" y="0.0" width="45" height="20.5"/>
@@ -81,15 +81,10 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bankroll" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP1-1l-TCs">
-                                        <rect key="frame" x="0.0" y="337" width="62.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BET" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06t-7w-zhs">
-                                        <rect key="frame" x="300" y="21" width="32" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP1-1l-TCs">
+                                        <rect key="frame" x="0.0" y="363" width="60.5" height="24"/>
+                                        <color key="backgroundColor" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -114,37 +109,73 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-zM-nHb" userLabel="Finished Hands">
-                                        <rect key="frame" x="0.0" y="144" width="240" height="60"/>
+                                        <rect key="frame" x="0.0" y="144" width="360" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr0-s6-HTE" userLabel="Finished Hand 1">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-5O-2Hq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="q7u-zG-b6b" kind="embed" identifier="Finished Hand 1" id="aJu-6q-2Y4"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="36n-TJ-JyN"/>
-                                                    <constraint firstAttribute="width" priority="250" constant="80" id="rP0-jb-nOv"/>
+                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="leading" secondItem="Gr0-s6-HTE" secondAttribute="leading" id="NQG-86-cdo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="o5g-5O-2Hq" secondAttribute="bottom" id="UoX-9g-kIB"/>
+                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="top" secondItem="Gr0-s6-HTE" secondAttribute="top" id="hs9-0v-zM0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="o5g-5O-2Hq" secondAttribute="trailing" id="jbk-MR-JB5"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="rP0-jb-nOv"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-xW-06a" userLabel="Finished Hand 2">
-                                                <rect key="frame" x="80" y="0.0" width="80" height="60"/>
+                                                <rect key="frame" x="120" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXP-UH-yrf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="npF-mH-FYy" kind="embed" identifier="Finished Hand 2" id="tcp-ci-kMB"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="top" secondItem="Zh0-xW-06a" secondAttribute="top" id="gRZ-B0-VDA"/>
                                                     <constraint firstAttribute="height" priority="250" constant="60" id="iID-jx-Oyr"/>
-                                                    <constraint firstAttribute="width" priority="250" constant="80" id="ygW-6Y-qL6"/>
+                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="leading" secondItem="Zh0-xW-06a" secondAttribute="leading" id="jTm-9e-uKH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JXP-UH-yrf" secondAttribute="trailing" id="kOf-Oj-Lw4"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="ygW-6Y-qL6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JXP-UH-yrf" secondAttribute="bottom" id="zju-Dk-biN"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-Se-rDA" userLabel="Finished Hand 3">
-                                                <rect key="frame" x="160" y="0.0" width="80" height="60"/>
+                                                <rect key="frame" x="240" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rav-Rh-mzq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="2td-DV-1YL" kind="embed" identifier="Finished Hand 3" id="Row-ur-6vT"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" priority="250" constant="80" id="23H-27-Yrn"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="23H-27-Yrn"/>
                                                     <constraint firstAttribute="height" priority="250" constant="60" id="AJh-Vr-HBa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rav-Rh-mzq" secondAttribute="trailing" id="JSL-jC-Awm"/>
+                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="top" secondItem="hbl-Se-rDA" secondAttribute="top" id="Zgu-AX-lPE"/>
+                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="leading" secondItem="hbl-Se-rDA" secondAttribute="leading" id="aLT-Ta-7TH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rav-Rh-mzq" secondAttribute="bottom" id="ruT-Uw-ojF"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="Zh0-xW-06a" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="3HR-BQ-Rw5"/>
-                                            <constraint firstAttribute="width" priority="250" constant="240" id="Dhy-yV-BxZ"/>
+                                            <constraint firstAttribute="width" priority="250" constant="360" id="Dhy-yV-BxZ"/>
                                             <constraint firstItem="Gr0-s6-HTE" firstAttribute="leading" secondItem="wwP-zM-nHb" secondAttribute="leading" id="F3d-KM-QRq"/>
                                             <constraint firstItem="Gr0-s6-HTE" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="NYw-1I-lMy"/>
                                             <constraint firstItem="hbl-Se-rDA" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="Oz8-aj-AMC"/>
@@ -158,6 +189,14 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMB-2M-bLd" userLabel="Split Hand 2">
                                                 <rect key="frame" x="40" y="0.0" width="40" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QH3-Xb-cVy">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                        <connections>
+                                                            <segue destination="YPA-jc-42r" kind="embed" identifier="Split Hand 2" id="Psy-yJ-2jC"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="VNf-ce-Ih2"/>
@@ -166,6 +205,14 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbd-Ub-qyi" userLabel="Split Hand 3">
                                                 <rect key="frame" x="80" y="0.0" width="40" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dl9-KR-5iB">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                        <connections>
+                                                            <segue destination="WRV-0r-zpV" kind="embed" identifier="Split Hand 3" id="rJx-Y1-wSS"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="dpg-Pg-kCG"/>
@@ -174,6 +221,14 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJU-SJ-yMI" userLabel="Split Hand 1">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eve-bx-FcT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                                                        <connections>
+                                                            <segue destination="g0P-zR-G6s" kind="embed" identifier="Split Hand 1" id="U7J-hm-H6D"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
                                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="BDo-nM-ufS"/>
@@ -194,10 +249,55 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NoH-hc-0a1" userLabel="Player Buttons Container">
-                                        <rect key="frame" x="400" y="107" width="200" height="250"/>
+                                        <rect key="frame" x="400" y="137" width="200" height="250"/>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="250" constant="250" id="Bjj-o8-8I4"/>
+                                            <constraint firstAttribute="width" priority="250" constant="200" id="zqz-dl-Q6G"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZTP-Gz-pCR" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="329" width="46" height="34"/>
+                                        <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="0.000">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Up3-8x-hWe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-hr-o7z" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="60" y="357" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="   " image="settings">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="cpv-Fw-t3H"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
+                                        <rect key="frame" x="200" y="287" width="200" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-e4-mZi" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="8" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Surrender">
@@ -216,7 +316,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HfU-rc-CYi" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="112" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Decline Ins">
@@ -237,52 +337,118 @@
                                                     <action selector="declineInsuranceButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iLW-Y7-dKx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLA-9G-lcn" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="156" width="60" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <state key="normal" title="Bet">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="y3N-sB-6pz" userLabel="Chip-100" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="Chip-100">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
                                                         <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
-                                                        <color key="value" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="betButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="naj-Go-0RB"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WV-vW-73T" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="200" width="60" height="40"/>
-                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Deal">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
-                                                        <color key="value" red="0.1215686275" green="0.60050884049999997" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qzq-Hk-q5j"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pYy-ay-ERq" userLabel="Chip-1" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="59" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="0.000" image="Chip-1">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                        <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="dealButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Jv-lm-ptL"/>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LlS-DM-3EC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="4zd-Cj-xnD" userLabel="Chip-5" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="63" y="62" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="Chip-5">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                        <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sb5-0b-p0i"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="mKC-aB-B52" userLabel="Chip-25" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="63" y="8" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" image="Chip-25">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                        <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="D55-e8-1Xz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="q7l-xx-Q0d" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="123" y="8" width="60" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="rebet">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                        <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LpC-gY-tMh"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pxG-da-Zxe" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="123" y="62" width="60" height="40"/>
+                                                <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" title="Deal">
+                                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                        <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="beY-Nx-rpR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SIv-ka-k0N" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="100" y="200" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="Hit">
@@ -316,7 +482,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ohG-em-fGc" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="100" y="150" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Stand">
@@ -344,7 +510,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xnd-1C-g0w" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="100" y="96" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Double">
@@ -378,7 +544,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="WZb-Zv-7Da" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="100" y="44" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Split">
@@ -394,7 +560,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bxO-f5-KcJ" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="60" width="60" height="40"/>
+                                                <rect key="frame" x="70" y="30" width="60" height="40"/>
                                                 <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Insurance">
@@ -410,10 +576,10 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="250" constant="250" id="Bjj-o8-8I4"/>
-                                            <constraint firstAttribute="width" priority="250" constant="200" id="zqz-dl-Q6G"/>
+                                            <constraint firstAttribute="width" constant="200" id="3sQ-2K-hgO"/>
+                                            <constraint firstAttribute="height" constant="100" id="odB-9N-FRp"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -422,27 +588,23 @@
                                     <constraint firstAttribute="width" priority="250" constant="600" id="2cd-cu-Bby"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="FaQ-Af-GcE"/>
                                     <constraint firstAttribute="height" priority="250" constant="356" id="Fgu-oO-dmA"/>
+                                    <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
                                     <constraint firstAttribute="bottom" secondItem="NoH-hc-0a1" secondAttribute="bottom" id="IhW-HJ-t5n"/>
-                                    <constraint firstAttribute="bottom" secondItem="NoH-hc-0a1" secondAttribute="bottom" constant="-300" id="JjF-eN-yhV"/>
-                                    <constraint firstItem="06t-7w-zhs" firstAttribute="top" secondItem="wT6-6P-Lsc" secondAttribute="bottom" constant="0.5" id="LQv-6M-HNA"/>
+                                    <constraint firstItem="FP1-1l-TCs" firstAttribute="top" secondItem="ZTP-Gz-pCR" secondAttribute="bottom" id="POm-2Z-kE1"/>
                                     <constraint firstItem="wT6-6P-Lsc" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="QMq-Eb-rDk"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="T0D-iK-4bw"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="Ylv-ih-6y2"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="b7g-9u-QC2"/>
-                                    <constraint firstAttribute="trailing" secondItem="NoH-hc-0a1" secondAttribute="trailing" id="bgE-sO-8aa"/>
+                                    <constraint firstAttribute="centerX" secondItem="nq1-QY-XLe" secondAttribute="centerX" id="bmE-tJ-gMr"/>
+                                    <constraint firstItem="VbV-hr-o7z" firstAttribute="leading" secondItem="FP1-1l-TCs" secondAttribute="trailing" id="f88-lO-tnj"/>
                                     <constraint firstAttribute="trailing" secondItem="NoH-hc-0a1" secondAttribute="trailing" id="i8k-7x-UOM"/>
+                                    <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" id="ioc-cF-2RN"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" id="jCr-uA-b1c"/>
                                     <constraint firstAttribute="bottom" secondItem="FP1-1l-TCs" secondAttribute="bottom" id="kUI-NM-F4D"/>
                                     <constraint firstItem="FP1-1l-TCs" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="vJO-EV-Nsh"/>
-                                    <constraint firstItem="06t-7w-zhs" firstAttribute="leading" secondItem="M6B-Zk-ket" secondAttribute="trailing" id="xy4-cG-w2D"/>
+                                    <constraint firstItem="ZTP-Gz-pCR" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="x2p-mV-jsz"/>
                                     <constraint firstItem="wT6-6P-Lsc" firstAttribute="leading" secondItem="M6B-Zk-ket" secondAttribute="trailing" id="ycv-7n-QbH"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JjF-eN-yhV"/>
-                                        <exclude reference="bgE-sO-8aa"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.25869856166150668" green="0.68223170230263153" blue="0.2963214130224458" alpha="1" colorSpace="calibratedRGB"/>
@@ -461,19 +623,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8NK-01-hxy" secondAttribute="bottom" id="yiw-LJ-sol"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="BlackJack" id="5c3-SA-nQl">
-                        <barButtonItem key="rightBarButtonItem" image="settings" id="xea-Ca-1EJ">
-                            <connections>
-                                <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="Nyf-n6-R16"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="BlackJack" id="5c3-SA-nQl"/>
                     <keyCommands/>
                     <connections>
-                        <outlet property="betButton" destination="BLA-9G-lcn" id="gq3-rI-Kgz"/>
+                        <outlet property="buttonContainerView" destination="nq1-QY-XLe" id="7Qu-Qu-Cp6"/>
                         <outlet property="buyInsuranceButton" destination="bxO-f5-KcJ" id="prX-kP-HIb"/>
-                        <outlet property="currenBetLabel" destination="06t-7w-zhs" id="ghD-w9-avL"/>
-                        <outlet property="dealButton" destination="8WV-vW-73T" id="JBs-aV-RcU"/>
+                        <outlet property="chip100Button" destination="y3N-sB-6pz" id="Cr8-jq-Je7"/>
+                        <outlet property="chip1Button" destination="pYy-ay-ERq" id="eZW-wP-GCY"/>
+                        <outlet property="chip25Button" destination="mKC-aB-B52" id="8jB-Cy-MzJ"/>
+                        <outlet property="chip5Button" destination="4zd-Cj-xnD" id="Ssr-Xa-YBE"/>
+                        <outlet property="currentBetButton" destination="ZTP-Gz-pCR" id="qi0-zL-7Hz"/>
+                        <outlet property="dealNewButton" destination="pxG-da-Zxe" id="sLx-H9-iFC"/>
                         <outlet property="dealerContainerView" destination="M28-ZO-E3Z" id="5h6-kz-EiL"/>
                         <outlet property="dealerHandView" destination="wCy-aE-J6d" id="KwB-tT-wZL"/>
                         <outlet property="dealerHandViewHeightConstraint" destination="kIA-YU-Hiu" id="SkS-QX-l7R"/>
@@ -490,6 +650,7 @@
                         <outlet property="playerHandViewHeightConstraint" destination="abY-9q-tsf" id="lbj-PU-q17"/>
                         <outlet property="playerHandViewWidthConstraint" destination="h7g-PG-ZHC" id="FZN-FU-9Kn"/>
                         <outlet property="playerScoreLabel" destination="wT6-6P-Lsc" id="hVk-om-1a1"/>
+                        <outlet property="rebetButton" destination="q7l-xx-Q0d" id="9Bf-7H-J0f"/>
                         <outlet property="splitHandButton" destination="WZb-Zv-7Da" id="iDr-wZ-ovv"/>
                         <outlet property="splitHandsViewHeightContraint" destination="FzB-Ys-mAi" id="F9d-Kx-vh9"/>
                         <outlet property="splitHandsViewWidthConstraint" destination="lKg-Ki-RTO" id="44y-el-TUa"/>
@@ -913,24 +1074,6 @@
             </objects>
             <point key="canvasLocation" x="2437" y="-269.5"/>
         </scene>
-        <!--Main Navigation-->
-        <scene sceneID="uq8-Xe-eia">
-            <objects>
-                <navigationController title="Main Navigation" automaticallyAdjustsScrollViewInsets="NO" id="cpD-kA-fvP" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hGP-NV-7CT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eta-Lj-C3F"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Juc-MU-aJ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="311" y="-274"/>
-        </scene>
         <!--Dealer Hand Container View Controller-->
         <scene sceneID="ECV-Lx-0tj">
             <objects>
@@ -948,11 +1091,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ry-ET-p7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="161" y="176"/>
         </scene>
-        <!--Player Hand View Controller-->
+        <!--Main Player Hand-->
         <scene sceneID="BQn-9P-zBr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="VrT-aI-btH" customClass="PlayerHandViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main Player Hand" automaticallyAdjustsScrollViewInsets="NO" id="VrT-aI-btH" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="84V-lQ-oTI"/>
                         <viewControllerLayoutGuide type="bottom" id="Glq-Nh-4be"/>
@@ -966,9 +1110,128 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1J-qC-LqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="168" y="375"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="aLh-0E-1jj">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="q7u-zG-b6b" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kxf-33-CLE"/>
+                        <viewControllerLayoutGuide type="bottom" id="TSZ-Cg-QnH"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wLM-9K-Z6M">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C68-ss-trk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861" y="285"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="vma-yt-dn4">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="npF-mH-FYy" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fWp-YJ-KNc"/>
+                        <viewControllerLayoutGuide type="bottom" id="MTf-Wt-K9X"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TnE-TW-leu">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ujd-jF-DW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="285"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="vmp-Lo-4oE">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2td-DV-1YL" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mnr-1g-XdT"/>
+                        <viewControllerLayoutGuide type="bottom" id="pQ6-j6-8Y0"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0uu-UV-pYE">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XSt-EC-KGV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1140" y="285"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="KWt-vI-IBF">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="g0P-zR-G6s" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iQO-lR-gYt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wri-Nw-wqK"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8gP-tI-5PK">
+                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qWh-pJ-TLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="976" y="425"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="rJR-3b-LrU">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YPA-jc-42r" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xcy-Fc-Svf"/>
+                        <viewControllerLayoutGuide type="bottom" id="bAl-3q-7dz"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PYF-3H-jei">
+                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xI2-G4-oMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1072" y="425"/>
+        </scene>
+        <!--Player Hand Container View Controller-->
+        <scene sceneID="ZfO-0R-AYE">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="WRV-0r-zpV" customClass="PlayerHandContainerViewController" customModule="BlackJack" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yXB-0p-keM"/>
+                        <viewControllerLayoutGuide type="bottom" id="g72-20-8HP"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="y9b-Ps-3YT">
+                        <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H69-T4-qNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1168" y="425"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Chip-1" width="96" height="96"/>
+        <image name="Chip-100" width="96" height="96"/>
+        <image name="Chip-25" width="96" height="96"/>
+        <image name="Chip-5" width="96" height="96"/>
         <image name="background" width="727" height="1490"/>
         <image name="settings" width="30" height="30"/>
     </resources>

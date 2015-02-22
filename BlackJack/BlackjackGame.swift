@@ -101,13 +101,28 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         player.insuranceAvailable = false
         if dealer!.hand!.handState == .NaturalBlackjack {
             player.bankRoll += 1.5 * player.currentBet
+            switch player.currentHand!.handState {
+            case .NaturalBlackjack:
+                player.currentHand!.handState = .Tied
+            default:
+                player.currentHand!.handState = .Lost
+            }
         }
     }
     
     func declinedInsurance(player: Player) {
         player.insuranceAvailable = false
         if dealer!.hand!.handState != .NaturalBlackjack {
-            player.surrenderOptionAvailabe = true
+            if gameConfiguration.surrenderAllowed {
+                player.surrenderOptionAvailabe = true
+            }
+        } else {
+            switch player.currentHand!.handState {
+            case .NaturalBlackjack:
+                player.currentHand!.handState = .Tied
+            default:
+                player.currentHand!.handState = .Lost
+            }
         }
     }
 
