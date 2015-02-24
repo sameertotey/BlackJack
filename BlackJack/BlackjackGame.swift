@@ -101,12 +101,14 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         player.insuranceAvailable = false
         if dealer!.hand!.handState == .NaturalBlackjack {
             player.bankRoll += 1.5 * player.currentBet
+            println("Insurance paid off..")
             switch player.currentHand!.handState {
             case .NaturalBlackjack:
                 player.currentHand!.handState = .Tied
             default:
                 player.currentHand!.handState = .Lost
             }
+            update()
         }
     }
     
@@ -123,6 +125,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
             default:
                 player.currentHand!.handState = .Lost
             }
+            update()
         }
     }
 

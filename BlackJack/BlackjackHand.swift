@@ -13,6 +13,8 @@ class BlackjackHand: NSObject {
     var initialCardPair = false
     var doubled = false
     var split = false
+    lazy var gameConfiguration = GameConfiguration()
+    
     var cards: [BlackjackCard] = [] {
         didSet {
             updateHandState()
@@ -22,7 +24,7 @@ class BlackjackHand: NSObject {
         case Active = 1, NaturalBlackjack, Stood, Busted, Surrendered, Won, Lost, Tied
     }
     var handState: HandState = .Active
-    var softHand: Bool {
+    var containsAce: Bool {
         for card in self.cards {
             if card.rank.values.second != nil {
                 return true
@@ -38,11 +40,12 @@ class BlackjackHand: NSObject {
         return result
     }
     var value: Int {
-        if softHand && rawValue <= 11 {
+        if containsAce && rawValue <= 11 {
             return rawValue + 10
         }
         return rawValue
     }
+
     var valueDescription: String {
         switch handState {
         case .NaturalBlackjack:
@@ -92,6 +95,9 @@ class BlackjackHand: NSObject {
                 break
             }
             if doubled {
+                handState = .Stood
+            }
+            if value == 21 && gameConfiguration.autoStandOnPlayer21 {
                 handState = .Stood
             }
         default:

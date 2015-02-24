@@ -9,7 +9,12 @@
 import Foundation
 
 class BlackjackCardShoe: NSObject {
-    var cards: [BlackjackCard]
+    var cards: [BlackjackCard] {
+        didSet {
+        let contentStatus = Float(initialCount - cards.count) / Float(initialCount)
+    NSNotificationCenter.defaultCenter().postNotificationName("cardShoeContentStatus", object: contentStatus)
+        }
+    }
     var initialCount: Int = 0
     override init() {
         cards = []

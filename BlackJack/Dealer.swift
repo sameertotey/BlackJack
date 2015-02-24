@@ -150,8 +150,16 @@ class Dealer: NSObject {
     
     func evaluateHand() {
         // read the hit on soft 17 setting from gameConfiguraion
-        if hand!.handState == .Active && (hand!.value >= 18 || (!hand!.softHand && hand!.value >= 17)) {
-            hand!.handState = .Stood
+        if (hand!.handState == .Active) {
+            if gameConfiguration!.dealerMustHitSoft17 {
+                if hand!.value >= 18 || ((hand!.value == hand!.rawValue) && hand!.value >= 17) {
+                    hand!.handState = .Stood
+                }
+            } else {
+                if hand!.value >= 17 {
+                    hand!.handState = .Stood
+                }
+            }
         }
         observer?.currentDealerHandUpdate(hand!)
     }

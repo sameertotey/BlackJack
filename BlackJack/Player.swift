@@ -42,7 +42,6 @@ class Player: NSObject {
         previousAction = .Wager
         if (bankRoll - amount) >= 0.0 {
             bankRoll -= amount
-            currentBet = amount
             observer?.bankrollUpdate()
             return true
         }
@@ -101,6 +100,7 @@ class Player: NSObject {
         if currentHand!.handState == .Active {
             if (bankRoll - currentBet) >= 0.0 {
                 bankRoll -= currentBet
+                observer?.bankrollUpdate()
                 var newHand = BlackjackHand()
                 newHand.bet = currentBet
                 var secondCard = currentHand!.cards.removeLast()
@@ -174,6 +174,7 @@ class Player: NSObject {
         println("declining insurance")
         previousAction = .DeclineInsurance
         delegate?.declinedInsurance(self)
+        delegate?.updated(self)
     }
     
     func surrenderOptionOffered() {

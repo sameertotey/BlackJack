@@ -21,21 +21,29 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     @IBOutlet weak var blackjackPayoutMultiplierLabel: UILabel!
     @IBOutlet weak var blackjackPayoutMultiplierSegmentedControl: UISegmentedControl!
     
-    @IBOutlet weak var splitsAllowedLabel: UILabel!
     @IBOutlet weak var splitsAllowedSwitch: UISwitch!
+    @IBOutlet weak var canSplitAcesSwitch: UISwitch!
+    @IBOutlet weak var onlyOneCardForSplitAcesSwitch: UISwitch!
+    @IBOutlet weak var any10ValueCardSplitAllowedSwitch: UISwitch!
     
     @IBOutlet weak var maxHandsAfterSplitsLabel: UILabel!
     @IBOutlet weak var maxHandsAfterSplitsSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var doubleDownAllowedLabel: UILabel!
     @IBOutlet weak var doubleDownAllowedSwitch: UISwitch!
+    @IBOutlet weak var doubleDownOnlyOn10and11Switch: UISwitch!
+    @IBOutlet weak var doubleDownOnlyOn9and10and11Switch: UISwitch!
     
     @IBOutlet weak var insuranceAllowedSwitch: UISwitch!
     @IBOutlet weak var surrenderAllowedSwitch: UISwitch!
     @IBOutlet weak var checkHoleCardSwitch: UISwitch!
+    @IBOutlet weak var dealerMustHitSoft17Switch: UISwitch!
     
     @IBOutlet weak var minimumBetAmountTextField: UITextField!
     @IBOutlet weak var maximumBetAmountTextField: UITextField!
+    
+    @IBOutlet weak var autoStandOnPlayer21Switch: UISwitch!
+    @IBOutlet weak var autoWagerPreviousBetSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +101,9 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         }
 
         splitsAllowedSwitch.on = gameConfiguration.splitsAllowed
-        
+        canSplitAcesSwitch.on = gameConfiguration.canSplitAces
+        onlyOneCardForSplitAcesSwitch.on = gameConfiguration.onlyOneCardOnSplitAces
+        any10ValueCardSplitAllowedSwitch.on = gameConfiguration.canSplitAny10Cards
         maxHandsAfterSplitsLabel.text = "Max Hands After Splits: \(gameConfiguration.maxHandsWithSplits)"
         switch gameConfiguration.maxHandsWithSplits {
         case 2:
@@ -106,11 +116,16 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
             println("Error: found max hands after splits = \(gameConfiguration.maxHandsWithSplits)")
         }
         doubleDownAllowedSwitch.on = gameConfiguration.doublingDownAllowed
+        doubleDownOnlyOn10and11Switch.on = gameConfiguration.doublingDownAllowedOn10and11Only
+        doubleDownOnlyOn9and10and11Switch.on = gameConfiguration.doublingDownAllowedOn9and10and11Only
         insuranceAllowedSwitch.on = gameConfiguration.insuranceAllowed
         surrenderAllowedSwitch.on = gameConfiguration.surrenderAllowed
         checkHoleCardSwitch.on = gameConfiguration.checkHoleCardForDealerBlackJack
+        dealerMustHitSoft17Switch.on = gameConfiguration.dealerMustHitSoft17
         minimumBetAmountTextField.text = "\(gameConfiguration.minimumBet)"
         maximumBetAmountTextField.text = "\(gameConfiguration.maximumBet)"
+        autoStandOnPlayer21Switch.on = gameConfiguration.autoStandOnPlayer21
+        autoWagerPreviousBetSwitch.on = gameConfiguration.autoWagerPreviousBet
     }
 
     // MARK: - Table view data source
@@ -124,7 +139,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 12
+        return 19
     }
     
     @IBAction func numDecksSegmentedControlValueChanged(sender: UISegmentedControl) {
@@ -191,6 +206,22 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
             gameConfiguration.surrenderAllowed = sender.on
         case checkHoleCardSwitch:
             gameConfiguration.checkHoleCardForDealerBlackJack = sender.on
+        case dealerMustHitSoft17Switch:
+            gameConfiguration.dealerMustHitSoft17 = sender.on
+        case canSplitAcesSwitch:
+            gameConfiguration.canSplitAces = sender.on
+        case onlyOneCardForSplitAcesSwitch:
+            gameConfiguration.onlyOneCardOnSplitAces = sender.on
+        case any10ValueCardSplitAllowedSwitch:
+            gameConfiguration.canSplitAny10Cards = sender.on
+        case doubleDownOnlyOn10and11Switch:
+            gameConfiguration.doublingDownAllowedOn10and11Only = sender.on
+        case doubleDownOnlyOn9and10and11Switch:
+            gameConfiguration.doublingDownAllowedOn9and10and11Only = sender.on
+        case autoStandOnPlayer21Switch:
+            gameConfiguration.autoStandOnPlayer21 = sender.on
+        case autoWagerPreviousBetSwitch:
+            gameConfiguration.autoWagerPreviousBet = sender.on
         default: break
         }
     }

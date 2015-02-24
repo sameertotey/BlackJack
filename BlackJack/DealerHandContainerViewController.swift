@@ -32,6 +32,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     
     func flipHoleCard() {
        println("why bother flipping???")
+        holeCardView!.userInteractionEnabled = true
     }
     
     func reset() {
@@ -62,6 +63,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
         displayCard(card)
         holeCardView = cardViews[1]
         holeCardView!.faceUp = false
+        holeCardView!.userInteractionEnabled = false
         originalHoleCardFrame = holeCardView!.frame
         self.view.addSubview(holeCardView!)
         
@@ -113,26 +115,27 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
             })
         } else {
             // we are done with displaying the cards, now display the score label
-            let label = UILabel(frame: self.view.frame)
+            let label = UILabel()
             label.textAlignment = NSTextAlignment.Center
             label.text = self.dealerScoreText
             switch self.dealerScoreText {
                 case "Busted!":
                 label.backgroundColor = UIColor.greenColor()
-                case "Jackpot!":
+                case "Blackjack!":
                 label.backgroundColor = UIColor.orangeColor()
             default:
                 label.backgroundColor = UIColor.yellowColor()
+
                 label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             }
             label.alpha = 0.0
+            label.sizeToFit()
+            let myX = CGRectGetMaxX(self.cardViews[index - 1].frame)
             self.view.addSubview(label)
             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                label.sizeToFit()
                 label.alpha = 1.0
-                label.center = self.view.center
+                label.frame = CGRectMake(myX, 0, label.bounds.size.width, label.bounds.size.height)
                 }, completion: { _ in
-                    //
             })
         }
     }

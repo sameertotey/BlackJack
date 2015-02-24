@@ -15,7 +15,7 @@ class GameActionButton: UIButton {
             mkLayer.enableMask(enable: maskEnabled)
         }
     }
-    @IBInspectable var rippleLocation: MKRippleLocation = .TapLocation {
+    @IBInspectable var rippleLocation: MKRippleLocation = .Center {
         didSet {
             mkLayer.rippleLocation = rippleLocation
         }
@@ -93,7 +93,11 @@ class GameActionButton: UIButton {
         if rippleLocation == .TapLocation {
             mkLayer.didChangeTapLocation(touch.locationInView(self))
         }
-        
+        animate()
+        return super.beginTrackingWithTouch(touch, withEvent: event)
+    }
+    
+    func animate() {
         // circleLayer animation
         mkLayer.animateScaleForCircleLayer(0.45, toScale: 1.0, timingFunction: circleAniTimingFunction, duration: CFTimeInterval(aniDuration))
         
@@ -113,7 +117,6 @@ class GameActionButton: UIButton {
             mkLayer.animateSuperLayerShadow(10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: CFTimeInterval(aniDuration))
             //}
         }
-        
-        return super.beginTrackingWithTouch(touch, withEvent: event)
+
     }
 }
