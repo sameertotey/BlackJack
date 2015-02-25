@@ -89,13 +89,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
                                 <rect key="frame" x="0.0" y="185" width="600" height="414.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP1-1l-TCs">
-                                        <rect key="frame" x="20" y="370" width="60.5" height="24"/>
-                                        <color key="backgroundColor" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
                                         <subviews>
@@ -682,36 +675,80 @@
                                             <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="cpv-Fw-t3H"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZTP-Gz-pCR" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="128" y="212" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="0.000">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-QY-tsG" userLabel="Chip-100" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="128" y="212" width="60" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="jyX-YD-xhp"/>
+                                            <constraint firstAttribute="height" constant="60" id="kVG-NZ-9Uf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="5" backgroundImage="green-chip">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
                                                 <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="circleGrowRatioMax">
-                                                <real key="value" value="1.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundLayerCornerRadius">
-                                                <real key="value" value="25"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskEnabled" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="aniDuration">
-                                                <real key="value" value="0.55000000000000004"/>
+                                                <real key="value" value="30"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
-                                                <color key="value" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="aniDuration">
+                                                <real key="value" value="0.80000000000000004"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleGrowRatioMax">
+                                                <real key="value" value="1.75"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundAniEnabled" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundLayerCornerRadius">
+                                                <real key="value" value="30"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Up3-8x-hWe"/>
+                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckH-OZ-5HU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Chip-100" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="349" width="60" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="Gzd-fQ-tAh"/>
+                                            <constraint firstAttribute="width" constant="60" id="x8h-1N-h27"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="100" backgroundImage="black-chip-1">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="aniDuration">
+                                                <real key="value" value="0.80000000000000004"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleGrowRatioMax">
+                                                <real key="value" value="1.75"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundAniEnabled" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundLayerCornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cS7-NU-Kqd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -722,16 +759,16 @@
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="FaQ-Af-GcE"/>
                                     <constraint firstAttribute="height" priority="250" constant="414.5" id="Fgu-oO-dmA"/>
                                     <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
+                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="8" id="JLg-r6-bHT"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="T0D-iK-4bw"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="Ylv-ih-6y2"/>
-                                    <constraint firstItem="ZTP-Gz-pCR" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="8" id="ZMk-Kl-dpK"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="b7g-9u-QC2"/>
                                     <constraint firstAttribute="centerX" secondItem="nq1-QY-XLe" secondAttribute="centerX" id="bmE-tJ-gMr"/>
                                     <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="20" symbolic="YES" id="cFz-1u-UFy"/>
+                                    <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="8" id="d3N-vc-zxJ"/>
+                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="8" id="ff9-tt-U16"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" id="jCr-uA-b1c"/>
-                                    <constraint firstAttribute="bottom" secondItem="FP1-1l-TCs" secondAttribute="bottom" constant="20" symbolic="YES" id="kUI-NM-F4D"/>
-                                    <constraint firstItem="FP1-1l-TCs" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="20" symbolic="YES" id="vJO-EV-Nsh"/>
-                                    <constraint firstItem="ZTP-Gz-pCR" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="8" id="yOB-Fi-puR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="5.5" id="sK6-A9-5Ss"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -764,7 +801,7 @@
                         <outlet property="chip1Button" destination="pYy-ay-ERq" id="eZW-wP-GCY"/>
                         <outlet property="chip25Button" destination="mKC-aB-B52" id="8jB-Cy-MzJ"/>
                         <outlet property="chip5Button" destination="4zd-Cj-xnD" id="Ssr-Xa-YBE"/>
-                        <outlet property="currentBetButton" destination="ZTP-Gz-pCR" id="qi0-zL-7Hz"/>
+                        <outlet property="currentBetButton" destination="XBL-QY-tsG" id="bfA-pC-okL"/>
                         <outlet property="dealNewButton" destination="pxG-da-Zxe" id="sLx-H9-iFC"/>
                         <outlet property="dealerContainerView" destination="M28-ZO-E3Z" id="5h6-kz-EiL"/>
                         <outlet property="dealerHandView" destination="wCy-aE-J6d" id="KwB-tT-wZL"/>
@@ -775,7 +812,7 @@
                         <outlet property="finishedHandsViewHeightConstraint" destination="Vm7-wB-Y3M" id="RgE-HA-ELL"/>
                         <outlet property="finishedHandsViewWidthConstraint" destination="Dhy-yV-BxZ" id="Qfd-XY-CLn"/>
                         <outlet property="hitButton" destination="SIv-ka-k0N" id="Eyu-BO-vIG"/>
-                        <outlet property="playerBankRollLabel" destination="FP1-1l-TCs" id="63M-fT-uHs"/>
+                        <outlet property="playerBankRollButton" destination="Z5s-jJ-TWn" id="nq4-i2-Z42"/>
                         <outlet property="playerContainerView" destination="rkE-bI-RS4" id="k6p-bn-g5d"/>
                         <outlet property="playerHandView" destination="M6B-Zk-ket" id="LVR-p3-5Vx"/>
                         <outlet property="playerHandViewHeightConstraint" destination="abY-9q-tsf" id="lbj-PU-q17"/>
@@ -1583,9 +1620,11 @@
         <image name="Chip-25" width="96" height="96"/>
         <image name="Chip-5" width="96" height="96"/>
         <image name="background" width="727" height="1490"/>
+        <image name="black-chip-1" width="225" height="225"/>
         <image name="cardback" width="71" height="96"/>
         <image name="cardback-red" width="729" height="1024"/>
         <image name="cardshoe" width="100" height="100"/>
+        <image name="green-chip" width="102" height="102"/>
         <image name="settings" width="30" height="30"/>
     </resources>
 </document>

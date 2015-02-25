@@ -52,7 +52,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, Blackja
         currentPlayer.observer = self
         currentPlayer.bankRoll = 100.00
         currentPlayer.delegate = blackjackGame
-        playerBankRollLabel.text = "\(currentPlayer.bankRoll)"
+        playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", forState: .Normal)
         theDealer = Dealer()
         setGameConfiguration()
         theDealer.cardSource = blackjackGame
@@ -180,6 +180,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, Blackja
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var playerBankRollLabel: UILabel!
     
+    @IBOutlet weak var playerBankRollButton: GameActionButton!
     
     @IBOutlet weak var doubleDownButton: GameActionButton!
     @IBOutlet weak var splitHandButton: GameActionButton!
@@ -467,7 +468,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, Blackja
     }
     func bankrollUpdate() {
         // should KVO be used here???
-        playerBankRollLabel.text = "\(currentPlayer.bankRoll)"
+        playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", forState: .Normal)
+        playerBankRollButton.animate()
         println("Bankroll is now \(currentPlayer.bankRoll) ")
     }
     

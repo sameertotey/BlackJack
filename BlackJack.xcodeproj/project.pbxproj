@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050DE8841A9D40D40013C7B8 /* MKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050DE8831A9D40D40013C7B8 /* MKLabel.swift */; };
+		050DE8861A9D444F0013C7B8 /* GameActionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050DE8851A9D444F0013C7B8 /* GameActionLabel.swift */; };
 		05110FD41A911604008576E4 /* GameActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05110FD31A911604008576E4 /* GameActionButton.swift */; };
 		05110FD61A914708008576E4 /* MKLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05110FD51A914708008576E4 /* MKLayer.swift */; };
 		05110FD81A943BF0008576E4 /* DealerHandContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05110FD71A943BF0008576E4 /* DealerHandContainerViewController.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050DE8831A9D40D40013C7B8 /* MKLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKLabel.swift; sourceTree = "<group>"; };
+		050DE8851A9D444F0013C7B8 /* GameActionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameActionLabel.swift; sourceTree = "<group>"; };
 		05110FD31A911604008576E4 /* GameActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameActionButton.swift; sourceTree = "<group>"; };
 		05110FD51A914708008576E4 /* MKLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKLayer.swift; sourceTree = "<group>"; };
 		05110FD71A943BF0008576E4 /* DealerHandContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealerHandContainerViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				05C12E061A7FEA980055D264 /* Main.storyboard */,
 				05110FD31A911604008576E4 /* GameActionButton.swift */,
 				051256E21A9BAD3700D18BF7 /* GameAnimatedLabel.swift */,
+				050DE8831A9D40D40013C7B8 /* MKLabel.swift */,
+				050DE8851A9D444F0013C7B8 /* GameActionLabel.swift */,
 				05110FD51A914708008576E4 /* MKLayer.swift */,
 				0573A8EF1A843DE90085C659 /* PlayingCardView.swift */,
 				05C12E0B1A7FEA980055D264 /* LaunchScreen.xib */,
@@ -323,8 +329,10 @@
 			files = (
 				05C12E281A80381F0055D264 /* PlayingCardDeckUtilities.swift in Sources */,
 				0573A8F01A843DE90085C659 /* PlayingCardView.swift in Sources */,
+				050DE8861A9D444F0013C7B8 /* GameActionLabel.swift in Sources */,
 				05C12E301A8052710055D264 /* BlackjackGame.swift in Sources */,
 				05C4943E1A87E17F00925F2F /* BlackjackGameStateTracker.swift in Sources */,
+				050DE8841A9D40D40013C7B8 /* MKLabel.swift in Sources */,
 				05C494421A8A4ED900925F2F /* BlackjackHand.swift in Sources */,
 				05C12E051A7FEA980055D264 /* BlackjackGameViewController.swift in Sources */,
 				05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */,
