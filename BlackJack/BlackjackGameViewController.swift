@@ -131,6 +131,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, Blackja
             case "Dealer Container":
                 println("This is a dealer container...")
                 dealerHandContainerViewController = segue.destinationViewController as? DealerHandContainerViewController
+                dealerHandContainerViewController!.cardShoeContainer = cardShoeContainerView
             case "Player Container":
                 println("This is the player container...")
                 playerHandContainerViewController = segue.destinationViewController as? PlayerHandContainerViewController
@@ -178,7 +179,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, Blackja
     var splitHandViews: [PlayingCardView] = []       // There is only one card per split hand view
     
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var playerBankRollLabel: UILabel!
     
     @IBOutlet weak var playerBankRollButton: GameActionButton!
     
