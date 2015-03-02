@@ -777,6 +777,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.25869856166150668" green="0.68223170230263153" blue="0.2963214130224458" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="8NK-01-hxy" secondAttribute="trailing" constant="-16" id="DMY-T6-jN2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="bottom" id="HTm-X3-RKi"/>
@@ -791,6 +792,10 @@
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w6i-FO-D7j"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8NK-01-hxy" secondAttribute="bottom" id="yiw-LJ-sol"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="gfH-ZI-qnl" appends="YES" id="V2d-bb-zQf"/>
+                            <outletCollection property="gestureRecognizers" destination="WcO-gE-Qrx" appends="YES" id="Pbm-P7-rpj"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="BlackJack" id="5c3-SA-nQl"/>
                     <keyCommands/>
@@ -842,6 +847,16 @@
                         <action selector="cardShoeLongPressed:" destination="BYZ-38-t0r" id="QUd-LC-G1a"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="gfH-ZI-qnl">
+                    <connections>
+                        <action selector="doubleTappedView:" destination="BYZ-38-t0r" id="75s-hn-Rfh"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="WcO-gE-Qrx">
+                    <connections>
+                        <action selector="swipedTheView:" destination="BYZ-38-t0r" id="6Kj-gL-EpW"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1011" y="-273.5"/>
         </scene>

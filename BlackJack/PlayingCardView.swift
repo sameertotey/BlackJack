@@ -47,8 +47,9 @@ class PlayingCardView: UIView {
         // Assumes UIView is top level and only object in PlayingCardView.xib file
         let view = nib.instantiateWithOwner(self, options: nil)[0] as UIView
         */
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "cardTapped:")
-        self.addGestureRecognizer(tapGestureRecognizer)
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "cardTapped:")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "cardLongPressed:")
+        self.addGestureRecognizer(longPressGestureRecognizer)
     }
 
     func cardTapped(sender: UITapGestureRecognizer) {
@@ -56,7 +57,16 @@ class PlayingCardView: UIView {
             // handling code
             UIView.transitionWithView(self, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
                 self.faceUp = !self.faceUp
-            }, completion: nil)
+                }, completion: nil)
+        }
+    }
+    
+    func cardLongPressed(sender: UILongPressGestureRecognizer) {
+        if sender.state == .Ended {
+            // handling code
+            UIView.transitionWithView(self, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                self.faceUp = !self.faceUp
+                }, completion: nil)
         }
     }
 

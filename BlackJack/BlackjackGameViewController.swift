@@ -375,6 +375,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             chipImageView.frame.size = finalSize.size
             chipImageView.center = self.playerBankRollButton.center
             chipImageView.alpha = 1.0
+            self.currentBetButton.alpha = 0.1
             }) { _ in
                 self.chipDynamicBehaviors(chipImageView, amount: amount)
                 AudioController.play(.Coin)
@@ -402,8 +403,9 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
         animator.removeAllBehaviors()
         
-        UIView.transitionWithView(currentBetButton, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+        UIView.transitionWithView(currentBetButton, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
             for aChipView in self.dynamicChipViews {
+                self.currentBetButton.alpha = 1.0
                 aChipView.removeFromSuperview()
             }
             }, completion: { _ in
@@ -439,20 +441,28 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
       
     @IBAction func hitButtonTouchUpInside(sender: UIButton) {
+        performHit()
+     }
+    
+    func performHit() {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.hit()
             setupButtons()
         }
+    }
+   
+    @IBAction func standButtonTouchUpInside(sender: UIButton) {
+        performStand()
      }
     
-    @IBAction func standButtonTouchUpInside(sender: UIButton) {
+    func performStand() {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.stand()
             setupButtons()
         }
-     }
+    }
     
     @IBAction func doubleButtonTouchUpInside(sender: UIButton) {
         if readyForNextAction() {
@@ -586,12 +596,29 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
+    func zoomStatusLabel() {
+        statusLabel.alpha = 1.0
+        statusLabel.hidden = false
+        let label = statusLabel
+        
+        UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+//            label.alpha = 0
+            label.transform = CGAffineTransformMakeScale(1.4, 1.8)
+            }, completion: { _ in
+//                label.hidden = true
+                label.transform = CGAffineTransformIdentity
+               
+        })
+    }
+
+    
     func readyForNextAction() -> Bool {
       
         if let dealerVC = dealerHandContainerViewController {
             if dealerVC.busyNow() {
                 println("hold on dealerAnimating")
                 statusLabel.text = "Hold On Please - Dealer busy"
+                zoomStatusLabel()
                 AudioController.play(.Beep)
                 return false
             }
@@ -601,10 +628,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
                 println("hold on playerAnimating")
                 statusLabel.text = "Hold On Please - busy"
                 AudioController.play(.Beep)
+                zoomStatusLabel()
                 return false
             }
         }
-
         return true
     }
     
@@ -638,6 +665,19 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             blackjackGame.getNewShoe()
         }
     }
+    @IBAction func doubleTappedView(sender: UITapGestureRecognizer) {
+        if sender.state == .Ended && blackjackGame.gameState == .Players {
+            println("Double tapped the view")
+            performHit()
+        }
+    }
     
+    @IBAction func swipedTheView(sender: UISwipeGestureRecognizer) {
+        if sender.state == .Ended && blackjackGame.gameState == .Players {
+            println("swiped  the view")
+            performStand()
+        }
+
+    }
 }
 
