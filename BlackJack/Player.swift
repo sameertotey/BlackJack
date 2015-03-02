@@ -11,7 +11,7 @@ import Foundation
 
 class Player: NSObject {
     var name: String?
-    var bankRoll = 0.0
+    dynamic var bankRoll = 0.0
     var currentBet = 0.0
     var insuranceAvailable: Bool = false {
         didSet {
@@ -42,7 +42,6 @@ class Player: NSObject {
         previousAction = .Wager
         if (bankRoll - amount) >= 0.0 {
             bankRoll -= amount
-            observer?.bankrollUpdate()
             return true
         }
         return false
@@ -101,7 +100,6 @@ class Player: NSObject {
         if currentHand!.handState == .Active {
             if (bankRoll - currentBet) >= 0.0 {
                 bankRoll -= currentBet
-                observer?.bankrollUpdate()
                 var newHand = BlackjackHand()
                 newHand.bet = currentBet
                 var secondCard = currentHand!.cards.removeLast()
@@ -142,7 +140,6 @@ class Player: NSObject {
             if (bankRoll - currentBet) >= 0.0 {
                 bankRoll -= currentBet
                 currentHand!.bet += currentBet
-                observer?.bankrollUpdate()
                 if let card = delegate?.getCard() {
                     currentHand!.doubled = true
                     addCardToCurrentHand(card)
@@ -167,7 +164,6 @@ class Player: NSObject {
         if (bankRoll - currentBet * 0.5 ) >= 0.0 {
             bankRoll -= currentBet * 0.5
             delegate?.insured(self)
-            observer?.bankrollUpdate()
         }
     }
     

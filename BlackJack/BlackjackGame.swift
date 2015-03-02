@@ -48,7 +48,6 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         if checkDealerTurn() {
             gameState = .Dealer
             dealer?.completeGame(players)
-//            blackjackGameDelegate?.gameCompleted()
             gameState = .Reset
             println("Cards remaining = \(cardShoe.cards.count)")
             if Double(cardShoe.cards.count) / Double(cardShoe.initialCount) > Double(gameConfiguration.redealThreshold) / 100.0 {

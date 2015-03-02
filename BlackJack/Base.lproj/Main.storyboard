@@ -1291,6 +1291,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="UVS-fO-0ya">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UVS-fO-0ya" id="hDy-te-BXY">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6uq-Zp-xyP">
+                                                    <rect key="frame" x="214" y="8" width="60" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="tz9-1j-JdF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0rt-ok-woA" id="sXh-bz-gcI"/>
+                                                    </connections>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum Bet Amount:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeS-IC-MAt">
+                                                    <rect key="frame" x="28" y="13" width="176.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6uq-Zp-xyP" firstAttribute="leading" secondItem="IeS-IC-MAt" secondAttribute="trailing" constant="10" id="FZ4-jF-bWU"/>
+                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="centerY" secondItem="6uq-Zp-xyP" secondAttribute="centerY" id="LPa-f8-A4l"/>
+                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="top" secondItem="hDy-te-BXY" secondAttribute="topMargin" constant="5" id="gca-Nh-ooW"/>
+                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="leading" secondItem="hDy-te-BXY" secondAttribute="leadingMargin" constant="20" id="roP-8O-lWH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="0xf-8R-afV">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0xf-8R-afV" id="I1X-XQ-gGR">
@@ -1322,44 +1353,17 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="UVS-fO-0ya">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UVS-fO-0ya" id="hDy-te-BXY">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maximum Bet Amount:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeS-IC-MAt">
-                                                    <rect key="frame" x="28" y="13" width="177" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6uq-Zp-xyP">
-                                                    <rect key="frame" x="215" y="9" width="60" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="tz9-1j-JdF"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="0rt-ok-woA" id="sXh-bz-gcI"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="6uq-Zp-xyP" firstAttribute="leading" secondItem="IeS-IC-MAt" secondAttribute="trailing" constant="10" id="FZ4-jF-bWU"/>
-                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="centerY" secondItem="6uq-Zp-xyP" secondAttribute="centerY" id="LPa-f8-A4l"/>
-                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="top" secondItem="hDy-te-BXY" secondAttribute="topMargin" constant="5" id="gca-Nh-ooW"/>
-                                                <constraint firstItem="IeS-IC-MAt" firstAttribute="leading" secondItem="hDy-te-BXY" secondAttribute="leadingMargin" constant="20" id="roP-8O-lWH"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Player Preferences" id="Fqd-0u-XBW">
+                                <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="rQu-83-aih">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rQu-83-aih" id="T9m-Jc-rLB">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dealer Must Hit Soft 17:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt9-B1-GIo" userLabel="Auto Stand on Player 21:">
-                                                    <rect key="frame" x="28" y="13" width="184" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Stand on 21" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt9-B1-GIo" userLabel="Auto Stand on Player 21:">
+                                                    <rect key="frame" x="28" y="13" width="134" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1385,8 +1389,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cZZ-Uv-f9A" id="TNL-X7-u2z">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dealer Must Hit Soft 17:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-JO-zhz" userLabel="Auto Wager Previous Bet">
-                                                    <rect key="frame" x="28" y="13" width="184" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Auto Wager Minimum Bet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQz-JO-zhz" userLabel="Auto Wager Previous Bet">
+                                                    <rect key="frame" x="28" y="13" width="197" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1404,6 +1408,33 @@
                                                 <constraint firstItem="xQz-JO-zhz" firstAttribute="top" secondItem="TNL-X7-u2z" secondAttribute="topMargin" constant="5" id="fR3-yN-Zwm"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="MNv-lk-Vk8" secondAttribute="trailing" constant="20" id="rd7-yp-fNf"/>
                                                 <constraint firstItem="xQz-JO-zhz" firstAttribute="centerY" secondItem="MNv-lk-Vk8" secondAttribute="centerY" id="zOH-8E-Pq8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="DxC-wy-SGb">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DxC-wy-SGb" id="w1t-BS-ECz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Sound Effects" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-6J-h6g" userLabel="Auto Wager Previous Bet">
+                                                    <rect key="frame" x="28" y="13" width="165" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hn8-9V-Wdi">
+                                                    <rect key="frame" x="523" y="8" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="SwitchValueChanged:" destination="0rt-ok-woA" eventType="valueChanged" id="Bw1-gC-mpa"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8u4-6J-h6g" firstAttribute="centerY" secondItem="Hn8-9V-Wdi" secondAttribute="centerY" id="5Ir-Qf-h0B"/>
+                                                <constraint firstItem="8u4-6J-h6g" firstAttribute="top" secondItem="w1t-BS-ECz" secondAttribute="topMargin" constant="5" id="IhG-eB-ZHf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Hn8-9V-Wdi" secondAttribute="trailing" constant="20" id="Tdm-S8-rWi"/>
+                                                <constraint firstItem="8u4-6J-h6g" firstAttribute="leading" secondItem="w1t-BS-ECz" secondAttribute="leadingMargin" constant="20" id="bTn-r5-U7T"/>
+                                                <constraint firstItem="Hn8-9V-Wdi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8u4-6J-h6g" secondAttribute="trailing" constant="20" id="tME-1s-ndj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1442,6 +1473,7 @@
                         <outlet property="doubleDownAllowedSwitch" destination="VQP-5b-xeY" id="RBO-pe-9Ec"/>
                         <outlet property="doubleDownOnlyOn10and11Switch" destination="Ovo-eC-hgM" id="yqU-IL-d9t"/>
                         <outlet property="doubleDownOnlyOn9and10and11Switch" destination="poP-ZW-rLV" id="tI1-5b-usp"/>
+                        <outlet property="enableSoundEffectsSwitch" destination="Hn8-9V-Wdi" id="c14-VZ-nTh"/>
                         <outlet property="insuranceAllowedSwitch" destination="Ze3-YX-FGP" id="mOT-5O-Jis"/>
                         <outlet property="maxHandsAfterSplitsLabel" destination="ox1-bL-OZt" id="t17-F8-hjk"/>
                         <outlet property="maxHandsAfterSplitsSegmentedControl" destination="CSf-Be-Ncw" id="WOj-zy-pEr"/>

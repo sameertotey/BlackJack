@@ -44,6 +44,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     
     @IBOutlet weak var autoStandOnPlayer21Switch: UISwitch!
     @IBOutlet weak var autoWagerPreviousBetSwitch: UISwitch!
+    @IBOutlet weak var enableSoundEffectsSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +127,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         maximumBetAmountTextField.text = "\(gameConfiguration.maximumBet)"
         autoStandOnPlayer21Switch.on = gameConfiguration.autoStandOnPlayer21
         autoWagerPreviousBetSwitch.on = gameConfiguration.autoWagerPreviousBet
+        enableSoundEffectsSwitch.on = gameConfiguration.enableSoundEffects
     }
 
     // MARK: - Table view data source
@@ -133,13 +135,20 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 19
+        switch section {
+        case 0:
+            return 17
+        case 1:
+            return 3
+        default:
+            return 0
+        }
     }
     
     @IBAction func numDecksSegmentedControlValueChanged(sender: UISegmentedControl) {
@@ -222,6 +231,8 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
             gameConfiguration.autoStandOnPlayer21 = sender.on
         case autoWagerPreviousBetSwitch:
             gameConfiguration.autoWagerPreviousBet = sender.on
+        case enableSoundEffectsSwitch:
+            gameConfiguration.enableSoundEffects = sender.on
         default: break
         }
     }

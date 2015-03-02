@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias KVOContext = UInt8
+var MyObservationContext = KVOContext()
 
 class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynamicAnimatorDelegate {
     
@@ -70,9 +72,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         currentBet = gameConfiguration.minimumBet
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: "cardShoeContentStatus", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: "dealerHandOver", object: nil)
+        startObservingBankroll(currentPlayer)
     }
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        stopObservingBankroll(currentPlayer)
     }
     func updateCardProgress(notification: NSNotification) {
         var progress: NSNumber = notification.object as NSNumber
@@ -83,6 +87,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         gameConfiguration = GameConfiguration()
         blackjackGame.gameConfiguration = gameConfiguration
         theDealer.gameConfiguration = gameConfiguration
+        AudioController.GameSounds.soundEffectsEnabled = gameConfiguration.enableSoundEffects
     }
     
     override func didReceiveMemoryWarning() {
@@ -346,7 +351,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             case currentBetButton:
                 currentPlayer.bankRoll += currentBet
                 currentBet = 0
-                bankrollUpdate()
             case dealNewButton:
                 deal()
             case rebetButton:
@@ -599,9 +603,32 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
                 return false
             }
         }
-        
 
         return true
+    }
+    
+    func startObservingBankroll(player: Player) {
+        let options = NSKeyValueObservingOptions.New | NSKeyValueObservingOptions.Old
+        player.addObserver(self, forKeyPath: "bankRoll", options: options, context: &MyObservationContext)
+    }
+    
+    func stopObservingBankroll(player: Player) {
+        player.removeObserver(self, forKeyPath: "bankRoll", context: &MyObservationContext)
+   
+    }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        switch (keyPath, context) {
+        case("bankRoll", &MyObservationContext):
+            println("Bankroll changed: \(change)")
+            bankrollUpdate()
+            
+        case(_, &MyObservationContext):
+            assert(false, "unknown key path")
+            
+        default:
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        }
     }
 }
 

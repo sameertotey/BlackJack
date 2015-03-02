@@ -33,7 +33,6 @@ protocol CardPlayerObserver: class {
     func addCardToCurrentHand(card: BlackjackCard)
     func addnewlySplitHand(card: BlackjackCard)
     func switchHands()
-    func bankrollUpdate()
 }
 
 protocol DealerObserver: class {

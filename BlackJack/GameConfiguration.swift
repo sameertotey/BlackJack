@@ -30,6 +30,7 @@ class GameConfiguration: NSObject {
     let maxPlayersKey = "MaxPlayersKey"
     let autoStandOnPlayer21Key = "autoStandOnPlayer21Key"
     let autoWagerPreviousBetKey = "autoWagerPreviousBetKey"
+    let enableSoundEffectsKey = "enableSoundEffectsKey"
     
     var numDecks = 6
     var redealThreshold = 25
@@ -51,6 +52,7 @@ class GameConfiguration: NSObject {
     var maxPlayers = 1
     var autoStandOnPlayer21 = true
     var autoWagerPreviousBet = true
+    var enableSoundEffects = true
     
     override init() {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -143,6 +145,11 @@ class GameConfiguration: NSObject {
         } else {
             autoWagerPreviousBet = true
         }
+        if let testValue: AnyObject = defaults.objectForKey(enableSoundEffectsKey) {
+            enableSoundEffects = defaults.boolForKey(enableSoundEffectsKey)
+        } else {
+            enableSoundEffects = true
+        }
         super.init()
     }
     
@@ -167,6 +174,7 @@ class GameConfiguration: NSObject {
         defaults.setInteger(maxPlayers, forKey: maxPlayersKey)
         defaults.setBool(autoStandOnPlayer21, forKey: autoStandOnPlayer21Key)
         defaults.setBool(autoWagerPreviousBet, forKey: autoWagerPreviousBetKey)
+        defaults.setBool(enableSoundEffects, forKey: enableSoundEffectsKey)
         defaults.synchronize()
     }
 }

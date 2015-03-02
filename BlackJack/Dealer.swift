@@ -140,7 +140,6 @@ class Dealer: NSObject {
                     hand.bet = 0
                 }
             }
-            player.observer?.bankrollUpdate()
         }
     }
     

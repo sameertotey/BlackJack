@@ -66,6 +66,7 @@ class AudioController: NSObject {
     }
     
     struct GameSounds {
+        static var soundEffectsEnabled = true
         static var busted: SystemSoundID = 0
         static var cardDraw: SystemSoundID = 0
         static var won: SystemSoundID = 0
@@ -94,7 +95,6 @@ class AudioController: NSObject {
                         let soundURL = NSBundle.mainBundle().URLForResource(urlName!, withExtension: urlExtension)
                         AudioServicesCreateSystemSoundID(soundURL, &gameSoundID)
                         gameSound.setSoundFileID(soundID: gameSoundID)
-
                     }
                 }
             }
@@ -105,7 +105,9 @@ class AudioController: NSObject {
     
     class func play(gameSound: GameSound) {
         // Play
-        AudioServicesPlaySystemSound(gameSound.soundFile)
+        if GameSounds.soundEffectsEnabled {
+            AudioServicesPlaySystemSound(gameSound.soundFile)
+        }
     }
    
 }
