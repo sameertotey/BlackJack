@@ -14,7 +14,22 @@
 		05110FD81A943BF0008576E4 /* DealerHandContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05110FD71A943BF0008576E4 /* DealerHandContainerViewController.swift */; };
 		051256E11A97C87200D18BF7 /* PlayerHandContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051256E01A97C87200D18BF7 /* PlayerHandContainerViewController.swift */; };
 		051256E31A9BAD3700D18BF7 /* GameAnimatedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051256E21A9BAD3700D18BF7 /* GameAnimatedLabel.swift */; };
+		051FCA311AA2583000D2880F /* bomb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA2C1AA2582F00D2880F /* bomb.mp3 */; };
+		051FCA321AA2583000D2880F /* drop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA2D1AA2582F00D2880F /* drop.mp3 */; };
+		051FCA331AA2583000D2880F /* gameover.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA2E1AA2582F00D2880F /* gameover.mp3 */; };
+		051FCA341AA2583000D2880F /* levelup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA2F1AA2582F00D2880F /* levelup.mp3 */; };
+		051FCA351AA2583000D2880F /* theme.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA301AA2582F00D2880F /* theme.mp3 */; };
+		051FCA371AA2592200D2880F /* LightBulbBreaking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA361AA2592200D2880F /* LightBulbBreaking.mp3 */; };
+		051FCA391AA25B1100D2880F /* ChaChingRegister.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA381AA25B1100D2880F /* ChaChingRegister.mp3 */; };
+		051FCA3B1AA25B7100D2880F /* ATone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051FCA3A1AA25B7100D2880F /* ATone.mp3 */; };
+		051FCA3D1AA26B1200D2880F /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051FCA3C1AA26B1200D2880F /* AudioController.swift */; };
 		0573A8F01A843DE90085C659 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0573A8EF1A843DE90085C659 /* PlayingCardView.swift */; };
+		0584D6AB1AA35C6F009CC994 /* Sounds.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6AA1AA35C6F009CC994 /* Sounds.plist */; };
+		0584D6AF1AA3AE97009CC994 /* no-energy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6AE1AA3AE97009CC994 /* no-energy.mp3 */; };
+		0584D6B21AA3B15D009CC994 /* Woosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B01AA3B15D009CC994 /* Woosh.mp3 */; };
+		0584D6B31AA3B15D009CC994 /* Blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B11AA3B15D009CC994 /* Blop.mp3 */; };
+		0584D6B51AA3B5A1009CC994 /* blip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B41AA3B5A1009CC994 /* blip.mp3 */; };
+		0584D6B71AA3B6B0009CC994 /* button-09.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B61AA3B6B0009CC994 /* button-09.mp3 */; };
 		05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12DFF1A7FEA980055D264 /* AppDelegate.swift */; };
 		05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */; };
 		05C12E051A7FEA980055D264 /* BlackjackGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E041A7FEA980055D264 /* BlackjackGameViewController.swift */; };
@@ -68,7 +83,22 @@
 		05110FD71A943BF0008576E4 /* DealerHandContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealerHandContainerViewController.swift; sourceTree = "<group>"; };
 		051256E01A97C87200D18BF7 /* PlayerHandContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerHandContainerViewController.swift; sourceTree = "<group>"; };
 		051256E21A9BAD3700D18BF7 /* GameAnimatedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAnimatedLabel.swift; sourceTree = "<group>"; };
+		051FCA2C1AA2582F00D2880F /* bomb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bomb.mp3; sourceTree = "<group>"; };
+		051FCA2D1AA2582F00D2880F /* drop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drop.mp3; sourceTree = "<group>"; };
+		051FCA2E1AA2582F00D2880F /* gameover.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameover.mp3; sourceTree = "<group>"; };
+		051FCA2F1AA2582F00D2880F /* levelup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelup.mp3; sourceTree = "<group>"; };
+		051FCA301AA2582F00D2880F /* theme.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theme.mp3; sourceTree = "<group>"; };
+		051FCA361AA2592200D2880F /* LightBulbBreaking.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LightBulbBreaking.mp3; sourceTree = "<group>"; };
+		051FCA381AA25B1100D2880F /* ChaChingRegister.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ChaChingRegister.mp3; sourceTree = "<group>"; };
+		051FCA3A1AA25B7100D2880F /* ATone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ATone.mp3; sourceTree = "<group>"; };
+		051FCA3C1AA26B1200D2880F /* AudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
 		0573A8EF1A843DE90085C659 /* PlayingCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
+		0584D6AA1AA35C6F009CC994 /* Sounds.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sounds.plist; sourceTree = "<group>"; };
+		0584D6AE1AA3AE97009CC994 /* no-energy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "no-energy.mp3"; sourceTree = "<group>"; };
+		0584D6B01AA3B15D009CC994 /* Woosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Woosh.mp3; sourceTree = "<group>"; };
+		0584D6B11AA3B15D009CC994 /* Blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blop.mp3; sourceTree = "<group>"; };
+		0584D6B41AA3B5A1009CC994 /* blip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blip.mp3; sourceTree = "<group>"; };
+		0584D6B61AA3B6B0009CC994 /* button-09.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-09.mp3"; sourceTree = "<group>"; };
 		05C12DFA1A7FEA980055D264 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C12DFE1A7FEA980055D264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05C12DFF1A7FEA980055D264 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +145,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051FCA2B1AA2582F00D2880F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				0584D6B41AA3B5A1009CC994 /* blip.mp3 */,
+				0584D6B61AA3B6B0009CC994 /* button-09.mp3 */,
+				0584D6B01AA3B15D009CC994 /* Woosh.mp3 */,
+				0584D6B11AA3B15D009CC994 /* Blop.mp3 */,
+				051FCA3A1AA25B7100D2880F /* ATone.mp3 */,
+				051FCA361AA2592200D2880F /* LightBulbBreaking.mp3 */,
+				0584D6AE1AA3AE97009CC994 /* no-energy.mp3 */,
+				051FCA381AA25B1100D2880F /* ChaChingRegister.mp3 */,
+				051FCA2C1AA2582F00D2880F /* bomb.mp3 */,
+				051FCA2D1AA2582F00D2880F /* drop.mp3 */,
+				051FCA2E1AA2582F00D2880F /* gameover.mp3 */,
+				051FCA2F1AA2582F00D2880F /* levelup.mp3 */,
+				051FCA301AA2582F00D2880F /* theme.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		05C12DF11A7FEA980055D264 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +192,7 @@
 				05C12E251A8003E20055D264 /* View */,
 				05C12E241A8003C00055D264 /* Model */,
 				05C12E091A7FEA980055D264 /* Images.xcassets */,
+				051FCA2B1AA2582F00D2880F /* Sounds */,
 				05C12DFD1A7FEA980055D264 /* Supporting Files */,
 			);
 			path = BlackJack;
@@ -151,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				05C12DFE1A7FEA980055D264 /* Info.plist */,
+				0584D6AA1AA35C6F009CC994 /* Sounds.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -213,6 +265,7 @@
 				051256E01A97C87200D18BF7 /* PlayerHandContainerViewController.swift */,
 				05110FD71A943BF0008576E4 /* DealerHandContainerViewController.swift */,
 				05C12E311A8056730055D264 /* GameConfigurationControllerTableViewController.swift */,
+				051FCA3C1AA26B1200D2880F /* AudioController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -308,8 +361,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				05C12E081A7FEA980055D264 /* Main.storyboard in Resources */,
+				051FCA321AA2583000D2880F /* drop.mp3 in Resources */,
+				0584D6AB1AA35C6F009CC994 /* Sounds.plist in Resources */,
+				051FCA351AA2583000D2880F /* theme.mp3 in Resources */,
+				0584D6B31AA3B15D009CC994 /* Blop.mp3 in Resources */,
+				0584D6AF1AA3AE97009CC994 /* no-energy.mp3 in Resources */,
+				0584D6B71AA3B6B0009CC994 /* button-09.mp3 in Resources */,
+				051FCA331AA2583000D2880F /* gameover.mp3 in Resources */,
 				05C12E0D1A7FEA980055D264 /* LaunchScreen.xib in Resources */,
+				051FCA341AA2583000D2880F /* levelup.mp3 in Resources */,
+				051FCA371AA2592200D2880F /* LightBulbBreaking.mp3 in Resources */,
+				051FCA311AA2583000D2880F /* bomb.mp3 in Resources */,
+				0584D6B51AA3B5A1009CC994 /* blip.mp3 in Resources */,
+				0584D6B21AA3B15D009CC994 /* Woosh.mp3 in Resources */,
+				051FCA391AA25B1100D2880F /* ChaChingRegister.mp3 in Resources */,
 				05C12E0A1A7FEA980055D264 /* Images.xcassets in Resources */,
+				051FCA3B1AA25B7100D2880F /* ATone.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +413,7 @@
 				05C4943A1A87C88B00925F2F /* PlayingCard.swift in Sources */,
 				051256E31A9BAD3700D18BF7 /* GameAnimatedLabel.swift in Sources */,
 				05C12E2E1A80501B0055D264 /* Dealer.swift in Sources */,
+				051FCA3D1AA26B1200D2880F /* AudioController.swift in Sources */,
 				05C12E2C1A804D480055D264 /* Player.swift in Sources */,
 				051256E11A97C87200D18BF7 /* PlayerHandContainerViewController.swift in Sources */,
 				05C494381A87134B00925F2F /* BlackjackCardShoe.swift in Sources */,

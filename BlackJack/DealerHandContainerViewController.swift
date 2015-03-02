@@ -8,14 +8,14 @@
 
 import UIKit
 
-class DealerHandContainerViewController: UIViewController, DealerObserver {
+class DealerHandContainerViewController: UIViewController, DealerObserver, UIDynamicAnimatorDelegate {
     private var cardViews: [PlayingCardView] = []
     
     private var originalHoleCardFrame: CGRect?
     private var theRootView: UIView?
     private var requiredCardCenter: CGPoint?
     private var labelX: CGFloat?
-    
+
     private var upCardView: PlayingCardView?
     private var holeCardView: PlayingCardView?
     
@@ -25,12 +25,23 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     private let numberOfCardsPerWidth: CGFloat = 4.0
     
     weak var cardShoeContainer: UIView?
-    private var animator: UIDynamicAnimator? 
+    private var animator: UIDynamicAnimator?
     private var snapBehavior: UISnapBehavior?
     private var pushBehavior: UIPushBehavior?
     private var itemBehavior: UIDynamicItemBehavior?
+    
+    private var animating: Bool = false {
+        didSet {
+            if !animating {
+                checkForGameOver()
+            }
+        }
+    }
    
-
+    private var gameOverRequired = false
+    private var isAnimatorOn = false
+    private var dealerViewBusy = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -44,6 +55,12 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
         holeCardView!.userInteractionEnabled = true
     }
     
+    func checkForGameOver() {
+        if gameOverRequired && !isAnimatorOn {
+            gameCompleted()
+        }
+    }
+    
     func reset() {
         for subview in view.subviews {
             subview.removeFromSuperview()
@@ -52,17 +69,23 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
         upCardView = nil
         holeCardView = nil
         dealerScoreText = ""
-        self.animator?.removeAllBehaviors()
+        animator?.removeAllBehaviors()
+        animator = nil
+        animating = false
+        gameOverRequired = false
+        isAnimatorOn = false
+        dealerViewBusy = false
     }
     
     func addCardToDealerHand(card: BlackjackCard) {
-        println("added dealer card \(card)")
+//        println("added dealer card \(card)")
         createCard(card)
     }
     
-    func pullCardFromShoe(cardView: PlayingCardView) {
+    private func pullCardFromShoe(cardView: PlayingCardView) {
         if self.animator == nil {
             self.animator = UIDynamicAnimator(referenceView: self.theRootView!)
+            self.animator?.delegate = self
         }
         self.pushBehavior = UIPushBehavior(items: [cardView], mode: .Instantaneous)
         self.pushBehavior!.pushDirection = CGVectorMake(-0.2, 0.4)
@@ -72,23 +95,25 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
         let point = self.view.convertPoint(self.requiredCardCenter!, toView: self.theRootView)
         
         self.snapBehavior = UISnapBehavior(item: cardView, snapToPoint: point)
+        self.snapBehavior!.damping = 0.9
         self.animator!.addBehavior(self.snapBehavior)
         cardView.removeFromSuperview()
         self.view.addSubview(cardView)
-        println("displaying card \(cardView.card)")
+//        println("displaying card \(cardView.card)")
 
     }
     
     func addUpCardToDealerHand(card: BlackjackCard) {
-        println("added dealer up card \(card)")
+//        println("added dealer up card \(card)")
         createCard(card)
         upCardView = cardViews[0]
         upCardView!.faceUp = false
     }
     
 
-    func displayInitialCards() {
-        self.theRootView = self.view.window!.rootViewController!.view!
+    private func displayInitialCards() {
+        theRootView = self.view.window!.rootViewController!.view!
+        animating = true
         
         let cardFrame = upCardView!.frame
         requiredCardCenter = upCardView!.center
@@ -117,14 +142,20 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
                                     }, completion: { _ in
                                         UIView.transitionWithView(self.upCardView!, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
                                         self.upCardView!.faceUp = true
-                                        }, completion: nil)}
+                                            }, completion: { _ in
+//                                                delay(seconds: 0.2) {
+                                                    self.animating = false
+//                                                }
+//                                                println("finished animating initial cards")
+                                                }
+                                        )}
                                 )}
                         )}
                 )}
     }
     
     func addHoleCardToDealerHand(card: BlackjackCard) {
-        println("added dealer hole card \(card)")
+//        println("added dealer hole card \(card)")
         createCard(card)
         holeCardView = cardViews[1]
         holeCardView!.faceUp = false
@@ -138,7 +169,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
         displayInitialCards()
     }
     
-    func createCard(card: BlackjackCard) {
+    private func createCard(card: BlackjackCard) {
         let cardWidth = CGFloat(self.view.bounds.width / cardWidthDivider)
         let xOffset = cardWidth * CGFloat(cardViews.count) / numberOfCardsPerWidth
         let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, self.view.bounds.height))
@@ -148,12 +179,18 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
     }
     
     func gameCompleted() {
-        println("game over")
-        theRootView?.userInteractionEnabled = false
-        animator?.removeAllBehaviors()
-
+//        println("game over initial")
+        if animating {
+            gameOverRequired = true
+//            println("Still animating .. will wait for animation to complete")
+            return
+        } else {
+            gameOverRequired = false
+        }
+        animating = true
+//        println("game over final")
+        self.animator?.removeAllBehaviors()
         UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut , animations: {
-            //
             self.holeCardView!.frame = self.originalHoleCardFrame!
             }, completion: { _ in
                 UIView.transitionWithView(self.holeCardView!, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
@@ -161,12 +198,11 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
                     self.holeCardView!.faceUp = true
                     }, completion: { _ in
                         self.revealRemainingCards(2)
-                        self.theRootView?.userInteractionEnabled = true
                 })
         } )
     }
 
-    func revealRemainingCards(index:Int) {
+    private func revealRemainingCards(index:Int) {
         if index < cardViews.count {
             theRootView = self.view.window!.rootViewController!.view!
             let cardFrame = cardViews[index].frame
@@ -195,6 +231,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
             let label = UILabel()
             label.textAlignment = NSTextAlignment.Center
             label.text = self.dealerScoreText
+//            println("dealerScore: \(self.dealerScoreText)")
             switch self.dealerScoreText {
                 case "Busted!":
                 label.backgroundColor = UIColor.greenColor()
@@ -212,8 +249,37 @@ class DealerHandContainerViewController: UIViewController, DealerObserver {
                 label.alpha = 1.0
                 label.frame = CGRectMake(self.labelX!, 0, label.bounds.size.width, label.bounds.size.height)
                 }, completion: { _ in
+                    self.animating = false
+                    NSNotificationCenter.defaultCenter().postNotificationName("dealerHandOver", object: nil)
+
+//                    println("finished animating the gameover")
             })
         }
     }
     
+    func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
+        isAnimatorOn = false
+        animator.removeAllBehaviors()
+//        println("animator did pause")
+        checkForGameOver()
+    }
+    
+    func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
+        isAnimatorOn = true
+//        println("animator did resume")
+
+    }
+    
+    func busyNow() ->Bool {
+        if animating {
+            return true
+        }
+        if let myAnimator = self.animator {
+            if myAnimator.running {
+                return true
+            }
+        }
+        return false
+    }
+
 }

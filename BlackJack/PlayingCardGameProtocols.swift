@@ -46,7 +46,6 @@ protocol DealerObserver: class {
 }
 
 protocol BlackjackGameDelegate: class {
-    func gameCompleted()
 }
 
 protocol CardDataSource: class {

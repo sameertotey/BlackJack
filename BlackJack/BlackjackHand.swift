@@ -22,8 +22,14 @@ class BlackjackHand: NSObject {
     }
     enum HandState: Int {
         case Active = 1, NaturalBlackjack, Stood, Busted, Surrendered, Won, Lost, Tied
+           }
+    var handState: HandState = .Active {
+        didSet {
+            if oldValue != handState {
+                println("handState is now \(handState.rawValue) was \(oldValue.rawValue)")
+            }
+        }
     }
-    var handState: HandState = .Active
     var containsAce: Bool {
         for card in self.cards {
             if card.rank.values.second != nil {
@@ -82,13 +88,14 @@ class BlackjackHand: NSObject {
             }
             if cards[0].rank == cards[1].rank {
                 initialCardPair = true
+                break
             }
             if (cards[0].rank == BlackjackCard.Rank.Ace) && split  {
                 // split aces hand is automatically stood after two cards
                 handState = .Stood
             }
 
-        case 3...11:         // you can never have more than 11 cards in any non busted blackjack hand
+        case 3...15:         // you can never have more than 11 cards in any valid dealer hand, there is never a need for more than 11 cards for any reasonable player hand, but in pathological cases we can have 15 card player hand
             initialCardPair = false
             if value > 21 {
                 handState = .Busted

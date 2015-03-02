@@ -22,6 +22,9 @@ class PlayingCardView: UIView {
     @IBInspectable var faceUp: Bool = false {
         didSet {
             setNeedsDisplay()
+            if faceUp != oldValue {
+                AudioController.play(.CardDraw)   
+            }
         }
     }
 

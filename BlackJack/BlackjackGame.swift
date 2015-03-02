@@ -12,7 +12,6 @@ import Foundation
 class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     var gameConfiguration = GameConfiguration()
     var delegate: PlayingGameDelegate?
-    var blackjackGameDelegate: BlackjackGameDelegate?
     enum GameState: Int {
         case Reset = 1, Deal, Players, Dealer
     }
@@ -49,7 +48,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         if checkDealerTurn() {
             gameState = .Dealer
             dealer?.completeGame(players)
-            blackjackGameDelegate?.gameCompleted()
+//            blackjackGameDelegate?.gameCompleted()
             gameState = .Reset
             println("Cards remaining = \(cardShoe.cards.count)")
             if Double(cardShoe.cards.count) / Double(cardShoe.initialCount) > Double(gameConfiguration.redealThreshold) / 100.0 {

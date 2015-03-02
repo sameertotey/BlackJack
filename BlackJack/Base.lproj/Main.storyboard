@@ -675,7 +675,7 @@
                                             <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="cpv-Fw-t3H"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-QY-tsG" userLabel="Chip-100" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-QY-tsG" userLabel="Current Bet" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                         <rect key="frame" x="128" y="212" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -713,7 +713,7 @@
                                             <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckH-OZ-5HU"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Chip-100" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Bank Roll" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                         <rect key="frame" x="8" y="349" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>

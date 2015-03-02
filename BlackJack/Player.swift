@@ -71,6 +71,7 @@ class Player: NSObject {
         }
         if currentHand!.handState == .Active {
             if let card = delegate?.getCard() {
+                println("Player hit for the card \(card)")
                 addCardToCurrentHand(card)
             }
         }
