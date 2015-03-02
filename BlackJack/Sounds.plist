@@ -44,6 +44,14 @@
 			<key>Extension</key>
 			<string>mp3</string>
 		</dict>
+		<dict>
+			<key>Purpose</key>
+			<string>Coin</string>
+			<key>Name</key>
+			<string>drop</string>
+			<key>Extension</key>
+			<string>mp3</string>
+		</dict>
 	</array>
 </dict>
 </plist>

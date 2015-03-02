@@ -377,6 +377,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             chipImageView.alpha = 1.0
             }) { _ in
                 self.chipDynamicBehaviors(chipImageView, amount: amount)
+                AudioController.play(.Coin)
         }
     }
     
@@ -630,5 +631,13 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
     }
+    
+    @IBAction func cardShoeLongPressed(sender: UILongPressGestureRecognizer) {
+        println("Card shoe was long pressed")
+        if sender.state == .Ended  && blackjackGame.gameState == .Deal {
+            blackjackGame.getNewShoe()
+        }
+    }
+    
 }
 

@@ -39,7 +39,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     }
     
     func getNewShoe() {
-        println("reseted")
+        println("reseted the show")
         cardShoe.newShoe(gameConfiguration.numDecks)
         gameState = .Deal
     }

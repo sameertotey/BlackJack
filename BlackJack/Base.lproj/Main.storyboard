@@ -43,6 +43,7 @@
                                             </progressView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="jVg-l8-Rvk" secondAttribute="trailing" id="03w-7Y-jfY"/>
                                             <constraint firstAttribute="width" priority="750" constant="100" id="GNT-JM-V7d" userLabel="Width - (100) - Shoe"/>
@@ -51,6 +52,9 @@
                                             <constraint firstAttribute="bottom" secondItem="jVg-l8-Rvk" secondAttribute="bottom" id="e8H-Yu-M5G"/>
                                             <constraint firstItem="jVg-l8-Rvk" firstAttribute="top" secondItem="euC-n1-ptA" secondAttribute="top" id="uKL-gU-lyW"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="r10-q2-5wT" appends="YES" id="xZb-QE-ERt"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCy-aE-J6d" userLabel="Dealer Hand">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
@@ -833,6 +837,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="r10-q2-5wT">
+                    <connections>
+                        <action selector="cardShoeLongPressed:" destination="BYZ-38-t0r" id="QUd-LC-G1a"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1011" y="-273.5"/>
         </scene>
