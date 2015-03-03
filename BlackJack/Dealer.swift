@@ -50,12 +50,17 @@ class Dealer: NSObject {
         }
      }
     
+    func sendNotification(message: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
+    }
+
     func checkForDealerBlackjack(players: [Player]) {
         println("Checking For Dealer Blackjack")
         // if we have no hole card rule in game options then we should skip this step
         if gameConfiguration!.checkHoleCardForDealerBlackJack {
             if hand!.handState == .NaturalBlackjack {
                 println("Dealer has a blackjack, sorry players")
+                sendNotification("Dealer Blackjack!")
                 // we have to have special payout here
                 for player in players {
                     switch player.currentHand!.handState {
@@ -71,6 +76,7 @@ class Dealer: NSObject {
     
     func offerInsurance(players: [Player]) {
         if gameConfiguration!.insuranceAllowed {
+            sendNotification("Insurance offerred")
             println("Offering Insurance for players")
             insuranceOffered = true
             for player in players {
@@ -83,6 +89,7 @@ class Dealer: NSObject {
         // Check game configuration if surrender is allowed and if insurance is not active.....
         if gameConfiguration!.surrenderAllowed {
             println("Offering surrender option to players")
+            sendNotification("Surrender option offered")
             for player in players {
                 player.surrenderOptionOffered()
             }
@@ -97,6 +104,7 @@ class Dealer: NSObject {
                     println("This is an error, player's hand can't be active now")
                 case .NaturalBlackjack:
                     println("The winning blackjack hand paid \(hand.bet * gameConfiguration!.multipleForPlayerBlackjack)")
+                    sendNotification("Blackjack paid \(hand.bet * gameConfiguration!.multipleForPlayerBlackjack)")
                     let winning = hand.bet + hand.bet * gameConfiguration!.multipleForPlayerBlackjack
                     player.bankRoll += winning
                     hand.bet = 0

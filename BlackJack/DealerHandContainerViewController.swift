@@ -250,7 +250,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
                 label.frame = CGRectMake(self.labelX!, 0, label.bounds.size.width, label.bounds.size.height)
                 }, completion: { _ in
                     self.animating = false
-                    NSNotificationCenter.defaultCenter().postNotificationName("dealerHandOver", object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.dealerHandOver, object: nil)
 
 //                    println("finished animating the gameover")
             })

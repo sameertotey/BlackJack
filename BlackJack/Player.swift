@@ -109,14 +109,18 @@ class Player: NSObject {
                 currentHand!.split = true
                 hands.append(newHand)
                 observer?.addnewlySplitHand(secondCard)
+                sendNotification("Splitting the Hand")
                 if let card = delegate?.getCard() {
                     addCardToCurrentHand(card)
                 }
                 // If the split hand was aces - consult game configuration and act accordingly
                 if secondCard.rank == .Ace {
                     println("split of aces being handled")
+                    sendNotification("Split Aces")
                     advanceToNextHand()
                 }
+            } else {
+                sendNotification("Cannot Split - not enough bankroll")
             }
         }
         previousAction = .Split
@@ -127,6 +131,7 @@ class Player: NSObject {
             currentHandIndex++
             currentHand = hands[currentHandIndex]
             observer?.switchHands()
+            sendNotification("Moving to the next split hand")
         }
     }
     
@@ -145,7 +150,9 @@ class Player: NSObject {
                     addCardToCurrentHand(card)
                 }
                 delegate?.updated(self)
+                sendNotification("Doubled your bet")
             } else {
+                sendNotification("Cannot Double - not enough bankroll")
                 println("don't have the bankroll to double down")
             }
         }
@@ -164,11 +171,13 @@ class Player: NSObject {
         if (bankRoll - currentBet * 0.5 ) >= 0.0 {
             bankRoll -= currentBet * 0.5
             delegate?.insured(self)
+            sendNotification("Insurance bet made")
         }
     }
     
     func declineInsurance() {
         println("declining insurance")
+        sendNotification("Insurance declined")
         previousAction = .DeclineInsurance
         delegate?.declinedInsurance(self)
         delegate?.updated(self)
@@ -178,7 +187,13 @@ class Player: NSObject {
         surrenderOptionAvailabe = true
     }
     
+    func sendNotification(message: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
+    }
+    
+
     func surrenderHand() {
+        sendNotification("Surrendered the bet")
         previousAction = .Surrender
         currentHand!.handState = .Surrendered
         delegate?.updated(self)

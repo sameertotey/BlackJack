@@ -8,8 +8,9 @@
 
 import UIKit
 
-typealias KVOContext = UInt8
-var MyObservationContext = KVOContext()
+private var MyObservationContext = 0
+
+
 
 class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynamicAnimatorDelegate {
     
@@ -32,7 +33,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
                 currentBet = gameConfiguration.maximumBet
                 dealNewButton.hidden = false
             case let x where x >= gameConfiguration.minimumBet:
-                statusLabel.text = "Bet Ready"
+                statusLabel.text = "Ready to Deal"
                 rebetButton.hidden = true
                 dealNewButton.hidden = false
             default:
@@ -70,8 +71,9 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         setupButtons()
         audioController = AudioController()
         currentBet = gameConfiguration.minimumBet
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: "cardShoeContentStatus", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: "dealerHandOver", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: NotificationMessages.cardShoeContentStatus, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: NotificationMessages.dealerHandOver, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setStatusMessage:", name: NotificationMessages.setStatus, object: nil)
         startObservingBankroll(currentPlayer)
     }
     deinit {
@@ -81,6 +83,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     func updateCardProgress(notification: NSNotification) {
         var progress: NSNumber = notification.object as NSNumber
         cardShoeProgressView.setProgress(progress.floatValue, animated: true)
+    }
+    func setStatusMessage(notification: NSNotification) {
+        var message: String = notification.object as String
+        zoomStatusLabel(message)
     }
     
     func setGameConfiguration() {
@@ -257,7 +263,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         buttons.append(chip100Button)
         buttons.append(rebetButton)
 
-        setButtonsAndMessage(buttons, message: "Play Blackjack")
+        setButtonsAndMessage(buttons, message: nil)
         bankrollUpdate()
         
         if previousBet == 0.0 {
@@ -325,7 +331,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         default:
             message = nil
         }
-        setButtonsAndMessage(buttons, message: message)
+        setButtonsAndMessage(buttons, message: nil)
     }
     
     func hideAllPlayerButtons() {
@@ -415,6 +421,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
     }
 
+    var predealTotal = 0.0
     func deal() {
         hideAllPlayerButtons()
         if blackjackGame.gameState == .Deal {
@@ -422,6 +429,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             previousBet = currentBet
             currentBetButton.enabled = false
             resetCardViews()
+            predealTotal = currentPlayer.currentBet + currentPlayer.bankRoll
             blackjackGame.deal()
             blackjackGame.update()
             setupButtons()
@@ -569,11 +577,26 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
 
     // MARK: - Blackjack Game Delegate
     func gameCompleted() {
+        let savedText = statusLabel.text
+        let differenceInBalance = predealTotal - currentPlayer.bankRoll
         currentBet = 0
         if gameConfiguration.autoWagerPreviousBet {
             currentBet = previousBet
         }
-        statusLabel.text = "Game Over!"
+
+        var gameSound: AudioController.GameSound
+
+        switch differenceInBalance {
+        case let x where x > 0:
+            statusLabel.text = "Game Over - Lost \(x)"
+            gameSound = .Lost
+        case let x where x < 0:
+            statusLabel.text = "Game Over - Won \(-x)"
+            gameSound = .Won
+        default:
+            statusLabel.text = "Game Over - Tie!"
+            gameSound = .Tied
+        }
         currentBetButton.enabled = true
         
         playerHandContainerViewController!.displayResult(currentPlayer.hands[playerHandContainerViewController!.playerHandIndex!].handState)
@@ -583,7 +606,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             }
         }
         if currentPlayer!.currentHandIndex == 0 {
-            var gameSound: AudioController.GameSound
             switch currentPlayer!.hands[0].handState{
             case .Won, .NaturalBlackjack:
                 gameSound = .Won
@@ -592,22 +614,21 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             default:
                 gameSound = .Tied
             }
-            AudioController.play(gameSound)
         }
+        AudioController.play(gameSound)
+
     }
     
-    func zoomStatusLabel() {
-        statusLabel.alpha = 1.0
-        statusLabel.hidden = false
+    func zoomStatusLabel(message: String) {
         let label = statusLabel
-        
-        UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-//            label.alpha = 0
-            label.transform = CGAffineTransformMakeScale(1.4, 1.8)
+        label.center = CGPointMake(view.center.x, statusLabel.center.y)
+        label.text = message
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        label.hidden = false
+        UIView.animateWithDuration(1.5, delay: 0.0, options: nil, animations: {
+            label.transform = CGAffineTransformMakeScale(1.4, 2.0)
             }, completion: { _ in
-//                label.hidden = true
                 label.transform = CGAffineTransformIdentity
-               
         })
     }
 
@@ -617,8 +638,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if let dealerVC = dealerHandContainerViewController {
             if dealerVC.busyNow() {
                 println("hold on dealerAnimating")
-                statusLabel.text = "Hold On Please - Dealer busy"
-                zoomStatusLabel()
+                zoomStatusLabel("Hold On Please - Dealer busy")
                 AudioController.play(.Beep)
                 return false
             }
@@ -626,12 +646,12 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if let playerVC = playerHandContainerViewController {
             if playerVC.busyNow() {
                 println("hold on playerAnimating")
-                statusLabel.text = "Hold On Please - busy"
+                zoomStatusLabel("Hold On Please - busy")
                 AudioController.play(.Beep)
-                zoomStatusLabel()
                 return false
             }
         }
+        statusLabel.text = ""
         return true
     }
     

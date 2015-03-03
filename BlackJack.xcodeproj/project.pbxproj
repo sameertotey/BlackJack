@@ -30,6 +30,7 @@
 		0584D6B31AA3B15D009CC994 /* Blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B11AA3B15D009CC994 /* Blop.mp3 */; };
 		0584D6B51AA3B5A1009CC994 /* blip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B41AA3B5A1009CC994 /* blip.mp3 */; };
 		0584D6B71AA3B6B0009CC994 /* button-09.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0584D6B61AA3B6B0009CC994 /* button-09.mp3 */; };
+		05888EEC1AA540C9003FBA64 /* NotificationMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05888EEB1AA540C9003FBA64 /* NotificationMessages.swift */; };
 		05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12DFF1A7FEA980055D264 /* AppDelegate.swift */; };
 		05C12E031A7FEA980055D264 /* BlackJack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E011A7FEA980055D264 /* BlackJack.xcdatamodeld */; };
 		05C12E051A7FEA980055D264 /* BlackjackGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C12E041A7FEA980055D264 /* BlackjackGameViewController.swift */; };
@@ -99,6 +100,7 @@
 		0584D6B11AA3B15D009CC994 /* Blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Blop.mp3; sourceTree = "<group>"; };
 		0584D6B41AA3B5A1009CC994 /* blip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blip.mp3; sourceTree = "<group>"; };
 		0584D6B61AA3B6B0009CC994 /* button-09.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "button-09.mp3"; sourceTree = "<group>"; };
+		05888EEB1AA540C9003FBA64 /* NotificationMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationMessages.swift; sourceTree = "<group>"; };
 		05C12DFA1A7FEA980055D264 /* BlackJack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C12DFE1A7FEA980055D264 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05C12DFF1A7FEA980055D264 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				05C12E221A8003B00055D264 /* BlackjackCard.swift */,
 				05C12E271A80381F0055D264 /* PlayingCardDeckUtilities.swift */,
 				05C494371A87134B00925F2F /* BlackjackCardShoe.swift */,
+				05888EEB1AA540C9003FBA64 /* NotificationMessages.swift */,
 				05C12E291A804BA30055D264 /* GameConfiguration.swift */,
 				05C12E2B1A804D480055D264 /* Player.swift */,
 				05C494411A8A4ED900925F2F /* BlackjackHand.swift */,
@@ -418,6 +421,7 @@
 				051256E11A97C87200D18BF7 /* PlayerHandContainerViewController.swift in Sources */,
 				05C494381A87134B00925F2F /* BlackjackCardShoe.swift in Sources */,
 				05C4943C1A87DB6F00925F2F /* PlayingCardGameProtocols.swift in Sources */,
+				05888EEC1AA540C9003FBA64 /* NotificationMessages.swift in Sources */,
 				05110FD41A911604008576E4 /* GameActionButton.swift in Sources */,
 				05C12E2A1A804BA30055D264 /* GameConfiguration.swift in Sources */,
 				05C12E001A7FEA980055D264 /* AppDelegate.swift in Sources */,

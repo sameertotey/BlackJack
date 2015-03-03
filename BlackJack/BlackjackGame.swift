@@ -100,6 +100,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         if dealer!.hand!.handState == .NaturalBlackjack {
             player.bankRoll += 1.5 * player.currentBet
             println("Insurance paid off..")
+            sendNotification("Insurance bet paid")
             switch player.currentHand!.handState {
             case .NaturalBlackjack:
                 player.currentHand!.handState = .Tied
@@ -124,7 +125,12 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
                 player.currentHand!.handState = .Lost
             }
             update()
+            sendNotification("Dealer Blackjack")
         }
+    }
+
+    func sendNotification(message: String) {
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
     }
 
     func drawACard() -> BlackjackCard {

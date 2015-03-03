@@ -8,12 +8,17 @@
 
 import Foundation
 
+struct NotificationMessages {
+    static let cardShoeContentStatus = "cardShoeContentStatus"
+    static let dealerHandOver        = "dealerHandOver"
+    static let setStatus             = "setStatus"
+}
+
 class BlackjackCardShoe: NSObject {
     var cards: [BlackjackCard] {
         didSet {
-        let contentStatus = Float(initialCount - cards.count) / Float(initialCount)
-    NSNotificationCenter.defaultCenter().postNotificationName("cardShoeContentStatus", object: contentStatus)
-        }
+            sendNotification()
+            }
     }
     var initialCount: Int = 0
     override init() {
@@ -58,5 +63,10 @@ class BlackjackCardShoe: NSObject {
     
     func drawRandomCard() -> BlackjackCard? {
         return drawCardAt(Int(arc4random_uniform(UInt32(cards.count))))
+    }
+    
+    func sendNotification() {
+        let contentStatus = Float(initialCount - cards.count) / Float(initialCount)
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.cardShoeContentStatus, object: contentStatus)
     }
 }
