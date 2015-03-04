@@ -119,7 +119,7 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
         requiredCardCenter = upCardView!.center
         var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
         
-        let smallFrame = CGRectMake(0, cardShoeContainer!.bounds.size.height - 20, 10, 20)
+        let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
         let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
         upCardView!.frame = smallFrameConverted
         let holeCardCenter = holeCardView!.center
@@ -127,17 +127,19 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
         theRootView!.addSubview(upCardView!)
 
         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.upCardView!.frame = cardShoeRect
+            self.upCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
             }) { _ in
                 UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                    self.upCardView!.frame = cardShoeRect
                     self.pullCardFromShoe(self.upCardView!)
                     }, completion: { _ in
                         self.requiredCardCenter = holeCardCenter
                         self.theRootView!.addSubview(self.holeCardView!)
                         UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut , animations: {
-                              self.holeCardView!.frame = cardShoeRect
+                              self.holeCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
                             }, completion: { _ in
                                 UIView.animateWithDuration( 0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                                    self.holeCardView!.frame = cardShoeRect
                                     self.pullCardFromShoe(self.holeCardView!)
                                     }, completion: { _ in
                                         UIView.transitionWithView(self.upCardView!, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
@@ -209,22 +211,28 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
             requiredCardCenter = cardViews[index].center
             var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
             
-            let smallFrame = CGRectMake(0, cardShoeContainer!.bounds.size.height - 20, 10, 20)
+            let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
             let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
             cardViews[index].frame = smallFrameConverted
             
             theRootView!.addSubview(cardViews[index])
 
-            UIView.animateWithDuration(0.20, delay: 0.0 , options: .CurveEaseOut, animations: {
-                self.cardViews[index].frame = cardShoeRect
-                self.pullCardFromShoe(self.cardViews[index])
-                }, completion: { _ in
-                    UIView.transitionWithView(self.cardViews[index], duration: 0.15, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
-                        self.cardViews[index].faceUp = true
-                        }, completion: { _ in
-                            let newIndex = index + 1
-                            self.revealRemainingCards(newIndex)
-                    })
+            UIView.animateWithDuration(0.20, animations: {
+                self.cardViews[index].frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+                    }, completion: { _ in
+                        UIView.animateWithDuration(0.20, delay: 0.0 , options: .CurveEaseOut, animations: {
+                            self.cardViews[index].frame = cardShoeRect
+                            self.pullCardFromShoe(self.cardViews[index])
+                            }, completion: { _ in
+                                UIView.transitionWithView(self.cardViews[index], duration: 0.15, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                                    self.cardViews[index].faceUp = true
+                                    }, completion: { _ in
+                                        let newIndex = index + 1
+                                        self.revealRemainingCards(newIndex)
+                                })
+
+                
+                        })
             })
         } else {
             // we are done with displaying the cards, now display the score label

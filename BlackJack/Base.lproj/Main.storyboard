@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M28-ZO-E3Z" userLabel="Dealer Container">
-                                <rect key="frame" x="0.0" y="20" width="600" height="165.5"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="170.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYI-dJ-5Kp">
                                         <rect key="frame" x="0.0" y="144" width="49.5" height="20.5"/>
@@ -40,7 +40,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" progressImage="cardback-red" trackImage="cardback" translatesAutoresizingMaskIntoConstraints="NO" id="s68-zD-4sw">
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.01" progressImage="cardback-red" trackImage="cardback" translatesAutoresizingMaskIntoConstraints="NO" id="s68-zD-4sw">
                                                 <rect key="frame" x="0.0" y="2" width="100" height="2"/>
                                                 <color key="progressTintColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <color key="trackTintColor" red="0.23384761598684203" green="0.74187911188157896" blue="0.82148074691578943" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,10 +95,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
-                                <rect key="frame" x="0.0" y="185" width="600" height="414.5"/>
+                                <rect key="frame" x="0.0" y="190" width="600" height="409.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
+                                        <rect key="frame" x="0.0" y="118" width="300" height="144"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdP-aO-aKA">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
@@ -118,7 +118,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-zM-nHb" userLabel="Finished Hands">
-                                        <rect key="frame" x="0.0" y="144" width="360" height="60"/>
+                                        <rect key="frame" x="0.0" y="59" width="360" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr0-s6-HTE" userLabel="Finished Hand 1">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
@@ -194,7 +194,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGc-q9-ADz" userLabel="Split Hands">
-                                        <rect key="frame" x="0.0" y="204" width="120" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMB-2M-bLd" userLabel="Split Hand 2">
                                                 <rect key="frame" x="40" y="0.0" width="40" height="60"/>
@@ -257,8 +257,8 @@
                                             <constraint firstItem="vMB-2M-bLd" firstAttribute="leading" secondItem="IJU-SJ-yMI" secondAttribute="trailing" id="tzm-fF-puZ"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
-                                        <rect key="frame" x="200" y="314" width="200" height="100"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
+                                        <rect key="frame" x="200" y="309" width="200" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-e4-mZi" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                                 <rect key="frame" x="70" y="30" width="60" height="40"/>
@@ -653,7 +653,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-hr-o7z" userLabel="Config Button" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="534" y="364" width="46" height="30"/>
+                                        <rect key="frame" x="550" y="375" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="   " image="settings">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -683,46 +683,8 @@
                                             <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="cpv-Fw-t3H"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-QY-tsG" userLabel="Current Bet" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="128" y="212" width="60" height="60"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="jyX-YD-xhp"/>
-                                            <constraint firstAttribute="height" constant="60" id="kVG-NZ-9Uf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="5" backgroundImage="green-chip">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
-                                                <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
-                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="aniDuration">
-                                                <real key="value" value="0.80000000000000004"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="circleGrowRatioMax">
-                                                <real key="value" value="1.75"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundAniEnabled" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskEnabled" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundLayerCornerRadius">
-                                                <real key="value" value="30"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckH-OZ-5HU"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Bank Roll" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="349" width="60" height="60"/>
+                                        <rect key="frame" x="4" y="344" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Gzd-fQ-tAh"/>
@@ -759,23 +721,61 @@
                                             <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cS7-NU-Kqd"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="XBL-QY-tsG" userLabel="Current Bet" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
+                                        <rect key="frame" x="128" y="0.0" width="60" height="60"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="jyX-YD-xhp"/>
+                                            <constraint firstAttribute="height" constant="60" id="kVG-NZ-9Uf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" title="5" backgroundImage="green-chip">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="backgroundLayerColor">
+                                                <color key="value" red="0.5450980392" green="0.4549019608" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleLayerColor">
+                                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="aniDuration">
+                                                <real key="value" value="0.80000000000000004"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="circleGrowRatioMax">
+                                                <real key="value" value="1.75"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundAniEnabled" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="maskEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="shadowAniEnabled" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="backgroundLayerCornerRadius">
+                                                <real key="value" value="30"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckH-OZ-5HU"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="2Qv-Et-itO"/>
                                     <constraint firstAttribute="width" priority="250" constant="600" id="2cd-cu-Bby"/>
-                                    <constraint firstAttribute="trailing" secondItem="VbV-hr-o7z" secondAttribute="trailing" constant="20" symbolic="YES" id="9S5-AU-Whx"/>
+                                    <constraint firstAttribute="trailing" secondItem="VbV-hr-o7z" secondAttribute="trailing" constant="4" id="9S5-AU-Whx"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="FaQ-Af-GcE"/>
                                     <constraint firstAttribute="height" priority="250" constant="414.5" id="Fgu-oO-dmA"/>
                                     <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
                                     <constraint firstItem="XBL-QY-tsG" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="8" id="JLg-r6-bHT"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="T0D-iK-4bw"/>
-                                    <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="Ylv-ih-6y2"/>
-                                    <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="b7g-9u-QC2"/>
+                                    <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="-119" id="Ylv-ih-6y2"/>
+                                    <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" constant="118" id="b7g-9u-QC2"/>
                                     <constraint firstAttribute="centerX" secondItem="nq1-QY-XLe" secondAttribute="centerX" id="bmE-tJ-gMr"/>
-                                    <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="20" symbolic="YES" id="cFz-1u-UFy"/>
-                                    <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="8" id="d3N-vc-zxJ"/>
-                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="8" id="ff9-tt-U16"/>
-                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" id="jCr-uA-b1c"/>
+                                    <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="4" id="cFz-1u-UFy"/>
+                                    <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="4" id="d3N-vc-zxJ"/>
+                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="-119" id="ff9-tt-U16"/>
+                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" constant="-203" id="jCr-uA-b1c"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="5.5" id="sK6-A9-5Ss"/>
                                 </constraints>
                             </view>
@@ -788,7 +788,7 @@
                             <constraint firstItem="8NK-01-hxy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cGa-Iq-ugf"/>
                             <constraint firstItem="8NK-01-hxy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="eUp-RZ-ZEU"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="width" secondItem="rkE-bI-RS4" secondAttribute="width" id="gAs-LP-h7v"/>
-                            <constraint firstItem="rkE-bI-RS4" firstAttribute="height" secondItem="M28-ZO-E3Z" secondAttribute="height" multiplier="2.5" id="gpC-PL-SLh"/>
+                            <constraint firstItem="rkE-bI-RS4" firstAttribute="height" secondItem="M28-ZO-E3Z" secondAttribute="height" multiplier="2.4" id="gpC-PL-SLh"/>
                             <constraint firstItem="rkE-bI-RS4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="him-cW-kMK"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iDk-2p-xkU"/>
                             <constraint firstAttribute="trailing" secondItem="M28-ZO-E3Z" secondAttribute="trailing" id="n4a-wo-qIF"/>

@@ -133,15 +133,16 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
             requiredCardCenter = playingCardView.center
             var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
             
-            let smallFrame = CGRectMake(0, cardShoeContainer!.bounds.size.height - 20, 10, 20)
+            let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
             let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
             playingCardView.frame = smallFrameConverted
             self.view.window!.rootViewController!.view!.addSubview(playingCardView)
 
             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                playingCardView.frame = cardShoeRect
+                playingCardView.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
                 }) { _ in
                     UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                        playingCardView.frame = cardShoeRect
                         self.pullCardFromShoe(playingCardView)
                         }, completion: { _ in
                             UIView.transitionWithView(playingCardView, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {

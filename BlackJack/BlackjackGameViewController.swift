@@ -239,6 +239,20 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
 //        playerContainerView.clipsToBounds = true
 //        dealerContainerView.clipsToBounds = true
     }
+
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        println("new traits: \(newCollection) ")
+    }
+    
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        println("The new size is \(size)")
+        hideAllPlayerButtons()
+        println("size of the button container: \(buttonContainerView.frame)")
+        setupButtons()
+    }
     
     func setupButtons () {
         switch blackjackGame.gameState {
@@ -251,7 +265,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
       }
     
-    let position0 = CGPointMake(0, 0)
+    let position0 = CGPointMake(-30, -30)
     
 
     let positions = [CGPointMake(30.0, 70.0), CGPointMake(100.0, 70.0), CGPointMake(170.0, 70.0), CGPointMake(30.0, 20.0), CGPointMake(100.0, 20.0), CGPointMake(170.0, 20.0)]
@@ -276,16 +290,24 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     func setButtonsAndMessage(buttons: [GameActionButton], message: String?) {
-        for index in 0..<buttons.count {
-            buttons[index].hidden = false
-            buttons[index].center = position0
+        for button in buttons {
+            button.hidden = false
+            button.center = position0
         }
         
-        UIView.animateWithDuration(0.25, delay: 0.8, options: .CurveEaseOut, animations: {
-            for index in 0..<buttons.count {
-                buttons[index].center = self.positions[index]
+        UIView.animateWithDuration(0.25, delay: 0.0, options: .CurveEaseOut, animations: {
+            for (index, button) in enumerate(buttons) {
+                button.center = self.positions[index]
+                
             }
             }) { _ in
+                // This is needed in order to make them work correctly when a change in orientation occurs
+                // for some reason the animated values are overwritten... Adding constaints would have worked here
+                for (index, button) in enumerate(buttons) {
+                    if button.center != self.positions[index] {
+                        button.center = self.positions[index]
+                    }
+                }
                 if message != nil {
                     self.statusLabel.text = message
                 }
