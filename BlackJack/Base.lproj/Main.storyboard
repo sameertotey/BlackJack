@@ -33,11 +33,15 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euC-n1-ptA" userLabel="Shoe">
                                         <rect key="frame" x="500" y="0.0" width="100" height="100"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardshoe" translatesAutoresizingMaskIntoConstraints="NO" id="jVg-l8-Rvk">
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardshoe" translatesAutoresizingMaskIntoConstraints="NO" id="jVg-l8-Rvk">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             </imageView>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.30000000000000004" progressImage="cardback-red" trackImage="cardback" translatesAutoresizingMaskIntoConstraints="NO" id="s68-zD-4sw">
-                                                <rect key="frame" x="0.0" y="99" width="100" height="2"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0r-4F-STb" customClass="PlayingCardShoeView" customModule="BlackJack" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" progressImage="cardback-red" trackImage="cardback" translatesAutoresizingMaskIntoConstraints="NO" id="s68-zD-4sw">
+                                                <rect key="frame" x="0.0" y="2" width="100" height="2"/>
                                                 <color key="progressTintColor" red="0.95294123890000004" green="0.094117656349999995" blue="0.18431372939999999" alpha="1" colorSpace="deviceRGB"/>
                                                 <color key="trackTintColor" red="0.23384761598684203" green="0.74187911188157896" blue="0.82148074691578943" alpha="1" colorSpace="calibratedRGB"/>
                                             </progressView>
@@ -826,6 +830,7 @@
                         <outlet property="playerHandView" destination="M6B-Zk-ket" id="LVR-p3-5Vx"/>
                         <outlet property="playerHandViewHeightConstraint" destination="abY-9q-tsf" id="lbj-PU-q17"/>
                         <outlet property="playerHandViewWidthConstraint" destination="h7g-PG-ZHC" id="FZN-FU-9Kn"/>
+                        <outlet property="playingCardShoeView" destination="L0r-4F-STb" id="cor-Ex-nIX"/>
                         <outlet property="rebetButton" destination="q7l-xx-Q0d" id="9Bf-7H-J0f"/>
                         <outlet property="splitHandButton" destination="WZb-Zv-7Da" id="iDr-wZ-ovv"/>
                         <outlet property="splitHandsViewHeightContraint" destination="FzB-Ys-mAi" id="F9d-Kx-vh9"/>

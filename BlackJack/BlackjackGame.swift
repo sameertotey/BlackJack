@@ -40,6 +40,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     
     func getNewShoe() {
         println("reseted the show")
+        sendNotification("New Card Shoe")
         cardShoe.newShoe(gameConfiguration.numDecks)
         gameState = .Deal
     }
@@ -54,6 +55,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
                 gameState = .Deal
             } else {
                 println("need to shuffle here....")
+                sendNotification("Dealer need to shuffle a new shoe")
                 getNewShoe()
             }
         } else  {

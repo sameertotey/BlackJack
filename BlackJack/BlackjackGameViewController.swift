@@ -94,6 +94,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         blackjackGame.gameConfiguration = gameConfiguration
         theDealer.gameConfiguration = gameConfiguration
         AudioController.GameSounds.soundEffectsEnabled = gameConfiguration.enableSoundEffects
+        playingCardShoeView.numDecks = gameConfiguration.numDecks
     }
     
     override func didReceiveMemoryWarning() {
@@ -229,6 +230,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     private var snapBehavior: UISnapBehavior?
     private var pushBehavior: UIPushBehavior?
     private var itemBehavior: UIDynamicItemBehavior?
+    
+    @IBOutlet weak var playingCardShoeView: PlayingCardShoeView!
     
     // Actions
 
