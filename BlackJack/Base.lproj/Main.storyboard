@@ -89,102 +89,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
                                 <rect key="frame" x="0.0" y="185" width="600" height="414.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
-                                        <rect key="frame" x="0.0" y="118" width="300" height="144"/>
-                                        <subviews>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdP-aO-aKA">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
-                                                <connections>
-                                                    <segue destination="VrT-aI-btH" kind="embed" identifier="Player Container" id="tf1-l7-YgY"/>
-                                                </connections>
-                                            </containerView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="XdP-aO-aKA" secondAttribute="bottom" id="Jw5-dm-2Wn"/>
-                                            <constraint firstItem="XdP-aO-aKA" firstAttribute="leading" secondItem="M6B-Zk-ket" secondAttribute="leading" id="RLf-yU-yl1"/>
-                                            <constraint firstAttribute="trailing" secondItem="XdP-aO-aKA" secondAttribute="trailing" id="TtD-ss-Isb"/>
-                                            <constraint firstItem="XdP-aO-aKA" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="top" id="USN-Ul-ive"/>
-                                            <constraint firstAttribute="height" priority="250" constant="144" id="abY-9q-tsf"/>
-                                            <constraint firstAttribute="width" priority="250" constant="300" id="h7g-PG-ZHC"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-zM-nHb" userLabel="Finished Hands">
-                                        <rect key="frame" x="0.0" y="59" width="360" height="60"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr0-s6-HTE" userLabel="Finished Hand 1">
-                                                <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
-                                                <subviews>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-5O-2Hq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
-                                                        <connections>
-                                                            <segue destination="q7u-zG-b6b" kind="embed" identifier="Finished Hand 1" id="aJu-6q-2Y4"/>
-                                                        </connections>
-                                                    </containerView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="36n-TJ-JyN"/>
-                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="leading" secondItem="Gr0-s6-HTE" secondAttribute="leading" id="NQG-86-cdo"/>
-                                                    <constraint firstAttribute="bottom" secondItem="o5g-5O-2Hq" secondAttribute="bottom" id="UoX-9g-kIB"/>
-                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="top" secondItem="Gr0-s6-HTE" secondAttribute="top" id="hs9-0v-zM0"/>
-                                                    <constraint firstAttribute="trailing" secondItem="o5g-5O-2Hq" secondAttribute="trailing" id="jbk-MR-JB5"/>
-                                                    <constraint firstAttribute="width" priority="250" constant="120" id="rP0-jb-nOv"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-xW-06a" userLabel="Finished Hand 2">
-                                                <rect key="frame" x="120" y="0.0" width="120" height="60"/>
-                                                <subviews>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXP-UH-yrf">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
-                                                        <connections>
-                                                            <segue destination="npF-mH-FYy" kind="embed" identifier="Finished Hand 2" id="tcp-ci-kMB"/>
-                                                        </connections>
-                                                    </containerView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="top" secondItem="Zh0-xW-06a" secondAttribute="top" id="gRZ-B0-VDA"/>
-                                                    <constraint firstAttribute="height" priority="250" constant="60" id="iID-jx-Oyr"/>
-                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="leading" secondItem="Zh0-xW-06a" secondAttribute="leading" id="jTm-9e-uKH"/>
-                                                    <constraint firstAttribute="trailing" secondItem="JXP-UH-yrf" secondAttribute="trailing" id="kOf-Oj-Lw4"/>
-                                                    <constraint firstAttribute="width" priority="250" constant="120" id="ygW-6Y-qL6"/>
-                                                    <constraint firstAttribute="bottom" secondItem="JXP-UH-yrf" secondAttribute="bottom" id="zju-Dk-biN"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-Se-rDA" userLabel="Finished Hand 3">
-                                                <rect key="frame" x="240" y="0.0" width="120" height="60"/>
-                                                <subviews>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rav-Rh-mzq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
-                                                        <connections>
-                                                            <segue destination="2td-DV-1YL" kind="embed" identifier="Finished Hand 3" id="Row-ur-6vT"/>
-                                                        </connections>
-                                                    </containerView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" priority="250" constant="120" id="23H-27-Yrn"/>
-                                                    <constraint firstAttribute="height" priority="250" constant="60" id="AJh-Vr-HBa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="rav-Rh-mzq" secondAttribute="trailing" id="JSL-jC-Awm"/>
-                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="top" secondItem="hbl-Se-rDA" secondAttribute="top" id="Zgu-AX-lPE"/>
-                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="leading" secondItem="hbl-Se-rDA" secondAttribute="leading" id="aLT-Ta-7TH"/>
-                                                    <constraint firstAttribute="bottom" secondItem="rav-Rh-mzq" secondAttribute="bottom" id="ruT-Uw-ojF"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="Zh0-xW-06a" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="3HR-BQ-Rw5"/>
-                                            <constraint firstAttribute="width" priority="250" constant="360" id="Dhy-yV-BxZ"/>
-                                            <constraint firstItem="Gr0-s6-HTE" firstAttribute="leading" secondItem="wwP-zM-nHb" secondAttribute="leading" id="F3d-KM-QRq"/>
-                                            <constraint firstItem="Gr0-s6-HTE" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="NYw-1I-lMy"/>
-                                            <constraint firstItem="hbl-Se-rDA" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="Oz8-aj-AMC"/>
-                                            <constraint firstAttribute="height" priority="250" constant="60" id="Vm7-wB-Y3M"/>
-                                            <constraint firstItem="hbl-Se-rDA" firstAttribute="leading" secondItem="Zh0-xW-06a" secondAttribute="trailing" id="jhk-Bq-HsN"/>
-                                            <constraint firstItem="Zh0-xW-06a" firstAttribute="leading" secondItem="Gr0-s6-HTE" secondAttribute="trailing" id="u6h-FG-wCa"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGc-q9-ADz" userLabel="Split Hands">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
                                         <subviews>
@@ -240,13 +144,33 @@
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="dbd-Ub-qyi" firstAttribute="top" secondItem="KGc-q9-ADz" secondAttribute="top" id="BKT-AU-Xu1"/>
-                                            <constraint firstAttribute="height" priority="250" constant="60" id="FzB-Ys-mAi"/>
+                                            <constraint firstAttribute="height" constant="60" id="FzB-Ys-mAi"/>
                                             <constraint firstItem="IJU-SJ-yMI" firstAttribute="top" secondItem="KGc-q9-ADz" secondAttribute="top" id="HDy-9o-wUf"/>
                                             <constraint firstItem="IJU-SJ-yMI" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="leading" id="Jzk-l2-wXw"/>
-                                            <constraint firstAttribute="width" priority="250" constant="120" id="lKg-Ki-RTO"/>
+                                            <constraint firstAttribute="width" constant="120" id="lKg-Ki-RTO"/>
                                             <constraint firstItem="vMB-2M-bLd" firstAttribute="top" secondItem="KGc-q9-ADz" secondAttribute="top" id="q0I-qC-WWE"/>
                                             <constraint firstItem="dbd-Ub-qyi" firstAttribute="leading" secondItem="vMB-2M-bLd" secondAttribute="trailing" id="s81-QR-zbV"/>
                                             <constraint firstItem="vMB-2M-bLd" firstAttribute="leading" secondItem="IJU-SJ-yMI" secondAttribute="trailing" id="tzm-fF-puZ"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
+                                        <rect key="frame" x="0.0" y="120" width="300" height="144"/>
+                                        <subviews>
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XdP-aO-aKA">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
+                                                <connections>
+                                                    <segue destination="VrT-aI-btH" kind="embed" identifier="Player Container" id="tf1-l7-YgY"/>
+                                                </connections>
+                                            </containerView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="XdP-aO-aKA" secondAttribute="bottom" id="Jw5-dm-2Wn"/>
+                                            <constraint firstItem="XdP-aO-aKA" firstAttribute="leading" secondItem="M6B-Zk-ket" secondAttribute="leading" id="RLf-yU-yl1"/>
+                                            <constraint firstAttribute="trailing" secondItem="XdP-aO-aKA" secondAttribute="trailing" id="TtD-ss-Isb"/>
+                                            <constraint firstItem="XdP-aO-aKA" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="top" id="USN-Ul-ive"/>
+                                            <constraint firstAttribute="height" priority="250" constant="144" id="abY-9q-tsf"/>
+                                            <constraint firstAttribute="width" priority="250" constant="300" id="h7g-PG-ZHC"/>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
@@ -682,7 +606,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Bank Roll" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="4" y="349" width="60" height="60"/>
+                                        <rect key="frame" x="4" y="350.5" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Gzd-fQ-tAh"/>
@@ -760,24 +684,100 @@
                                             <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ckH-OZ-5HU"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwP-zM-nHb" userLabel="Finished Hands">
+                                        <rect key="frame" x="0.0" y="60" width="360" height="60"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gr0-s6-HTE" userLabel="Finished Hand 1">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5g-5O-2Hq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="q7u-zG-b6b" kind="embed" identifier="Finished Hand 1" id="aJu-6q-2Y4"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="36n-TJ-JyN"/>
+                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="leading" secondItem="Gr0-s6-HTE" secondAttribute="leading" id="NQG-86-cdo"/>
+                                                    <constraint firstAttribute="bottom" secondItem="o5g-5O-2Hq" secondAttribute="bottom" id="UoX-9g-kIB"/>
+                                                    <constraint firstItem="o5g-5O-2Hq" firstAttribute="top" secondItem="Gr0-s6-HTE" secondAttribute="top" id="hs9-0v-zM0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="o5g-5O-2Hq" secondAttribute="trailing" id="jbk-MR-JB5"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="rP0-jb-nOv"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zh0-xW-06a" userLabel="Finished Hand 2">
+                                                <rect key="frame" x="120" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXP-UH-yrf">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="npF-mH-FYy" kind="embed" identifier="Finished Hand 2" id="tcp-ci-kMB"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="top" secondItem="Zh0-xW-06a" secondAttribute="top" id="gRZ-B0-VDA"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="60" id="iID-jx-Oyr"/>
+                                                    <constraint firstItem="JXP-UH-yrf" firstAttribute="leading" secondItem="Zh0-xW-06a" secondAttribute="leading" id="jTm-9e-uKH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="JXP-UH-yrf" secondAttribute="trailing" id="kOf-Oj-Lw4"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="ygW-6Y-qL6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="JXP-UH-yrf" secondAttribute="bottom" id="zju-Dk-biN"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-Se-rDA" userLabel="Finished Hand 3">
+                                                <rect key="frame" x="240" y="0.0" width="120" height="60"/>
+                                                <subviews>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rav-Rh-mzq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                                                        <connections>
+                                                            <segue destination="2td-DV-1YL" kind="embed" identifier="Finished Hand 3" id="Row-ur-6vT"/>
+                                                        </connections>
+                                                    </containerView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" priority="250" constant="120" id="23H-27-Yrn"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="60" id="AJh-Vr-HBa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rav-Rh-mzq" secondAttribute="trailing" id="JSL-jC-Awm"/>
+                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="top" secondItem="hbl-Se-rDA" secondAttribute="top" id="Zgu-AX-lPE"/>
+                                                    <constraint firstItem="rav-Rh-mzq" firstAttribute="leading" secondItem="hbl-Se-rDA" secondAttribute="leading" id="aLT-Ta-7TH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rav-Rh-mzq" secondAttribute="bottom" id="ruT-Uw-ojF"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Zh0-xW-06a" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="3HR-BQ-Rw5"/>
+                                            <constraint firstAttribute="width" constant="360" id="Dhy-yV-BxZ"/>
+                                            <constraint firstItem="Gr0-s6-HTE" firstAttribute="leading" secondItem="wwP-zM-nHb" secondAttribute="leading" id="F3d-KM-QRq"/>
+                                            <constraint firstItem="Gr0-s6-HTE" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="NYw-1I-lMy"/>
+                                            <constraint firstItem="hbl-Se-rDA" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="top" id="Oz8-aj-AMC"/>
+                                            <constraint firstAttribute="height" constant="60" id="Vm7-wB-Y3M"/>
+                                            <constraint firstItem="hbl-Se-rDA" firstAttribute="leading" secondItem="Zh0-xW-06a" secondAttribute="trailing" id="jhk-Bq-HsN"/>
+                                            <constraint firstItem="Zh0-xW-06a" firstAttribute="leading" secondItem="Gr0-s6-HTE" secondAttribute="trailing" id="u6h-FG-wCa"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="2Qv-Et-itO"/>
                                     <constraint firstAttribute="width" priority="250" constant="600" id="2cd-cu-Bby"/>
+                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="KGc-q9-ADz" secondAttribute="bottom" id="5US-pt-Bt9"/>
                                     <constraint firstAttribute="trailing" secondItem="VbV-hr-o7z" secondAttribute="trailing" constant="4" id="9S5-AU-Whx"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="FaQ-Af-GcE"/>
-                                    <constraint firstAttribute="height" priority="250" constant="414.5" id="Fgu-oO-dmA"/>
+                                    <constraint firstAttribute="height" constant="414.5" id="Fgu-oO-dmA"/>
                                     <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
                                     <constraint firstItem="XBL-QY-tsG" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="8" id="JLg-r6-bHT"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="T0D-iK-4bw"/>
-                                    <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="-119" id="Ylv-ih-6y2"/>
-                                    <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" constant="118" id="b7g-9u-QC2"/>
                                     <constraint firstAttribute="centerX" secondItem="nq1-QY-XLe" secondAttribute="centerX" id="bmE-tJ-gMr"/>
                                     <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="4" id="cFz-1u-UFy"/>
                                     <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="4" id="d3N-vc-zxJ"/>
-                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" constant="-119" id="ff9-tt-U16"/>
-                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" constant="-203" id="jCr-uA-b1c"/>
-                                    <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="5.5" id="sK6-A9-5Ss"/>
+                                    <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="f4P-8N-d8E"/>
+                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="top" secondItem="KGc-q9-ADz" secondAttribute="top" id="kUP-Xm-xn1"/>
+                                    <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="4" id="sK6-A9-5Ss"/>
+                                    <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="zM4-qN-TTW"/>
                                 </constraints>
                                 <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="20" width="400" height="380"/>
