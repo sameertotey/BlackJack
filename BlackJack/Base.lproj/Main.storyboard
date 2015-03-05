@@ -115,7 +115,6 @@
                                                 <variation key="heightClass=compact-widthClass=compact" constant="240"/>
                                             </constraint>
                                         </constraints>
-                                        <variation key="heightClass=compact-widthClass=compact"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
                                         <rect key="frame" x="200" y="314" width="200" height="100"/>
@@ -777,26 +776,24 @@
                                     <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="QcU-aR-vEr"/>
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="T0D-iK-4bw"/>
+                                    <constraint firstItem="XBL-QY-tsG" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="8" id="Tte-bh-UA7"/>
                                     <constraint firstAttribute="centerX" secondItem="nq1-QY-XLe" secondAttribute="centerX" id="bmE-tJ-gMr"/>
                                     <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="4" id="cFz-1u-UFy"/>
                                     <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="4" id="d3N-vc-zxJ"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="f4P-8N-d8E"/>
+                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="-120" id="iPb-RH-N1E"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="leading" secondItem="XBL-QY-tsG" secondAttribute="trailing" id="l4a-xP-KqD"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="4" id="sK6-A9-5Ss"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="zM4-qN-TTW"/>
                                 </constraints>
                                 <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="XBL-QY-tsG"/>
-                                    </mask>
                                     <mask key="constraints">
-                                        <exclude reference="4eG-Vg-NIq"/>
-                                        <exclude reference="5Ud-Cv-COP"/>
-                                        <exclude reference="QcU-aR-vEr"/>
                                         <exclude reference="3LQ-h2-JVN"/>
-                                        <exclude reference="9oX-IF-R9E"/>
                                         <exclude reference="FeD-il-kkr"/>
                                         <exclude reference="l4a-xP-KqD"/>
+                                        <exclude reference="5Ud-Cv-COP"/>
+                                        <exclude reference="QcU-aR-vEr"/>
+                                        <exclude reference="4eG-Vg-NIq"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=compact">
@@ -804,18 +801,19 @@
                                         <include reference="XBL-QY-tsG"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="4eG-Vg-NIq"/>
-                                        <exclude reference="f4P-8N-d8E"/>
-                                        <exclude reference="5US-pt-Bt9"/>
-                                        <include reference="5Ud-Cv-COP"/>
-                                        <include reference="QcU-aR-vEr"/>
-                                        <exclude reference="T0D-iK-4bw"/>
                                         <exclude reference="2Qv-Et-itO"/>
                                         <include reference="3LQ-h2-JVN"/>
                                         <include reference="9oX-IF-R9E"/>
                                         <include reference="FeD-il-kkr"/>
                                         <include reference="l4a-xP-KqD"/>
                                         <exclude reference="zM4-qN-TTW"/>
+                                        <exclude reference="5US-pt-Bt9"/>
+                                        <include reference="5Ud-Cv-COP"/>
+                                        <include reference="QcU-aR-vEr"/>
+                                        <exclude reference="T0D-iK-4bw"/>
+                                        <include reference="4eG-Vg-NIq"/>
+                                        <exclude reference="f4P-8N-d8E"/>
+                                        <exclude reference="Tte-bh-UA7"/>
                                     </mask>
                                 </variation>
                             </view>
