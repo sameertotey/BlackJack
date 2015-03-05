@@ -175,9 +175,13 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     // MARK: - Gesture Recognizers
     
     @IBOutlet weak var dealerContainerView: UIView!
+    @IBOutlet weak var dealerContainerViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var dealerHandView: UIView!
     
     @IBOutlet weak var playerContainerView: UIView!
+    @IBOutlet weak var playerContainerViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var playerHandView: UIView!
     
     @IBOutlet var finishedHandContainerViews: [UIView]!
@@ -189,6 +193,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     @IBOutlet weak var statusLabel: UILabel!
     
     @IBOutlet weak var playerBankRollButton: GameActionButton!
+    @IBOutlet weak var playerBankRollButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var playerBankRollButtonWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var doubleDownButton: GameActionButton!
     @IBOutlet weak var splitHandButton: GameActionButton!
@@ -252,7 +258,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         hideAllPlayerButtons()
         println("size of the button container: \(buttonContainerView.frame)")
         setupButtons()
-        dealerHandViewHeightConstraint.constant = 60.0
+        dealerHandViewHeightConstraint.constant = 100.0
+        if size.width == 320.0 {
+            dealerHandViewWidthConstraint.constant = 240.0
+        }
     }
     
     func setupButtons () {

@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M28-ZO-E3Z" userLabel="Dealer Container">
-                                <rect key="frame" x="0.0" y="20" width="600" height="170.5"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="165.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYI-dJ-5Kp">
                                         <rect key="frame" x="0.0" y="144" width="49.5" height="20.5"/>
@@ -93,9 +93,12 @@
                                     <constraint firstAttribute="width" priority="250" constant="600" id="oeg-q0-2T6"/>
                                     <constraint firstItem="wCy-aE-J6d" firstAttribute="leading" secondItem="M28-ZO-E3Z" secondAttribute="leading" id="zG3-4M-48j"/>
                                 </constraints>
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="0.0"/>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
-                                <rect key="frame" x="0.0" y="190" width="600" height="409.5"/>
+                                <rect key="frame" x="0.0" y="185" width="600" height="414.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
                                         <rect key="frame" x="0.0" y="118" width="300" height="144"/>
@@ -258,7 +261,7 @@
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
-                                        <rect key="frame" x="200" y="309" width="200" height="100"/>
+                                        <rect key="frame" x="200" y="314" width="200" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-e4-mZi" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                                 <rect key="frame" x="70" y="30" width="60" height="40"/>
@@ -653,7 +656,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-hr-o7z" userLabel="Config Button" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="550" y="375" width="46" height="30"/>
+                                        <rect key="frame" x="550" y="380" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="   " image="settings">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -684,7 +687,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Bank Roll" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="4" y="344" width="60" height="60"/>
+                                        <rect key="frame" x="4" y="349" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Gzd-fQ-tAh"/>
@@ -778,6 +781,9 @@
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" constant="-203" id="jCr-uA-b1c"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="5.5" id="sK6-A9-5Ss"/>
                                 </constraints>
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="380"/>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20694074919999994" green="0.86762438322105262" blue="0.45969003964473687" alpha="1" colorSpace="calibratedRGB"/>
@@ -788,7 +794,7 @@
                             <constraint firstItem="8NK-01-hxy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cGa-Iq-ugf"/>
                             <constraint firstItem="8NK-01-hxy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="eUp-RZ-ZEU"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="width" secondItem="rkE-bI-RS4" secondAttribute="width" id="gAs-LP-h7v"/>
-                            <constraint firstItem="rkE-bI-RS4" firstAttribute="height" secondItem="M28-ZO-E3Z" secondAttribute="height" multiplier="2.4" id="gpC-PL-SLh"/>
+                            <constraint firstItem="rkE-bI-RS4" firstAttribute="height" relation="greaterThanOrEqual" secondItem="M28-ZO-E3Z" secondAttribute="height" multiplier="2.4" id="gpC-PL-SLh"/>
                             <constraint firstItem="rkE-bI-RS4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="him-cW-kMK"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iDk-2p-xkU"/>
                             <constraint firstAttribute="trailing" secondItem="M28-ZO-E3Z" secondAttribute="trailing" id="n4a-wo-qIF"/>
@@ -817,6 +823,7 @@
                         <outlet property="currentBetButton" destination="XBL-QY-tsG" id="bfA-pC-okL"/>
                         <outlet property="dealNewButton" destination="pxG-da-Zxe" id="sLx-H9-iFC"/>
                         <outlet property="dealerContainerView" destination="M28-ZO-E3Z" id="5h6-kz-EiL"/>
+                        <outlet property="dealerContainerViewHeightConstraint" destination="NSc-sL-Cda" id="LXf-Ud-V28"/>
                         <outlet property="dealerHandView" destination="wCy-aE-J6d" id="KwB-tT-wZL"/>
                         <outlet property="dealerHandViewHeightConstraint" destination="kIA-YU-Hiu" id="SkS-QX-l7R"/>
                         <outlet property="dealerHandViewWidthConstraint" destination="lmF-Hv-uWo" id="Uyw-4O-jBk"/>
@@ -826,7 +833,10 @@
                         <outlet property="finishedHandsViewWidthConstraint" destination="Dhy-yV-BxZ" id="Qfd-XY-CLn"/>
                         <outlet property="hitButton" destination="SIv-ka-k0N" id="Eyu-BO-vIG"/>
                         <outlet property="playerBankRollButton" destination="Z5s-jJ-TWn" id="nq4-i2-Z42"/>
+                        <outlet property="playerBankRollButtonHeightConstraint" destination="Gzd-fQ-tAh" id="b5G-wr-8N2"/>
+                        <outlet property="playerBankRollButtonWidthConstraint" destination="x8h-1N-h27" id="eW5-vd-Ccn"/>
                         <outlet property="playerContainerView" destination="rkE-bI-RS4" id="k6p-bn-g5d"/>
+                        <outlet property="playerContainerViewHeightConstraint" destination="Fgu-oO-dmA" id="iFA-HC-TXE"/>
                         <outlet property="playerHandView" destination="M6B-Zk-ket" id="LVR-p3-5Vx"/>
                         <outlet property="playerHandViewHeightConstraint" destination="abY-9q-tsf" id="lbj-PU-q17"/>
                         <outlet property="playerHandViewWidthConstraint" destination="h7g-PG-ZHC" id="FZN-FU-9Kn"/>
