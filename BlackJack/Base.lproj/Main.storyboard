@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Black Jack-->
@@ -18,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="8NK-01-hxy">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M28-ZO-E3Z" userLabel="Dealer Container">
                                 <rect key="frame" x="0.0" y="20" width="600" height="165.5"/>
                                 <subviews>
@@ -93,7 +89,7 @@
                                     <constraint firstAttribute="width" priority="250" constant="600" id="oeg-q0-2T6"/>
                                     <constraint firstItem="wCy-aE-J6d" firstAttribute="leading" secondItem="M28-ZO-E3Z" secondAttribute="leading" id="zG3-4M-48j"/>
                                 </constraints>
-                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="20" width="400" height="0.0"/>
                                 </variation>
                             </view>
@@ -654,6 +650,9 @@
                                             <constraint firstAttribute="width" constant="200" id="3sQ-2K-hgO"/>
                                             <constraint firstAttribute="height" constant="100" id="odB-9N-FRp"/>
                                         </constraints>
+                                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="100" y="280" width="200" height="100"/>
+                                        </variation>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-hr-o7z" userLabel="Config Button" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                         <rect key="frame" x="550" y="380" width="46" height="30"/>
@@ -682,6 +681,9 @@
                                                 <real key="value" value="0.84999999999999998"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="350" y="346" width="46" height="30"/>
+                                        </variation>
                                         <connections>
                                             <segue destination="UYI-UB-7w4" kind="presentation" identifier="Present Game Configuration" id="cpv-Fw-t3H"/>
                                         </connections>
@@ -720,6 +722,9 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="4" y="314.5" width="60" height="60"/>
+                                        </variation>
                                         <connections>
                                             <action selector="playerActionButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cS7-NU-Kqd"/>
                                         </connections>
@@ -781,7 +786,7 @@
                                     <constraint firstItem="wwP-zM-nHb" firstAttribute="top" secondItem="M6B-Zk-ket" secondAttribute="bottom" constant="-203" id="jCr-uA-b1c"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="5.5" id="sK6-A9-5Ss"/>
                                 </constraints>
-                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES">
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="20" width="400" height="380"/>
                                 </variation>
                             </view>
@@ -789,18 +794,13 @@
                         <color key="backgroundColor" red="0.20694074919999994" green="0.86762438322105262" blue="0.45969003964473687" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="8NK-01-hxy" secondAttribute="trailing" constant="-16" id="DMY-T6-jN2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="bottom" id="HTm-X3-RKi"/>
-                            <constraint firstItem="8NK-01-hxy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cGa-Iq-ugf"/>
-                            <constraint firstItem="8NK-01-hxy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="eUp-RZ-ZEU"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="width" secondItem="rkE-bI-RS4" secondAttribute="width" id="gAs-LP-h7v"/>
-                            <constraint firstItem="rkE-bI-RS4" firstAttribute="height" relation="greaterThanOrEqual" secondItem="M28-ZO-E3Z" secondAttribute="height" multiplier="2.4" id="gpC-PL-SLh"/>
                             <constraint firstItem="rkE-bI-RS4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="him-cW-kMK"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iDk-2p-xkU"/>
                             <constraint firstAttribute="trailing" secondItem="M28-ZO-E3Z" secondAttribute="trailing" id="n4a-wo-qIF"/>
                             <constraint firstItem="rkE-bI-RS4" firstAttribute="top" secondItem="M28-ZO-E3Z" secondAttribute="bottom" id="pKs-1F-l7V"/>
                             <constraint firstItem="M28-ZO-E3Z" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="w6i-FO-D7j"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8NK-01-hxy" secondAttribute="bottom" id="yiw-LJ-sol"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gfH-ZI-qnl" appends="YES" id="V2d-bb-zQf"/>
@@ -1690,7 +1690,6 @@
         <image name="Chip-100" width="96" height="96"/>
         <image name="Chip-25" width="96" height="96"/>
         <image name="Chip-5" width="96" height="96"/>
-        <image name="background" width="727" height="1490"/>
         <image name="black-chip-1" width="225" height="225"/>
         <image name="cardback" width="71" height="96"/>
         <image name="cardback-red" width="729" height="1024"/>
