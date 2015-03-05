@@ -201,6 +201,13 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
         cardView.removeFromSuperview()
         label?.removeFromSuperview()
         resultLabel?.removeFromSuperview()
+        removeLastConstraint()
+    }
+    
+    private func removeLastConstraint() {
+        heightConstraints.removeLast()
+        widthConstraints.removeLast()
+        leftOffsetConstraints.removeLast()
     }
     
     func removeFirstCard() -> BlackjackCard? {

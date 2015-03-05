@@ -11,9 +11,9 @@ import UIKit
 class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     var cardViews: [PlayingCardView] = []
 
-    var heightContraints: [NSLayoutConstraint] = []
-    var widthContraints: [NSLayoutConstraint] = []
-    var leftOffsetContraints: [NSLayoutConstraint] = []
+    var heightConstraints: [NSLayoutConstraint] = []
+    var widthConstraints: [NSLayoutConstraint] = []
+    var leftOffsetConstraints: [NSLayoutConstraint] = []
     weak var cardShoeContainer: UIView?
 
     var holecardOffsetConstraint: NSLayoutConstraint?
@@ -46,9 +46,9 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     }
     
     func reset() {
-        heightContraints.removeAll(keepCapacity: true)
-        widthContraints.removeAll(keepCapacity: true)
-        leftOffsetContraints.removeAll(keepCapacity: true)
+        heightConstraints.removeAll(keepCapacity: false)
+        widthConstraints.removeAll(keepCapacity: false)
+        leftOffsetConstraints.removeAll(keepCapacity: false)
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
@@ -139,9 +139,9 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         t1.active = true
         w1.active = true
         l1.active = true
-        heightContraints.append(h1)
-        widthContraints.append(w1)
-        leftOffsetContraints.append(l1)
+        heightConstraints.append(h1)
+        widthConstraints.append(w1)
+        leftOffsetConstraints.append(l1)
         view.addConstraint(h1)
         view.addConstraint(w1)
         view.addConstraint(t1)
@@ -161,13 +161,13 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         super.viewWillLayoutSubviews()
         println("Inside the view will layout subviews")
         println("size of the dealer container: \(view.frame)")
-        for constraint in heightContraints {
+        for constraint in heightConstraints {
             constraint.constant = view.bounds.size.height
         }
-        for constraint in widthContraints {
+        for constraint in widthConstraints {
             constraint.constant = view.bounds.size.width / cardWidthDivider
         }
-        for (index,constraint) in enumerate(leftOffsetContraints) {
+        for (index,constraint) in enumerate(leftOffsetConstraints) {
             constraint.constant = CGFloat(cardViews[index].tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth))
             
         }

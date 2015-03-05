@@ -29,9 +29,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euC-n1-ptA" userLabel="Shoe">
                                         <rect key="frame" x="500" y="0.0" width="100" height="100"/>
                                         <subviews>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardshoe" translatesAutoresizingMaskIntoConstraints="NO" id="jVg-l8-Rvk">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                            </imageView>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0r-4F-STb" customClass="PlayingCardShoeView" customModule="BlackJack" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,12 +42,8 @@
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="jVg-l8-Rvk" secondAttribute="trailing" id="03w-7Y-jfY"/>
                                             <constraint firstAttribute="width" priority="750" constant="100" id="GNT-JM-V7d" userLabel="Width - (100) - Shoe"/>
-                                            <constraint firstItem="jVg-l8-Rvk" firstAttribute="leading" secondItem="euC-n1-ptA" secondAttribute="leading" id="RWm-9A-Our"/>
                                             <constraint firstAttribute="height" priority="750" constant="100" id="c77-82-iz7"/>
-                                            <constraint firstAttribute="bottom" secondItem="jVg-l8-Rvk" secondAttribute="bottom" id="e8H-Yu-M5G"/>
-                                            <constraint firstItem="jVg-l8-Rvk" firstAttribute="top" secondItem="euC-n1-ptA" secondAttribute="top" id="uKL-gU-lyW"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="r10-q2-5wT" appends="YES" id="xZb-QE-ERt"/>
@@ -81,7 +74,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="wCy-aE-J6d" firstAttribute="top" secondItem="M28-ZO-E3Z" secondAttribute="top" id="4iU-Ox-TmU"/>
-                                    <constraint firstAttribute="height" priority="250" constant="165.5" id="NSc-sL-Cda"/>
+                                    <constraint firstAttribute="height" constant="165.5" id="NSc-sL-Cda"/>
                                     <constraint firstItem="euC-n1-ptA" firstAttribute="top" secondItem="M28-ZO-E3Z" secondAttribute="top" id="OWA-pY-Mak"/>
                                     <constraint firstItem="UYI-dJ-5Kp" firstAttribute="leading" secondItem="M28-ZO-E3Z" secondAttribute="leading" id="Sfh-Md-SXf"/>
                                     <constraint firstAttribute="trailing" secondItem="euC-n1-ptA" secondAttribute="trailing" id="fsR-5g-K8S"/>
@@ -1693,7 +1686,6 @@
         <image name="black-chip-1" width="225" height="225"/>
         <image name="cardback" width="71" height="96"/>
         <image name="cardback-red" width="729" height="1024"/>
-        <image name="cardshoe" width="100" height="100"/>
         <image name="green-chip" width="102" height="102"/>
         <image name="settings" width="30" height="30"/>
     </resources>
