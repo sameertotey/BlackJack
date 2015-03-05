@@ -8,43 +8,23 @@
 
 import UIKit
 
-class DealerHandContainerViewController: UIViewController, DealerObserver, UIDynamicAnimatorDelegate {
-    private var cardViews: [PlayingCardView] = []
+class DealerHandContainerViewController: HandContainerViewController, DealerObserver {
     
     private var originalHoleCardFrame: CGRect?
-    private var theRootView: UIView?
-    private var requiredCardCenter: CGPoint?
     private var labelX: CGFloat?
 
     private var upCardView: PlayingCardView?
     private var holeCardView: PlayingCardView?
     
+    
     private var dealerScoreText = ""
     
-    private let cardWidthDivider: CGFloat = 3.0
-    private let numberOfCardsPerWidth: CGFloat = 4.0
     
-    weak var cardShoeContainer: UIView?
-    private var animator: UIDynamicAnimator?
-    private var snapBehavior: UISnapBehavior?
-    private var pushBehavior: UIPushBehavior?
-    private var itemBehavior: UIDynamicItemBehavior?
-    
-    private var animating: Bool = false {
-        didSet {
-            if !animating {
-                checkForGameOver()
-            }
-        }
-    }
-   
     private var gameOverRequired = false
-    private var isAnimatorOn = false
     private var dealerViewBusy = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func currentDealerHandUpdate(hand: BlackjackHand) {
@@ -53,6 +33,31 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
     
     func flipHoleCard() {
         holeCardView!.userInteractionEnabled = true
+        holeCardView!.tag = 1
+        if let constraint = holecardOffsetConstraint {
+             constraint.constant = CGFloat(holeCardView!.tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth))
+        }
+       
+    }
+    
+    override func reset() {
+        super.reset()
+        upCardView = nil
+        holeCardView = nil
+        dealerScoreText = ""
+        gameOverRequired = false
+        dealerViewBusy = false
+    }
+    
+    override func finishedAnimating() {
+        super.finishedAnimating()
+        checkForGameOver()
+
+    }
+    
+    override func finishedDynamicAnimating() {
+        super.finishedDynamicAnimating()
+        checkForGameOver()
     }
     
     func checkForGameOver() {
@@ -60,48 +65,12 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
             gameCompleted()
         }
     }
-    
-    func reset() {
-        for subview in view.subviews {
-            subview.removeFromSuperview()
-        }
-        cardViews = []
-        upCardView = nil
-        holeCardView = nil
-        dealerScoreText = ""
-        animator?.removeAllBehaviors()
-        animator = nil
-        animating = false
-        gameOverRequired = false
-        isAnimatorOn = false
-        dealerViewBusy = false
-    }
-    
+
     func addCardToDealerHand(card: BlackjackCard) {
 //        println("added dealer card \(card)")
         createCard(card)
     }
     
-    private func pullCardFromShoe(cardView: PlayingCardView) {
-        if self.animator == nil {
-            self.animator = UIDynamicAnimator(referenceView: self.theRootView!)
-            self.animator?.delegate = self
-        }
-        self.pushBehavior = UIPushBehavior(items: [cardView], mode: .Instantaneous)
-        self.pushBehavior!.pushDirection = CGVectorMake(-0.2, 0.4)
-        self.pushBehavior!.magnitude = 20
-        self.animator!.addBehavior(self.pushBehavior)
-        
-        let point = self.view.convertPoint(self.requiredCardCenter!, toView: self.theRootView)
-        
-        self.snapBehavior = UISnapBehavior(item: cardView, snapToPoint: point)
-        self.snapBehavior!.damping = 0.9
-        self.animator!.addBehavior(self.snapBehavior)
-        cardView.removeFromSuperview()
-        self.view.addSubview(cardView)
-//        println("displaying card \(cardView.card)")
-
-    }
     
     func addUpCardToDealerHand(card: BlackjackCard) {
 //        println("added dealer up card \(card)")
@@ -110,54 +79,8 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
         upCardView!.faceUp = false
     }
     
-
-    private func displayInitialCards() {
-        theRootView = self.view.window!.rootViewController!.view!
-        animating = true
-        
-        let cardFrame = upCardView!.frame
-        requiredCardCenter = upCardView!.center
-        var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
-        
-        let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-        let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
-        upCardView!.frame = smallFrameConverted
-        let holeCardCenter = holeCardView!.center
-        holeCardView!.frame = smallFrameConverted
-        theRootView!.addSubview(upCardView!)
-
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.upCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
-            }) { _ in
-                UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
-                    self.upCardView!.frame = cardShoeRect
-                    self.pullCardFromShoe(self.upCardView!)
-                    }, completion: { _ in
-                        self.requiredCardCenter = holeCardCenter
-                        self.theRootView!.addSubview(self.holeCardView!)
-                        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut , animations: {
-                              self.holeCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
-                            }, completion: { _ in
-                                UIView.animateWithDuration( 0.3, delay: 0.0, options: .CurveEaseOut, animations: {
-                                    self.holeCardView!.frame = cardShoeRect
-                                    self.pullCardFromShoe(self.holeCardView!)
-                                    }, completion: { _ in
-                                        UIView.transitionWithView(self.upCardView!, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
-                                        self.upCardView!.faceUp = true
-                                            }, completion: { _ in
-//                                                delay(seconds: 0.2) {
-                                                    self.animating = false
-//                                                }
-//                                                println("finished animating initial cards")
-                                                }
-                                        )}
-                                )}
-                        )}
-                )}
-    }
-    
     func addHoleCardToDealerHand(card: BlackjackCard) {
-//        println("added dealer hole card \(card)")
+        //        println("added dealer hole card \(card)")
         createCard(card)
         holeCardView = cardViews[1]
         holeCardView!.faceUp = false
@@ -175,9 +98,56 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
         let cardWidth = CGFloat(self.view.bounds.width / cardWidthDivider)
         let xOffset = cardWidth * CGFloat(cardViews.count) / numberOfCardsPerWidth
         let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, self.view.bounds.height))
+        playingCardView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        playingCardView.tag = cardViews.count
         playingCardView.card = card
         playingCardView.faceUp = false
         cardViews.append(playingCardView)
+    }
+
+    private func displayInitialCards() {
+        animating = true
+        
+        let cardFrame = upCardView!.frame
+        var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
+        
+        let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
+        let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
+        upCardView!.frame = smallFrameConverted
+        let holeCardCenter = holeCardView!.center
+        holeCardView!.frame = smallFrameConverted
+        view.window!.rootViewController!.view!.addSubview(upCardView!)
+
+        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            self.upCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+            }) { _ in
+                UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                    self.upCardView!.frame = cardShoeRect
+                    self.pullCardFromShoe(self.upCardView!)
+                    }, completion: { _ in
+                        self.requiredCardCenter = holeCardCenter
+                        self.view.window!.rootViewController!.view!.addSubview(self.holeCardView!)
+                        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut , animations: {
+                              self.holeCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+                            }, completion: { _ in
+                                UIView.animateWithDuration( 0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                                    self.holeCardView!.frame = cardShoeRect
+                                    self.pullCardFromShoe(self.holeCardView!)
+                                    }, completion: { _ in
+                                        
+                                        self.requiredCardCenter = nil
+                                            UIView.transitionWithView(self.upCardView!, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                                        self.upCardView!.faceUp = true
+                                            }, completion: { _ in
+//                                                delay(seconds: 0.2) {
+                                                    self.animating = false
+//                                                }
+//                                                println("finished animating initial cards")
+                                                }
+                                        )}
+                                )}
+                        )}
+                )}
     }
     
     func gameCompleted() {
@@ -206,16 +176,14 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
 
     private func revealRemainingCards(index:Int) {
         if index < cardViews.count {
-            theRootView = self.view.window!.rootViewController!.view!
             let cardFrame = cardViews[index].frame
-            requiredCardCenter = cardViews[index].center
             var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
             
             let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-            let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
+            let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
             cardViews[index].frame = smallFrameConverted
             
-            theRootView!.addSubview(cardViews[index])
+            view.window!.rootViewController!.view!.addSubview(cardViews[index])
 
             UIView.animateWithDuration(0.20, animations: {
                 self.cardViews[index].frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
@@ -230,7 +198,6 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
                                         let newIndex = index + 1
                                         self.revealRemainingCards(newIndex)
                                 })
-
                 
                         })
             })
@@ -265,29 +232,5 @@ class DealerHandContainerViewController: UIViewController, DealerObserver, UIDyn
         }
     }
     
-    func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
-        isAnimatorOn = false
-        animator.removeAllBehaviors()
-//        println("animator did pause")
-        checkForGameOver()
-    }
-    
-    func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
-        isAnimatorOn = true
-//        println("animator did resume")
-
-    }
-    
-    func busyNow() ->Bool {
-        if animating {
-            return true
-        }
-        if let myAnimator = self.animator {
-            if myAnimator.running {
-                return true
-            }
-        }
-        return false
-    }
-
+   
 }

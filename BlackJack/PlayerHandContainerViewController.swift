@@ -8,8 +8,7 @@
 
 import UIKit
 
-class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
-    private var cardViews: [PlayingCardView] = []
+class PlayerHandContainerViewController: HandContainerViewController, UIDynamicAnimatorDelegate {
     private var cards: [BlackjackCard] = []
     private var displayCardQueue: [BlackjackCard] = []
     private var playerScoreText = ""
@@ -23,34 +22,8 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
         }
     }
     
-    private var theRootView: UIView?
-    private var requiredCardCenter: CGPoint?
     private var labelX: CGFloat?
-
-    var cardWidthDivider: CGFloat = 3.0
-    var numberOfCardsPerWidth: CGFloat = 4.0
     
-    weak var cardShoeContainer: UIView?
-    private var animator: UIDynamicAnimator?
-    private var snapBehavior: UISnapBehavior?
-    private var pushBehavior: UIPushBehavior?
-    private var itemBehavior: UIDynamicItemBehavior?
-    
-    private var animating: Bool = false {
-        didSet {
-            if !animating {
-                checkForDisplayQueue()
-               }
-        }
-    }
-    
-    private var isAnimatorOn: Bool = false {
-        didSet {
-            if !isAnimatorOn {
-                checkForDisplayQueue()
-            }
-        }
-    }
     private var labelDisplayNeeded = false
     private var resultDisplayNeeded = false
     private var savedResultState: BlackjackHand.HandState?
@@ -60,35 +33,31 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func reset() {
-        if (animator != nil) {
-            if animator!.running {
-                
-            }
-        }
-        for view in cardViews {
-            view.removeFromSuperview()
-        }
+    override func reset() {
+        super.reset()
         cardViews.removeAll(keepCapacity: false)
         cards.removeAll(keepCapacity: false)
         displayCardQueue.removeAll(keepCapacity: false)
-        animator?.removeAllBehaviors()
         labelDisplayNeeded = false
         resultDisplayNeeded = false
         playerScoreText = ""
         label = nil
         resultLabel = nil
-        theRootView = nil
         playerHandIndex = nil
-        animator = nil
-        animating = false
-        isAnimatorOn = false
         savedResultState = nil
-        for subview in view.subviews {
-            subview.removeFromSuperview()
-        }
+     }
+    
+    override func finishedAnimating() {
+        super.finishedAnimating()
+        checkForDisplayQueue()
+        
     }
     
+    override func finishedDynamicAnimating() {
+        super.finishedDynamicAnimating()
+        checkForDisplayQueue()
+    }
+
     func addCardToPlayerHand(card: BlackjackCard) {
          if !busyNow() {
             let playingCardView = createCard(card)
@@ -118,6 +87,8 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
         let cardWidth = CGFloat(self.view.bounds.width / cardWidthDivider)
         let xOffset = cardWidth * CGFloat(cardViews.count) / numberOfCardsPerWidth
         let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, self.view.bounds.height))
+        playingCardView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        playingCardView.tag = cardViews.count
         playingCardView.card = card
         playingCardView.faceUp = false
         cardViews.append(playingCardView)
@@ -127,14 +98,13 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
     
     private func displayCard(playingCardView: PlayingCardView) {
         animating = true
-        theRootView = self.view.window!.rootViewController!.view!
         if cardShoeContainer != nil {
             let cardFrame = playingCardView.frame
-            requiredCardCenter = playingCardView.center
+//            requiredCardCenter = playingCardView.center
             var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
             
             let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-            let smallFrameConverted = theRootView!.convertRect(smallFrame, fromView: cardShoeContainer)
+            let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
             playingCardView.frame = smallFrameConverted
             self.view.window!.rootViewController!.view!.addSubview(playingCardView)
 
@@ -155,6 +125,7 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
                     )}
         } else {
             view.addSubview(playingCardView)
+            addConstraints(playingCardView, holeCard: false)
             playingCardView.alpha = 0
             UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
                 playingCardView.alpha = 1.0
@@ -241,18 +212,7 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
         }
     }
     
-    func busyNow() ->Bool {
-        if animating {
-            return true
-        }
-        if let myAnimator = self.animator {
-            if myAnimator.running {
-                return true
-            }
-        }
-        return false
-    }
-
+ 
     func displayResult(resultState: BlackjackHand.HandState) {
         if busyNow() {
             resultDisplayNeeded = true
@@ -303,39 +263,4 @@ class PlayerHandContainerViewController: UIViewController, UIDynamicAnimatorDele
         })
     }
     
-    private func pullCardFromShoe(cardView: PlayingCardView) {
-        if contains(cardViews, cardView) {
-            if self.animator == nil {
-                self.animator = UIDynamicAnimator(referenceView: self.view.window!.rootViewController!.view!)
-                self.animator?.delegate = self
-            }
-            self.pushBehavior = UIPushBehavior(items: [cardView], mode: .Instantaneous)
-            self.pushBehavior!.pushDirection = CGVectorMake(-0.2, 0.4)
-            self.pushBehavior!.magnitude = 20
-            self.animator!.addBehavior(self.pushBehavior)
-            
-            let myCenter = view.convertPoint(cardView.center, toView: cardShoeContainer)
-            
-            let point = self.view.convertPoint(myCenter, toView: self.view.window!.rootViewController!.view!)
-            
-            self.snapBehavior = UISnapBehavior(item: cardView, snapToPoint: point)
-            self.snapBehavior!.damping = 0.9
-            self.animator!.addBehavior(self.snapBehavior)
-            cardView.removeFromSuperview()
-            self.view.addSubview(cardView)
-
-        } else {
-            println("skipping this card display............\(NSDate())")
-        }
-    }
-
-    func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
-        isAnimatorOn = false
-        animator.removeAllBehaviors()
-    }
-    
-    func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
-        isAnimatorOn = true
-    }
-
-}
+ }

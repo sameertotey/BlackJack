@@ -86,6 +86,10 @@ class BlackjackHand: NSObject {
                 handState = .NaturalBlackjack
                 break
             }
+            if value == 21 && gameConfiguration.autoStandOnPlayer21 {
+                handState = .Stood
+                break
+            }
             if cards[0].rank == cards[1].rank {
                 initialCardPair = true
                 break

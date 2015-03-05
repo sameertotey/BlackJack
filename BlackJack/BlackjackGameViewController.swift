@@ -252,6 +252,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         hideAllPlayerButtons()
         println("size of the button container: \(buttonContainerView.frame)")
         setupButtons()
+        dealerHandViewHeightConstraint.constant = 60.0
     }
     
     func setupButtons () {
