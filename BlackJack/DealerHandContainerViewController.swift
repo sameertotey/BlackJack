@@ -11,7 +11,6 @@ import UIKit
 class DealerHandContainerViewController: HandContainerViewController, DealerObserver {
     
     private var originalHoleCardFrame: CGRect?
-    private var labelX: CGFloat?
 
     private var upCardView: PlayingCardView?
     private var holeCardView: PlayingCardView?
@@ -166,7 +165,6 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             self.holeCardView!.frame = self.originalHoleCardFrame!
             }, completion: { _ in
                 UIView.transitionWithView(self.holeCardView!, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
-                    self.labelX = CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame)
                     self.holeCardView!.faceUp = true
                     }, completion: { _ in
                         self.revealRemainingCards(2)
@@ -203,26 +201,28 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             })
         } else {
             // we are done with displaying the cards, now display the score label
-            let label = UILabel()
-            label.textAlignment = NSTextAlignment.Center
-            label.text = self.dealerScoreText
+            self.label = UILabel()
+            label!.setTranslatesAutoresizingMaskIntoConstraints(false)
+            self.label!.textAlignment = NSTextAlignment.Center
+            self.label!.text = self.dealerScoreText
 //            println("dealerScore: \(self.dealerScoreText)")
             switch self.dealerScoreText {
                 case "Busted!":
-                label.backgroundColor = UIColor.greenColor()
+                self.label!.backgroundColor = UIColor.greenColor()
                 case "Blackjack!":
-                label.backgroundColor = UIColor.orangeColor()
+                self.label!.backgroundColor = UIColor.orangeColor()
             default:
-                label.backgroundColor = UIColor.yellowColor()
+                self.label!.backgroundColor = UIColor.yellowColor()
 
-                label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                self.label!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
             }
-            label.alpha = 0.0
-            label.sizeToFit()
-            self.view.addSubview(label)
+            self.label!.alpha = 0.0
+            self.label!.sizeToFit()
+            self.view.addSubview(self.label!)
+            self.addLabelConstraints()
             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                label.alpha = 1.0
-                label.frame = CGRectMake(self.labelX!, 0, label.bounds.size.width, label.bounds.size.height)
+                self.label!.alpha = 1.0
+                self.label!.frame = CGRectMake(CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame), 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
                 }, completion: { _ in
                     self.animating = false
                     NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.dealerHandOver, object: nil)

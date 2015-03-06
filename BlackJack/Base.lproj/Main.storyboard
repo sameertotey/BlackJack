@@ -68,7 +68,7 @@
                                                 <variation key="heightClass=compact-widthClass=compact" constant="80"/>
                                             </constraint>
                                             <constraint firstAttribute="width" priority="250" constant="300" id="lmF-Hv-uWo">
-                                                <variation key="heightClass=compact-widthClass=compact" constant="240"/>
+                                                <variation key="heightClass=compact-widthClass=compact" constant="180"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="uCi-9I-gmh" secondAttribute="trailing" id="uMV-Ve-ge1"/>
                                             <constraint firstAttribute="bottom" secondItem="uCi-9I-gmh" secondAttribute="bottom" id="v2v-7W-GEg"/>
@@ -78,7 +78,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="wCy-aE-J6d" firstAttribute="top" secondItem="M28-ZO-E3Z" secondAttribute="top" id="4iU-Ox-TmU"/>
-                                    <constraint firstAttribute="height" priority="900" constant="165.5" id="NSc-sL-Cda">
+                                    <constraint firstAttribute="height" priority="900" constant="166" id="NSc-sL-Cda">
                                         <variation key="heightClass=compact-widthClass=compact" constant="100"/>
                                     </constraint>
                                     <constraint firstItem="euC-n1-ptA" firstAttribute="top" secondItem="M28-ZO-E3Z" secondAttribute="top" id="OWA-pY-Mak"/>
@@ -90,7 +90,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkE-bI-RS4" userLabel="Player Container">
-                                <rect key="frame" x="0.0" y="185" width="600" height="414.5"/>
+                                <rect key="frame" x="0.0" y="219.5" width="600" height="380"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6B-Zk-ket" userLabel="Player Hand">
                                         <rect key="frame" x="0.0" y="120" width="300" height="144"/>
@@ -112,12 +112,12 @@
                                                 <variation key="heightClass=compact-widthClass=compact" constant="80"/>
                                             </constraint>
                                             <constraint firstAttribute="width" priority="250" constant="300" id="h7g-PG-ZHC">
-                                                <variation key="heightClass=compact-widthClass=compact" constant="240"/>
+                                                <variation key="heightClass=compact-widthClass=compact" constant="180"/>
                                             </constraint>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nq1-QY-XLe" userLabel="Button Container">
-                                        <rect key="frame" x="200" y="314" width="200" height="100"/>
+                                        <rect key="frame" x="200" y="279.5" width="200" height="100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pBz-e4-mZi" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
                                                 <rect key="frame" x="70" y="30" width="60" height="40"/>
@@ -512,7 +512,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VbV-hr-o7z" userLabel="Config Button" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="550" y="380" width="46" height="30"/>
+                                        <rect key="frame" x="550" y="345.5" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.84002364309999999" green="0.74028577299999998" blue="0.30715460529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="   " image="settings">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -543,7 +543,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Z5s-jJ-TWn" userLabel="Bank Roll" customClass="GameActionButton" customModule="BlackJack" customModuleProvider="target">
-                                        <rect key="frame" x="4" y="350.5" width="60" height="60"/>
+                                        <rect key="frame" x="4" y="316" width="60" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Gzd-fQ-tAh"/>
@@ -770,7 +770,7 @@
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="XBL-QY-tsG" secondAttribute="top" id="9oX-IF-R9E"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" id="FaQ-Af-GcE"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="FeD-il-kkr"/>
-                                    <constraint firstAttribute="height" priority="900" constant="414" id="Fgu-oO-dmA">
+                                    <constraint firstAttribute="height" priority="900" constant="380" id="Fgu-oO-dmA">
                                         <variation key="heightClass=compact-widthClass=compact" constant="220"/>
                                     </constraint>
                                     <constraint firstAttribute="bottom" secondItem="nq1-QY-XLe" secondAttribute="bottom" id="GSH-si-0tq"/>
@@ -781,7 +781,6 @@
                                     <constraint firstAttribute="bottom" secondItem="VbV-hr-o7z" secondAttribute="bottom" constant="4" id="cFz-1u-UFy"/>
                                     <constraint firstItem="Z5s-jJ-TWn" firstAttribute="leading" secondItem="rkE-bI-RS4" secondAttribute="leading" constant="4" id="d3N-vc-zxJ"/>
                                     <constraint firstItem="M6B-Zk-ket" firstAttribute="top" secondItem="wwP-zM-nHb" secondAttribute="bottom" id="f4P-8N-d8E"/>
-                                    <constraint firstItem="wwP-zM-nHb" firstAttribute="leading" secondItem="KGc-q9-ADz" secondAttribute="trailing" constant="-120" id="iPb-RH-N1E"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="leading" secondItem="XBL-QY-tsG" secondAttribute="trailing" id="l4a-xP-KqD"/>
                                     <constraint firstAttribute="bottom" secondItem="Z5s-jJ-TWn" secondAttribute="bottom" constant="4" id="sK6-A9-5Ss"/>
                                     <constraint firstItem="KGc-q9-ADz" firstAttribute="top" secondItem="rkE-bI-RS4" secondAttribute="top" id="zM4-qN-TTW"/>
@@ -848,6 +847,8 @@
                         <outlet property="chip25Button" destination="mKC-aB-B52" id="8jB-Cy-MzJ"/>
                         <outlet property="chip5Button" destination="4zd-Cj-xnD" id="Ssr-Xa-YBE"/>
                         <outlet property="currentBetButton" destination="XBL-QY-tsG" id="bfA-pC-okL"/>
+                        <outlet property="currentBetButtonHeightConstraint" destination="kVG-NZ-9Uf" id="bdO-8s-xgR"/>
+                        <outlet property="currentBetButtonWidthConstraint" destination="jyX-YD-xhp" id="Tn6-ei-144"/>
                         <outlet property="dealNewButton" destination="pxG-da-Zxe" id="sLx-H9-iFC"/>
                         <outlet property="dealerContainerView" destination="M28-ZO-E3Z" id="5h6-kz-EiL"/>
                         <outlet property="dealerContainerViewHeightConstraint" destination="NSc-sL-Cda" id="LXf-Ud-V28"/>

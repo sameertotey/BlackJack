@@ -12,7 +12,6 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
     private var cards: [BlackjackCard] = []
     private var displayCardQueue: [BlackjackCard] = []
     private var playerScoreText = ""
-    private var label: UILabel?
     private var resultLabel: UILabel?
     var playerHandIndex: Int? {
         didSet {
@@ -150,6 +149,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             } else {
                 label!.removeFromSuperview()
             }
+            label!.setTranslatesAutoresizingMaskIntoConstraints(false)
             label!.textAlignment = NSTextAlignment.Center
             label!.text = self.playerScoreText
             switch self.playerScoreText {
@@ -166,6 +166,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             label!.frame = CGRectMake(0, 0, label!.bounds.size.width, label!.bounds.size.height)
             let myX = CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame)
             self.view.addSubview(label!)
+            self.addLabelConstraints()
             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.label!.alpha = 1.0
                 self.label!.frame = CGRectMake(myX, 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
@@ -208,6 +209,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
         heightConstraints.removeLast()
         widthConstraints.removeLast()
         leftOffsetConstraints.removeLast()
+//        updateLabelConstraint(CGRectGetMaxX(cardViews[cardViews.count - 1].frame))
     }
     
     func removeFirstCard() -> BlackjackCard? {

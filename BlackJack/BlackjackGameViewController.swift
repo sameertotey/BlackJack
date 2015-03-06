@@ -205,6 +205,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     @IBOutlet weak var standButton: GameActionButton!
     
     @IBOutlet weak var currentBetButton: GameActionButton!
+    @IBOutlet weak var currentBetButtonWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var currentBetButtonHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var chip100Button: GameActionButton!
     @IBOutlet weak var chip25Button: GameActionButton!
@@ -242,8 +244,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     // Actions
 
     func setupSubViews() {
-//        playerContainerView.clipsToBounds = true
-//        dealerContainerView.clipsToBounds = true
+
     }
 
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -256,11 +257,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         println("The new size is \(size)")
         hideAllPlayerButtons()
-        println("size of the button container: \(buttonContainerView.frame)")
         setupButtons()
-        dealerHandViewHeightConstraint.constant = 100.0
         if size.width == 320.0 {
-            dealerHandViewWidthConstraint.constant = 240.0
+            playerBankRollButtonHeightConstraint.constant = 50.0
+            playerBankRollButtonWidthConstraint.constant = 50.0
         }
     }
     

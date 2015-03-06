@@ -15,6 +15,11 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     var widthConstraints: [NSLayoutConstraint] = []
     var leftOffsetConstraints: [NSLayoutConstraint] = []
     weak var cardShoeContainer: UIView?
+    
+    var label: UILabel?
+    var labelConstraint: NSLayoutConstraint?
+    var lastCardOffsetConstraint: NSLayoutConstraint?
+
 
     var holecardOffsetConstraint: NSLayoutConstraint?
     var requiredCardCenter: CGPoint?
@@ -148,6 +153,23 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         view.addConstraint(l1)
     }
     
+    func addLabelConstraints() {
+        let t1 = NSLayoutConstraint(item: label!, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0)
+        
+        labelConstraint = NSLayoutConstraint(item: label!, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame))
+        labelConstraint!.active = true
+        t1.active = true
+        view.addConstraint(labelConstraint!)
+        view.addConstraint(t1)
+        
+    }
+    
+    func updateLabelConstraint(constantValue: CGFloat) {
+        if label != nil {
+            labelConstraint!.constant =   constantValue
+        }
+    }
+    
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         println("The new size of the dealer container .........is \(size)")
@@ -157,10 +179,12 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         //        view.layoutIfNeeded()
     }
     
+   
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        println("Inside the view will layout subviews")
-        println("size of the dealer container: \(view.frame)")
+//        println("Inside the view will layout subviews")
+//        println("size of the dealer container: \(view.frame)")
         for constraint in heightConstraints {
             constraint.constant = view.bounds.size.height
         }
@@ -169,9 +193,11 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
         for (index,constraint) in enumerate(leftOffsetConstraints) {
             constraint.constant = CGFloat(cardViews[index].tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth))
-            
+            lastCardOffsetConstraint = constraint
         }
-        
+        if lastCardOffsetConstraint != nil {
+            updateLabelConstraint(lastCardOffsetConstraint!.constant + view.bounds.size.width / cardWidthDivider)
+        }
     }
 
 }
