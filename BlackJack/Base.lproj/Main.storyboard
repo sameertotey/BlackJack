@@ -831,6 +831,7 @@
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gfH-ZI-qnl" appends="YES" id="V2d-bb-zQf"/>
                             <outletCollection property="gestureRecognizers" destination="WcO-gE-Qrx" appends="YES" id="Pbm-P7-rpj"/>
+                            <outletCollection property="gestureRecognizers" destination="rM5-O2-P2I" appends="YES" id="dEn-hg-crO"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="BlackJack" id="5c3-SA-nQl"/>
@@ -895,9 +896,14 @@
                         <action selector="doubleTappedView:" destination="BYZ-38-t0r" id="75s-hn-Rfh"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="WcO-gE-Qrx">
+                <swipeGestureRecognizer direction="right" id="WcO-gE-Qrx" userLabel="Swipe Gesture for Stand">
                     <connections>
                         <action selector="swipedTheView:" destination="BYZ-38-t0r" id="6Kj-gL-EpW"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="rM5-O2-P2I" userLabel="Swipe Gesture for rebet">
+                    <connections>
+                        <action selector="swipedTheViewUp:" destination="BYZ-38-t0r" id="rhv-UR-n6d"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

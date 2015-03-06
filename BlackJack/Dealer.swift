@@ -88,8 +88,8 @@ class Dealer: NSObject {
     func offerSurrender(players: [Player]) {
         // Check game configuration if surrender is allowed and if insurance is not active.....
         if gameConfiguration!.surrenderAllowed {
-            println("Offering surrender option to players")
-            sendNotification("Surrender option offered")
+//            println("Offering surrender option to players")
+//            sendNotification("Surrender option offered")
             for player in players {
                 player.surrenderOptionOffered()
             }
@@ -132,7 +132,7 @@ class Dealer: NSObject {
                     hand.bet = 0
                     println("The player lost")
                 case .Surrendered:
-                    hand.handState = .Lost
+//                    hand.handState = .Lost
                     // return half the bet back (depending on the rule in gameConfiguration
                     let surrenderAllowance = hand.bet / 2
                     player.bankRoll += surrenderAllowance

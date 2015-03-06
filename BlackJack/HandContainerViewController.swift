@@ -32,7 +32,11 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     private var snapBehavior: UISnapBehavior?
     private var pushBehavior: UIPushBehavior?
     private var itemBehavior: UIDynamicItemBehavior?
-
+    
+    private var currentCardView: PlayingCardView?
+    private var isHoleCard: Bool?
+    
+    
     var animating: Bool = false {
         didSet {
             if !animating {
@@ -80,7 +84,7 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
             }
             self.pushBehavior = UIPushBehavior(items: [cardView], mode: .Instantaneous)
             self.pushBehavior!.pushDirection = CGVectorMake(-0.2, 0.4)
-            self.pushBehavior!.magnitude = 20
+            self.pushBehavior!.magnitude = -0.1
             self.animator!.addBehavior(self.pushBehavior)
             
             var myCenter: CGPoint?
@@ -99,9 +103,8 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
             self.snapBehavior = UISnapBehavior(item: cardView, snapToPoint: point)
             self.snapBehavior!.damping = 0.9
             self.animator!.addBehavior(self.snapBehavior)
-            cardView.removeFromSuperview()
-            self.view.addSubview(cardView)
-            self.addConstraints(cardView, holeCard: holecard)
+            isHoleCard = holecard
+            currentCardView = cardView
         } else {
             println("skipping this card display............\(NSDate())")
         }
@@ -120,6 +123,9 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     }
 
     func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
+        currentCardView!.removeFromSuperview()
+        self.view.addSubview(currentCardView!)
+        self.addConstraints(currentCardView!, holeCard: isHoleCard!)
         isAnimatorOn = false
         animator.removeAllBehaviors()
         finishedDynamicAnimating()
@@ -166,25 +172,13 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     
     func updateLabelConstraint(constantValue: CGFloat) {
         if label != nil {
-            labelConstraint!.constant =   constantValue
+            labelConstraint?.constant =   constantValue
         }
     }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        println("The new size of the dealer container .........is \(size)")
-        println("size of the dealer container: \(view.frame)")
-        
-        //        view.setNeedsLayout()
-        //        view.layoutIfNeeded()
-    }
-    
    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        println("Inside the view will layout subviews")
-//        println("size of the dealer container: \(view.frame)")
         for constraint in heightConstraints {
             constraint.constant = view.bounds.size.height
         }

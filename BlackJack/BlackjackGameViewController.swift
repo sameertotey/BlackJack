@@ -34,7 +34,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
                 dealNewButton.hidden = false
             case let x where x >= gameConfiguration.minimumBet:
                 statusLabel.text = "Ready to Deal"
-                rebetButton.hidden = true
+//                rebetButton.hidden = true
                 dealNewButton.hidden = false
             default:
                 println("Default")
@@ -63,7 +63,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         theDealer.observer = dealerHandContainerViewController
         blackjackGame.dealer = theDealer
         
-        setupSubViews()
         playerFinishedHandsVC = [playerFinishedHand1ViewController!, playerFinishedHand2ViewController!, playerFinishedHand3ViewController!]
         playerSplitHandsVC = [playerSplit1ViewController!, playerSplit2ViewController!, playerSplit3ViewController!]
         blackjackGame.play()
@@ -93,6 +92,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         gameConfiguration = GameConfiguration()
         blackjackGame.gameConfiguration = gameConfiguration
         theDealer.gameConfiguration = gameConfiguration
+        currentPlayer.gameConfiguration = gameConfiguration
         AudioController.GameSounds.soundEffectsEnabled = gameConfiguration.enableSoundEffects
         playingCardShoeView.numDecks = gameConfiguration.numDecks
     }
@@ -243,7 +243,18 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     
     // Actions
 
-    func setupSubViews() {
+    override func viewWillAppear(animated: Bool) {
+        println("The size is view appearing \(view.bounds.size)")
+        setupSubViews(view.bounds.size)
+    }
+    
+    func setupSubViews(size: CGSize) {
+        hideAllPlayerButtons()
+        setupButtons()
+        if size.width == 320.0 {
+            playerBankRollButtonHeightConstraint.constant = 50.0
+            playerBankRollButtonWidthConstraint.constant = 50.0
+        }
 
     }
 
@@ -256,12 +267,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         println("The new size is \(size)")
-        hideAllPlayerButtons()
-        setupButtons()
-        if size.width == 320.0 {
-            playerBankRollButtonHeightConstraint.constant = 50.0
-            playerBankRollButtonWidthConstraint.constant = 50.0
-        }
+        setupSubViews(size)
     }
     
     func setupButtons () {
@@ -330,10 +336,36 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         buttons.append(standButton)
         if let currentPlayerHand = currentPlayer.currentHand {
             if currentPlayerHand.cards.count == 2 {
-                buttons.append(doubleDownButton)
-                if currentPlayerHand.initialCardPair {
-                    if currentPlayer.hands.count < gameConfiguration.maxHandsWithSplits {
-                        buttons.append(splitHandButton)
+                if gameConfiguration.doublingDownAllowed {
+                    if gameConfiguration.doublingDownAllowedOn10and11Only {
+                        if currentPlayerHand.value >= 10 && currentPlayerHand.value <= 11 {
+                            buttons.append(doubleDownButton)
+                        }
+                    } else if gameConfiguration.doublingDownAllowedOn9and10and11Only {
+                        if currentPlayerHand.value >= 9 && currentPlayerHand.value <= 11 {                                buttons.append(doubleDownButton)
+                            }
+                    } else {
+                        buttons.append(doubleDownButton)
+                    }
+                }
+                
+                if gameConfiguration.splitsAllowed {
+                    if currentPlayerHand.initialCardPair {
+                        if currentPlayerHand.cards.first!.rank == .Ace {
+                            if gameConfiguration.canSplitAces {
+                                if currentPlayer.hands.count < gameConfiguration.maxHandsWithSplits {
+                                    buttons.append(splitHandButton)
+                                }
+                            }
+                        } else if currentPlayer.hands.count < gameConfiguration.maxHandsWithSplits {
+                            buttons.append(splitHandButton)
+                        }
+                    } else if gameConfiguration.canSplitAny10Cards {
+                        if (currentPlayerHand.cards[0].rank.values.first == 10) && (currentPlayerHand.cards[1].rank.values.first == 10) {
+                            if currentPlayer.hands.count < gameConfiguration.maxHandsWithSplits {
+                                buttons.append(splitHandButton)
+                            }
+                        }
                     }
                 }
             }
@@ -629,7 +661,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             statusLabel.text = "Game Over - Won \(-x)"
             gameSound = .Won
         default:
-            statusLabel.text = "Game Over - Tie!"
+            statusLabel.text = "Game Over - Push!"
             gameSound = .Tied
         }
         currentBetButton.enabled = true
@@ -644,7 +676,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             switch currentPlayer!.hands[0].handState{
             case .Won, .NaturalBlackjack:
                 gameSound = .Won
-            case .Lost:
+            case .Lost, .Surrendered:
                 gameSound = .Lost
             default:
                 gameSound = .Tied
@@ -727,12 +759,19 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
+    @IBAction func swipedTheViewUp(sender: UISwipeGestureRecognizer) {
+        if sender.state == .Ended  {
+            println("swiped  the view UP")
+            deal()
+        }
+
+    }
+    
     @IBAction func swipedTheView(sender: UISwipeGestureRecognizer) {
         if sender.state == .Ended && blackjackGame.gameState == .Players {
             println("swiped  the view")
             performStand()
         }
-
     }
 }
 

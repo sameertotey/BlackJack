@@ -55,7 +55,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
                 gameState = .Deal
             } else {
                 println("need to shuffle here....")
-                sendNotification("Dealer need to shuffle a new shoe")
+                sendNotification("Dealer needs to shuffle a new shoe")
                 getNewShoe()
             }
         } else  {
@@ -126,7 +126,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
             default:
                 player.currentHand!.handState = .Lost
             }
-            update()
+//            update()
             sendNotification("Dealer Blackjack")
         }
     }

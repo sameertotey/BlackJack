@@ -13,6 +13,7 @@ class Player: NSObject {
     var name: String?
     dynamic var bankRoll = 0.0
     var currentBet = 0.0
+    var gameConfiguration: GameConfiguration?
     var insuranceAvailable: Bool = false {
         didSet {
             if insuranceAvailable == true {
@@ -115,8 +116,18 @@ class Player: NSObject {
                 }
                 // If the split hand was aces - consult game configuration and act accordingly
                 if secondCard.rank == .Ace {
-                    println("split of aces being handled")
-                    sendNotification("Split Aces")
+                    if gameConfiguration != nil {
+                        if gameConfiguration!.onlyOneCardOnSplitAces {
+                            println("split of aces being handled")
+                            sendNotification("Split Aces")
+                            advanceToNextHand()
+                        }
+                    }
+                }
+                // If the hand state is not active advance to next hand??
+                if currentHand!.handState == .Stood {
+                    println("Advancing to next hand")
+                    sendNotification("Auto stand on 21")
                     advanceToNextHand()
                 }
             } else {

@@ -16,7 +16,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
     var playerHandIndex: Int? {
         didSet {
             if oldValue != playerHandIndex {
-                println("The player hand index is now changing to...\(playerHandIndex)")
+//                println("The player hand index is now changing to...\(playerHandIndex)")
             }
         }
     }
@@ -166,12 +166,12 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             label!.frame = CGRectMake(0, 0, label!.bounds.size.width, label!.bounds.size.height)
             let myX = CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame)
             self.view.addSubview(label!)
-            self.addLabelConstraints()
             UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.label!.alpha = 1.0
                 self.label!.frame = CGRectMake(myX, 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
                 }, completion: { _ in
                     self.animating = false
+                    self.addLabelConstraints()
             })
             labelDisplayNeeded = false
         }
@@ -242,9 +242,11 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             resultLabel!.text = "😑"
             resultLabel!.backgroundColor = UIColor.grayColor()
         case .NaturalBlackjack:
-            println("Blackjack")
+            resultLabel!.text = "💰"
+            resultLabel!.backgroundColor = UIColor.redColor()
         case .Surrendered:
-            println("Surrendered")
+            resultLabel!.text = "⚐"
+            resultLabel!.backgroundColor = UIColor.redColor()
         case .Stood:
             println("Stood")
         case .Active:
