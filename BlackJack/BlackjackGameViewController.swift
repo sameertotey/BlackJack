@@ -760,7 +760,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     @IBAction func swipedTheViewUp(sender: UISwipeGestureRecognizer) {
-        if sender.state == .Ended  {
+        if sender.state == .Ended  && blackjackGame.gameState == .Deal  {
             println("swiped  the view UP")
             deal()
         }
