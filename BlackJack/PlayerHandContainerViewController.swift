@@ -105,6 +105,12 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
                 }, completion: { _ in
                     self.animating = false
                     self.addLabelConstraints()
+                    println("finished the player label")
+                    
+                    self.view.window!.rootViewController!.view!.userInteractionEnabled = true
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.playerLabelDisplayed, object: nil)
+
+
             })
             labelDisplayNeeded = false
         }
@@ -176,7 +182,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             resultLabel!.backgroundColor = UIColor.grayColor()
         case .NaturalBlackjack:
             resultLabel!.text = "💰"
-            resultLabel!.backgroundColor = UIColor.redColor()
+            resultLabel!.backgroundColor = UIColor.yellowColor()
         case .Surrendered:
             resultLabel!.text = "⚐"
             resultLabel!.backgroundColor = UIColor.redColor()
@@ -200,10 +206,11 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
         let myY = view.bounds.height / 2
         self.view.addSubview(resultLabel!)
         UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.resultLabel!.alpha = 1.0
-            self.resultLabel!.center = CGPointMake(myX, myY)
+                self.resultLabel!.alpha = 1.0
+                self.resultLabel!.center = CGPointMake(myX, myY)
             }, completion: { _ in
-            self.animating = false
+                self.animating = false
+                self.view.window!.rootViewController!.view!.userInteractionEnabled = true
         })
     }
     

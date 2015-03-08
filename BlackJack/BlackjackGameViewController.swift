@@ -43,7 +43,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             currentBetButton.animate()
             let difference = currentBet - oldValue
             if difference > 0 {
-                currentPlayer.bet(difference)
+                if !currentPlayer.bet(difference) {
+                    statusLabel.text = "Not enough bankroll"
+                    currentBet = oldValue
+                }
             }
         }
     }
@@ -67,12 +70,12 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         playerSplitHandsVC = [playerSplit1ViewController!, playerSplit2ViewController!, playerSplit3ViewController!]
         blackjackGame.play()
         hideAllPlayerButtons()
-        setupButtons()
         audioController = AudioController()
         currentBet = gameConfiguration.minimumBet
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: NotificationMessages.cardShoeContentStatus, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: NotificationMessages.dealerHandOver, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setStatusMessage:", name: NotificationMessages.setStatus, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setPlayerReady", name: NotificationMessages.playerLabelDisplayed, object: nil)
         startObservingBankroll(currentPlayer)
     }
     deinit {
@@ -279,6 +282,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         default:
             println("This should not happen, you should be in only Deal or Player state")
         }
+        self.view.window?.rootViewController?.view?.userInteractionEnabled = true
       }
     
     let position0 = CGPointMake(-30, -30)
@@ -402,6 +406,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     func hideAllPlayerButtons() {
+        self.view.window?.rootViewController?.view?.userInteractionEnabled = false
         for subView in buttonContainerView.subviews {
             if subView is GameActionButton {
                 (subView as GameActionButton).hidden = true
@@ -461,8 +466,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             animator!.delegate = self
         }
         pushBehavior = UIPushBehavior(items: [chipView], mode: .Instantaneous)
-        pushBehavior!.pushDirection = CGVectorMake(0.8, 0.4)
-        pushBehavior!.magnitude = 2
+        pushBehavior!.pushDirection = CGVectorMake(0.6, 0.4)
+        pushBehavior!.magnitude = 1
         animator!.addBehavior(pushBehavior)
         
         snapBehavior = UISnapBehavior(item: chipView, snapToPoint: currentBetButton.center)
@@ -492,14 +497,18 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     func deal() {
         hideAllPlayerButtons()
         if blackjackGame.gameState == .Deal {
-            currentPlayer.currentBet = currentBet
-            previousBet = currentBet
-            currentBetButton.enabled = false
-            resetCardViews()
-            predealTotal = currentPlayer.currentBet + currentPlayer.bankRoll
-            blackjackGame.deal()
-            blackjackGame.update()
-            setupButtons()
+            if currentBet >= gameConfiguration.minimumBet {
+                currentPlayer.currentBet = currentBet
+                previousBet = currentBet
+                currentBetButton.enabled = false
+                resetCardViews()
+                predealTotal = currentPlayer.currentBet + currentPlayer.bankRoll
+                blackjackGame.deal()
+                blackjackGame.update()
+                //            setupButtons()
+            } else {
+                statusLabel.text = "Need to obtain more points thru game configuration"
+            }
         }
     }
     
@@ -523,7 +532,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.hit()
-            setupButtons()
+//            setupButtons()
         }
     }
    
@@ -535,7 +544,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.stand()
-            setupButtons()
+//            setupButtons()
         }
     }
     
@@ -543,7 +552,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.doubleDown()
-            setupButtons()
+//            setupButtons()
         }
      }
 
@@ -551,7 +560,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.split()
-            setupButtons()
+//            setupButtons()
         }
     }
     
@@ -559,7 +568,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.surrenderHand()
-            setupButtons()
+//            setupButtons()
         }
     }
     
@@ -567,7 +576,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.buyInsurance()
-            setupButtons()
+//            setupButtons()
         }
     }
     
@@ -575,7 +584,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.declineInsurance()
-            setupButtons()
+//            setupButtons()
         }
     }
     
@@ -642,6 +651,12 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
 
+    func setPlayerReady() {
+        println("Inside set player ready---")
+        if blackjackGame.gameState == .Players {
+            setupButtons()
+        }
+    }
     // MARK: - Blackjack Game Delegate
     func gameCompleted() {
         let savedText = statusLabel.text
@@ -657,12 +672,17 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         case let x where x > 0:
             statusLabel.text = "Game Over - Lost \(x)"
             gameSound = .Lost
+            println("Lost \(x)")
         case let x where x < 0:
             statusLabel.text = "Game Over - Won \(-x)"
             gameSound = .Won
+            println("Won \(-x)")
+
         default:
             statusLabel.text = "Game Over - Push!"
             gameSound = .Tied
+            println("Push")
+
         }
         currentBetButton.enabled = true
         
@@ -683,7 +703,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             }
         }
         AudioController.play(gameSound)
-
+        setupButtons()
     }
     
     func zoomStatusLabel(message: String) {

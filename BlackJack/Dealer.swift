@@ -104,7 +104,7 @@ class Dealer: NSObject {
                     println("This is an error, player's hand can't be active now")
                 case .NaturalBlackjack:
                     println("The winning blackjack hand paid \(hand.bet * gameConfiguration!.multipleForPlayerBlackjack)")
-                    sendNotification("Blackjack paid \(hand.bet * gameConfiguration!.multipleForPlayerBlackjack)")
+//                    sendNotification("Blackjack paid \(hand.bet * gameConfiguration!.multipleForPlayerBlackjack)")
                     let winning = hand.bet + hand.bet * gameConfiguration!.multipleForPlayerBlackjack
                     player.bankRoll += winning
                     hand.bet = 0

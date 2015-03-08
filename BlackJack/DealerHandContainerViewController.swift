@@ -240,6 +240,7 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
                 }, completion: { _ in
                     self.animating = false
                     self.addLabelConstraints()
+                    self.view.window!.rootViewController!.view!.userInteractionEnabled = true
                     NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.dealerHandOver, object: nil)
 
             })

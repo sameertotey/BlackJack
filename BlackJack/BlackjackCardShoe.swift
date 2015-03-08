@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct NotificationMessages {
-    static let cardShoeContentStatus = "cardShoeContentStatus"
-    static let dealerHandOver        = "dealerHandOver"
-    static let setStatus             = "setStatus"
-}
 
 class BlackjackCardShoe: NSObject {
     var cards: [BlackjackCard] {
