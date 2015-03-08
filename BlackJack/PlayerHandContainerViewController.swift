@@ -108,7 +108,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
                     println("finished the player label")
                     
                     self.view.window!.rootViewController!.view!.userInteractionEnabled = true
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.playerLabelDisplayed, object: nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
 
 
             })

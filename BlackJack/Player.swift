@@ -132,7 +132,7 @@ class Player: NSObject {
                 }
             } else {
                 sendNotification("Cannot Split - not enough bankroll")
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.playerLabelDisplayed, object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
             }
         }
         previousAction = .Split
@@ -165,7 +165,7 @@ class Player: NSObject {
                 sendNotification("Doubled your bet")
             } else {
                 sendNotification("Cannot Double - not enough bankroll")
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.playerLabelDisplayed, object: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
                 println("don't have the bankroll to double down")
             }
         }

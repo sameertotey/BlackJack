@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GameKit
 
-class GameConfigurationControllerTableViewController: UITableViewController, UITextFieldDelegate {
+class GameConfigurationControllerTableViewController: UITableViewController, UITextFieldDelegate, GKGameCenterControllerDelegate {
     
     let gameConfiguration = GameConfiguration()
 
@@ -135,7 +136,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 2
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,6 +146,8 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 0:
             return 17
         case 1:
+            return 3
+        case 2:
             return 3
         default:
             return 0
@@ -265,6 +268,36 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         return true
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // 
+        println("Did select row \(indexPath.section) \(indexPath.row)")
+        switch (indexPath.section, indexPath.row) {
+        case (2, 0):
+            displayGameCenterVC("Blackjack")
+        case (2, 1):
+            NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.resetPlayerScore, object: nil)
+        case (2, 2):
+            println("Add sharing code here")
+        default:
+            println("Do nothing for now")
+        }
+    }
+    
+    func displayGameCenterVC(leaderBoardID:String) {
+        let gameCenterViewController = GKGameCenterViewController()
+        gameCenterViewController.gameCenterDelegate = self
+        gameCenterViewController.viewState = .Leaderboards
+        gameCenterViewController.leaderboardIdentifier = leaderBoardID
+        presentViewController(gameCenterViewController, animated: true, completion: nil)
+    }
+
+    // MARK: - GKGameCenterDelegate
+    
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+//        println("Game Center View Controller Did Finish")
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell

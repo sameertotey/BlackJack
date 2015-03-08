@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameKit
 
 private var MyObservationContext = 0
 
@@ -21,6 +22,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     var gameConfiguration: GameConfiguration!
     var audioController: AudioController!
     var theDealer: Dealer!
+    var gameKitHelper: GameKitHelper?
+    
+    var gameCenterLeaderBoardID = "Blackjack.version1.0"
+
     var previousBet: Double = 0.0
     var currentBet: Double = 0.0 {
         didSet {
@@ -57,7 +62,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         blackjackGame = BlackjackGame()
         currentPlayer = Player(name: "Sameer")
         currentPlayer.observer = self
-        currentPlayer.bankRoll = 100.00
         currentPlayer.delegate = blackjackGame
         playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", forState: .Normal)
         theDealer = Dealer()
@@ -71,11 +75,15 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         blackjackGame.play()
         hideAllPlayerButtons()
         audioController = AudioController()
-        currentBet = gameConfiguration.minimumBet
+        resetPlayerScore()
+        gameKitHelper = GameKitHelper()
+        gameKitHelper?.authenticateLocalPlayer()
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: NotificationMessages.cardShoeContentStatus, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: NotificationMessages.dealerHandOver, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setStatusMessage:", name: NotificationMessages.setStatus, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setPlayerReady", name: NotificationMessages.playerLabelDisplayed, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setPlayerReady", name: NotificationMessages.setPlayerReady, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "resetPlayerScore", name: NotificationMessages.resetPlayerScore, object: nil)
         startObservingBankroll(currentPlayer)
     }
     deinit {
@@ -650,6 +658,14 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         println("Bankroll is now \(currentPlayer.bankRoll) ")
     }
     
+    func resetPlayerScore() {
+        println("Resetting Player score")
+        if blackjackGame.gameState == .Deal {
+            currentBet = 0
+            currentPlayer.bankRoll = gameConfiguration.maximumBet
+            currentBet = gameConfiguration.minimumBet
+        }
+    }
 
     func setPlayerReady() {
         println("Inside set player ready---")
@@ -662,6 +678,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         let savedText = statusLabel.text
         let differenceInBalance = predealTotal - currentPlayer.bankRoll
         currentBet = 0
+        var myScore = Int(currentPlayer.bankRoll) * 10
+//        reportScore(Int64(myScore), leaderBoardID: gameCenterLeaderBoardID)
+        gameDidEnd(score: Int(currentPlayer.bankRoll) * 10)
+
         if gameConfiguration.autoWagerPreviousBet {
             currentBet = previousBet
         }
@@ -793,5 +813,69 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             performStand()
         }
     }
+    
+    func reportScore(score:Int64, leaderBoardID:String) {
+        let scoreReporter = GKScore(leaderboardIdentifier: leaderBoardID)
+        scoreReporter.value = score
+        println("Reporting Score \(score)")
+        scoreReporter.context = 0
+        GKScore.reportScores([scoreReporter], withCompletionHandler: { (error) -> Void in
+            println("Completed Sending Score with Error: \(error)")
+        })
+    }
+    
+    func gameDidEnd(#score: Int?) {
+        var level:Int?
+        switch score {
+        case let x where x <= 2000:
+            level = 1
+        case let x where x <= 5000:
+            level = 2
+        default:
+            level = 3
+        }
+        println("Scored \(score) at level \(level)")
+        if let reportingScore = score {
+            var myScore: Int64
+            myScore = Int64(reportingScore)
+            reportScore(myScore, leaderBoardID: gameCenterLeaderBoardID)
+            if let reportingLevel = level {
+                var myLevel = reportingLevel - 1
+                var myPercent:Double
+                myPercent = Double(myScore) % 100.00
+                var achievements = [String:Double]()
+                switch myLevel {
+                case 0:
+                    achievements["BlackjackLevel1"] = myPercent
+                    achievements["BlackjackLevel2"] = 0.00
+                case 1:
+                    achievements["BlackjackLevel1"] = 100.0
+                    achievements["BlackjackLevel2"] = myPercent
+                case 2:
+                    achievements["BlackjackLevel1"] = 100.0
+                    achievements["BlackjackLevel2"] = 100.00
+                default:
+                    println("Somebody have moved to higher levels!!!!")
+                }
+                reportAllAchievements(achievements)
+            }
+        }
+    }
+    
+    func reportAllAchievements(achievements:Dictionary<String, Double>) {
+        var myAchievements = [GKAchievement]()
+        for (identifier, percent) in achievements {
+            let achievement = GKAchievement(identifier: identifier)
+            achievement.percentComplete = percent
+            println("Reporting achievement \(identifier) for \(percent)")
+            myAchievements.append(achievement)
+        }
+        GKAchievement.reportAchievements(myAchievements, withCompletionHandler: { (error) -> Void in
+            println("Completed Sending Achievements with Error: \(error)")
+        })
+        
+    }
+
+
 }
 

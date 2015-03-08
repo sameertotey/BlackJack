@@ -11,6 +11,7 @@ import Foundation
 public struct NotificationMessages {
     static let cardShoeContentStatus       = "CardShoeContentStatus"
     static let dealerHandOver              = "DealerHandOver"
-    static let playerLabelDisplayed        = "PlayerLabelDisplayed"
+    static let setPlayerReady              = "SetPlayerReady"
     static let setStatus                   = "SetStatus"
+    static let resetPlayerScore            = "Reset Player Score"
 }
