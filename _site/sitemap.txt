@@ -1,0 +1,6 @@
+
+http://Blackjack.sameertotey.com/atom.xml
+http://Blackjack.sameertotey.com/index.html
+http://Blackjack.sameertotey.com/pages.html
+http://Blackjack.sameertotey.com/rss.xml
+http://Blackjack.sameertotey.com/sitemap.txt

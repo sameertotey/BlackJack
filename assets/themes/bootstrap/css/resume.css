@@ -1,0 +1,19 @@
+body{font-weight:200;margin-bottom:100px}
+@media (min-width: 768px){.container{max-width:960px}}
+/* Responsive: Portrait tablets and up */
+.header,.marketing,.footer{padding-right:0;padding-left:0}
+#resume{margin:75px 0 0}
+.citystate{/*display: none;*/font-weight:200;color:#555}
+th{padding-right:.75em;padding-bottom:5px;border-right:solid 2px #ddd;color:#999;text-align:right;font-weight:400}
+h1,h2,h3,h4{letter-spacing:-.04em}
+td{padding-left:.75em;letter-spacing:-.04em}
+.dates{font-weight:lighter}
+h1{color:#1433b6;text-shadow:#3f79dd 1px 0 0;font-family:'Rock Salt',cursive}
+.position strong{color:#555;padding-bottom:10px}
+#summary,#skills{margin-bottom:25px}
+strong{margin-bottom:20px}
+#summary ol{/*padding-left: 15px;*/}
+#summary ol li{line-height:1.8em;font-size:1.2em;margin-left:0}
+#logo{margin-bottom:50px}h1{font-size:2em}
+.education strong{color:#555;padding-bottom:10px}.
+@media (max-width: 767px){#resume{margin:25px 0}#logo{text-align:center}}

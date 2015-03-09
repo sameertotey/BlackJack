@@ -1,0 +1,6 @@
+.pagebreak{page-break-before:always}
+@media print{body{width:960px;margin:0 50px 0 20px;padding:0;font-weight:200}
+.col-sm-3{width:30%;float:left;padding-left:60px}
+.col-sm-8{width:65%;float:left;padding-right:40px}
+h1{color:#1433b6;text-shadow:#3f79dd 1px 0 0}
+.hidden-xs{display:visible}}

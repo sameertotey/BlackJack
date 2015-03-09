@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Blackjack</title>
+ <link href="http://Blackjack.sameertotey.com/" rel="self"/>
+ <link href="http://Blackjack.sameertotey.com"/>
+ <updated>2015-03-09T12:57:23-06:00</updated>
+ <id>http://Blackjack.sameertotey.com</id>
+ <author>
+   <name>Sameer Totey</name>
+   <email>sameertotey@hotmail.com</email>
+ </author>
+
+ 
+ 
+</feed>
