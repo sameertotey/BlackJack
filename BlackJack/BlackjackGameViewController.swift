@@ -151,8 +151,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             case "Present Game Configuration":
                 if segue.destinationViewController is UINavigationController {
                     let toVC = segue.destinationViewController as UINavigationController
-                    toVC.modalPresentationStyle = .Custom
-                    toVC.transitioningDelegate = self.modalTransitioningDelegate
+//                    toVC.modalPresentationStyle = .Custom
+//                    toVC.transitioningDelegate = self.modalTransitioningDelegate
                 }
             case "Dealer Container":
                 dealerHandContainerViewController = segue.destinationViewController as? DealerHandContainerViewController
