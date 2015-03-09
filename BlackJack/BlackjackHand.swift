@@ -26,7 +26,7 @@ class BlackjackHand: NSObject {
     var handState: HandState = .Active {
         didSet {
             if oldValue != handState {
-                println("handState is now \(handState.rawValue) was \(oldValue.rawValue)")
+//                println("handState is now \(handState.rawValue) was \(oldValue.rawValue)")
             }
         }
     }

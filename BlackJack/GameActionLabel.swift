@@ -12,7 +12,6 @@ class GameActionLabel: MKLabel {
 
     override func sizeThatFits(size: CGSize) -> CGSize {
         let originalSize = super.sizeThatFits(self.frame.size)
-        println("originalSize = \(originalSize)")
         return CGSizeMake(max(originalSize.width, originalSize.height) + 20, max(originalSize.width, originalSize.height) + 20)
     }
     
@@ -26,14 +25,14 @@ class GameActionLabel: MKLabel {
 //        println("mysize: \(mysize)")
         self.sizeToFit()
         
-        println("drawing the view with bounds \(self.bounds)")
+//        println("drawing the view with bounds \(self.bounds)")
 
         let roundedRect = UIBezierPath(roundedRect:self.bounds, cornerRadius:cornerRadius)
 //        roundedRect.addClip()
         UIColor.whiteColor().setFill()
         UIRectFill(self.bounds)
-        println(self.bounds)
-        println(self.frame)
+//        println(self.bounds)
+//        println(self.frame)
         UIColor.blackColor().setStroke()
         roundedRect.stroke()
         
@@ -50,7 +49,7 @@ class GameActionLabel: MKLabel {
         textBounds.size = cornerText.size()
         cornerText.drawInRect(textBounds)
 
-        println("Ended drawing")
+//        println("Ended drawing")
 
     }
 

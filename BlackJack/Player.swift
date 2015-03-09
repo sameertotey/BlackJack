@@ -71,7 +71,7 @@ class Player: NSObject {
         }
         if currentHand!.handState == .Active {
             if let card = delegate?.getCard() {
-                println("Player hit for the card \(card)")
+//                println("Player hit for the card \(card)")
                 addCardToCurrentHand(card)
             }
         }
@@ -118,7 +118,7 @@ class Player: NSObject {
                 if secondCard.rank == .Ace {
                     if gameConfiguration != nil {
                         if gameConfiguration!.onlyOneCardOnSplitAces {
-                            println("split of aces being handled")
+//                            println("split of aces being handled")
                             sendNotification("Split Aces")
                             advanceToNextHand()
                         }
@@ -126,7 +126,7 @@ class Player: NSObject {
                 }
                 // If the hand state is not active advance to next hand??
                 if currentHand!.handState == .Stood {
-                    println("Advancing to next hand")
+//                    println("Advancing to next hand")
                     sendNotification("Auto stand on 21")
                     advanceToNextHand()
                 }
@@ -166,7 +166,6 @@ class Player: NSObject {
             } else {
                 sendNotification("Cannot Double - not enough bankroll")
                 NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
-                println("don't have the bankroll to double down")
             }
         }
         previousAction = .DoubleDown
@@ -179,7 +178,6 @@ class Player: NSObject {
     }
     
     func buyInsurance() {
-        println("buying insurance")
         previousAction = .BuyInsurance
         if (bankRoll - currentBet * 0.5 ) >= 0.0 {
             bankRoll -= currentBet * 0.5
@@ -189,7 +187,6 @@ class Player: NSObject {
     }
     
     func declineInsurance() {
-        println("declining insurance")
         sendNotification("Insurance declined")
         previousAction = .DeclineInsurance
         delegate?.declinedInsurance(self)

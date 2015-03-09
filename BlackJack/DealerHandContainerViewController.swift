@@ -178,29 +178,20 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
     }
       
     func gameCompleted() {
-        println("game over initial")
         if busyNow() {
             gameOverRequired = true
-            println("Still animating .. will wait for animation to complete")
             return
         } else {
             gameOverRequired = false
         }
         animating = true
-        println("game over final")
         UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut , animations: {
-            println("game over final 1")
-
             self.holeCardView!.frame = self.originalHoleCardFrame!
             }, completion: { _ in
-                println("game over final 2")
-
                 UIView.transitionWithView(self.holeCardView!, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
                     self.holeCardView!.faceUp = true
                     }, completion: { _ in
 //                        self.revealRemainingCards(2)
-                        println("game over final 3")
-
                         self.labelDisplayNeeded = true
                         self.animating = false
                 })
@@ -209,7 +200,6 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
 
     
     private func displayLabel() {
-        println("Display label code ..........")
         if cardViews.count > 1 {
             animating = true
             if label == nil {

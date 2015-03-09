@@ -24,7 +24,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     
     func play() {
         delegate?.gameDidStart(self)
-        println("Playing Blackjack")
+//        println("Playing Blackjack")
         switch gameState {
         case .Reset:
             getNewShoe()
@@ -39,7 +39,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     }
     
     func getNewShoe() {
-        println("reseted the show")
+//        println("reseted the show")
         sendNotification("New Card Shoe")
         cardShoe.newShoe(gameConfiguration.numDecks)
         gameState = .Deal
@@ -50,11 +50,11 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
             gameState = .Dealer
             dealer?.completeGame(players)
             gameState = .Reset
-            println("Cards remaining = \(cardShoe.cards.count)")
+//            println("Cards remaining = \(cardShoe.cards.count)")
             if Double(cardShoe.cards.count) / Double(cardShoe.initialCount) > Double(gameConfiguration.redealThreshold) / 100.0 {
                 gameState = .Deal
             } else {
-                println("need to shuffle here....")
+//                println("need to shuffle here....")
                 sendNotification("Dealer needs to shuffle a new shoe")
                 getNewShoe()
             }
@@ -77,7 +77,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     func advanceCurrentPlayerHand() {
         if let currentHandState = currentPlayer?.currentHand?.handState {
             if currentHandState == .Stood || currentHandState == .Busted {
-                println("hands are \(currentPlayer!.hands)")
+//                println("hands are \(currentPlayer!.hands)")
                 currentPlayer!.advanceToNextHand()
             }
         }
@@ -101,7 +101,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
         player.insuranceAvailable = false
         if dealer!.hand!.handState == .NaturalBlackjack {
             player.bankRoll += 1.5 * player.currentBet
-            println("Insurance paid off..")
+//            println("Insurance paid off..")
             sendNotification("Insurance bet paid")
             switch player.currentHand!.handState {
             case .NaturalBlackjack:

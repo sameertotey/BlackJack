@@ -270,7 +270,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // 
-        println("Did select row \(indexPath.section) \(indexPath.row)")
+//        println("Did select row \(indexPath.section) \(indexPath.row)")
         switch (indexPath.section, indexPath.row) {
         case (2, 0):
             displayGameCenterVC("Blackjack")

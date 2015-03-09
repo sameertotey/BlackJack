@@ -255,7 +255,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     // Actions
 
     override func viewWillAppear(animated: Bool) {
-        println("The size is view appearing \(view.bounds.size)")
         setupSubViews(view.bounds.size)
     }
     
@@ -271,13 +270,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
 
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
-        println("new traits: \(newCollection) ")
     }
     
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        println("The new size is \(size)")
         setupSubViews(size)
     }
     
@@ -616,7 +613,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     func switchHands() {
-        println("Advance to next hand....")
+//        println("Advance to next hand....")
         let finishedHandsCount = finishedHandViewCards.count    // This is an array of array of cards, two dimentional array
         var finishedHandViewCardsItem: [BlackjackCard] = []
         let savedPlayerText = playerHandContainerViewController?.getPlayerScoreText()
@@ -639,27 +636,24 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         // find the next split hand card....
         for splitVCIndex in 0..<3 {
             if let cardViewCard = playerSplitHandsVC[splitVCIndex].removeLastCard(true) {
-                println("Advanced to next hand in between....")
                 addCardToCurrentHand(cardViewCard)
                 break
             }
         }
         
         // Now that we have switched the hand, we should hit on the split hand
-        println("Advanced to next hand complete..Auto Hit..")
-
         currentPlayer.hit()
     }
     
     func bankrollUpdate() {
-        // should KVO be used here???
+        // KVO is used to keep player bankroll updated
         playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", forState: .Normal)
         playerBankRollButton.animate()
-        println("Bankroll is now \(currentPlayer.bankRoll) ")
+//        println("Bankroll is now \(currentPlayer.bankRoll) ")
     }
     
     func resetPlayerScore() {
-        println("Resetting Player score")
+//        println("Resetting Player score")
         if blackjackGame.gameState == .Deal {
             currentBet = 0
             currentPlayer.bankRoll = gameConfiguration.maximumBet
@@ -668,7 +662,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
 
     func setPlayerReady() {
-        println("Inside set player ready---")
         if blackjackGame.gameState == .Players {
             setupButtons()
         }
@@ -692,16 +685,16 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         case let x where x > 0:
             statusLabel.text = "Game Over - Lost \(x)"
             gameSound = .Lost
-            println("Lost \(x)")
+//            println("Lost \(x)")
         case let x where x < 0:
             statusLabel.text = "Game Over - Won \(-x)"
             gameSound = .Won
-            println("Won \(-x)")
+//            println("Won \(-x)")
 
         default:
             statusLabel.text = "Game Over - Push!"
             gameSound = .Tied
-            println("Push")
+//            println("Push")
 
         }
         currentBetButton.enabled = true
@@ -744,7 +737,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
       
         if let dealerVC = dealerHandContainerViewController {
             if dealerVC.busyNow() {
-                println("hold on dealerAnimating")
                 zoomStatusLabel("Hold On Please - Dealer busy")
                 AudioController.play(.Beep)
                 return false
@@ -752,7 +744,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
         if let playerVC = playerHandContainerViewController {
             if playerVC.busyNow() {
-                println("hold on playerAnimating")
                 zoomStatusLabel("Hold On Please - busy")
                 AudioController.play(.Beep)
                 return false
@@ -775,7 +766,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         switch (keyPath, context) {
         case("bankRoll", &MyObservationContext):
-            println("Bankroll changed: \(change)")
+//            println("Bankroll changed: \(change)")
             bankrollUpdate()
             
         case(_, &MyObservationContext):
@@ -787,21 +778,21 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     @IBAction func cardShoeLongPressed(sender: UILongPressGestureRecognizer) {
-        println("Card shoe was long pressed")
+//        println("Card shoe was long pressed")
         if sender.state == .Ended  && blackjackGame.gameState == .Deal {
             blackjackGame.getNewShoe()
         }
     }
     @IBAction func doubleTappedView(sender: UITapGestureRecognizer) {
         if sender.state == .Ended && blackjackGame.gameState == .Players {
-            println("Double tapped the view")
+//            println("Double tapped the view")
             performHit()
         }
     }
     
     @IBAction func swipedTheViewUp(sender: UISwipeGestureRecognizer) {
         if sender.state == .Ended  && blackjackGame.gameState == .Deal  {
-            println("swiped  the view UP")
+//            println("swiped  the view UP")
             deal()
         }
 
@@ -809,7 +800,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     
     @IBAction func swipedTheView(sender: UISwipeGestureRecognizer) {
         if sender.state == .Ended && blackjackGame.gameState == .Players {
-            println("swiped  the view")
+//            println("swiped  the view")
             performStand()
         }
     }
@@ -817,10 +808,10 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     func reportScore(score:Int64, leaderBoardID:String) {
         let scoreReporter = GKScore(leaderboardIdentifier: leaderBoardID)
         scoreReporter.value = score
-        println("Reporting Score \(score)")
+//        println("Reporting Score \(score)")
         scoreReporter.context = 0
         GKScore.reportScores([scoreReporter], withCompletionHandler: { (error) -> Void in
-            println("Completed Sending Score with Error: \(error)")
+//            println("Completed Sending Score with Error: \(error)")
         })
     }
     
@@ -834,7 +825,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         default:
             level = 3
         }
-        println("Scored \(score) at level \(level)")
+//        println("Scored \(score) at level \(level)")
         if let reportingScore = score {
             var myScore: Int64
             myScore = Int64(reportingScore)
@@ -867,11 +858,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         for (identifier, percent) in achievements {
             let achievement = GKAchievement(identifier: identifier)
             achievement.percentComplete = percent
-            println("Reporting achievement \(identifier) for \(percent)")
+//            println("Reporting achievement \(identifier) for \(percent)")
             myAchievements.append(achievement)
         }
         GKAchievement.reportAchievements(myAchievements, withCompletionHandler: { (error) -> Void in
-            println("Completed Sending Achievements with Error: \(error)")
+//            println("Completed Sending Achievements with Error: \(error)")
         })
         
     }

@@ -155,7 +155,7 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
             var myCenter: CGPoint?
             var holecard = false
             if let center = requiredCardCenter {
-                println("Using the provided card center")
+//                println("Using the provided card center")
                 myCenter = center
                 cardView.tag = Int(numberOfCardsPerWidth)
                 holecard = true
@@ -171,7 +171,7 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
             isHoleCard = holecard
             currentCardView = cardView
         } else {
-            println("skipping this card display............\(NSDate())")
+//            println("skipping this card display............\(NSDate())")
         }
     }
 
