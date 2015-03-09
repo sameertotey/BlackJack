@@ -89,6 +89,9 @@ class GameConfiguration: NSObject {
             canSplitAny10Cards = false
         }
         maxHandsWithSplits = defaults.integerForKey(maxHandsWithSplitsKey)
+        if maxHandsWithSplits == 0 {
+            maxHandsWithSplits = 4
+        }
         if let testValue: AnyObject = defaults.objectForKey(doublingDownAllowedKey) {
             doublingDownAllowed = defaults.boolForKey(doublingDownAllowedKey)
         } else {
