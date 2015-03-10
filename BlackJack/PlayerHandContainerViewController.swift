@@ -103,12 +103,10 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
                 self.label!.alpha = 1.0
                 self.label!.frame = CGRectMake(myX, 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
                 }, completion: { _ in
-                    self.animating = false
                     self.addLabelConstraints()
-                    
                     self.view.window!.rootViewController!.view!.userInteractionEnabled = true
+                    self.animating = false
                     NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
-
 
             })
             labelDisplayNeeded = false

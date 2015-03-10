@@ -10,7 +10,7 @@ import UIKit
 import GameKit
 
 private var MyObservationContext = 0
-
+var gameCenterLeaderBoardID = "Blackjack.version1.0"
 
 
 class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynamicAnimatorDelegate {
@@ -24,7 +24,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     var theDealer: Dealer!
     var gameKitHelper: GameKitHelper?
     
-    var gameCenterLeaderBoardID = "Blackjack.version1.0"
 
     var previousBet: Double = 0.0
     var currentBet: Double = 0.0 {
@@ -84,12 +83,23 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setStatusMessage:", name: NotificationMessages.setStatus, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setPlayerReady", name: NotificationMessages.setPlayerReady, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "resetPlayerScore", name: NotificationMessages.resetPlayerScore, object: nil)
+        // listen to Game Center authentication requests
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAuthenticationViewController:", name: presentGameCenterAuthenticationVeiwController, object: nil)
+
         startObservingBankroll(currentPlayer)
     }
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         stopObservingBankroll(currentPlayer)
     }
+    func showAuthenticationViewController(notification: NSNotification) {
+        println("Show Authentication Notification")
+        if let presentedVC = self.presentedViewController {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+        presentViewController(notification.object as UIViewController, animated: true, completion: nil)
+    }
+
     func updateCardProgress(notification: NSNotification) {
         var progress: NSNumber = notification.object as NSNumber
         cardShoeProgressView.setProgress(progress.floatValue, animated: true)
@@ -437,6 +447,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             case dealNewButton:
                 deal()
             case rebetButton:
+                currentPlayer.bankRoll += currentBet
+                currentBet = 0
                 currentBet = previousBet
                 deal()
             default:
@@ -673,7 +685,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         currentBet = 0
         var myScore = Int(currentPlayer.bankRoll) * 10
 //        reportScore(Int64(myScore), leaderBoardID: gameCenterLeaderBoardID)
-        gameDidEnd(score: Int(currentPlayer.bankRoll) * 10)
+        gameKitHelper!.gameDidEnd(score: Int(currentPlayer.bankRoll) * 10)
 
         if gameConfiguration.autoWagerPreviousBet {
             currentBet = previousBet
@@ -805,68 +817,6 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
-    func reportScore(score:Int64, leaderBoardID:String) {
-        let scoreReporter = GKScore(leaderboardIdentifier: leaderBoardID)
-        scoreReporter.value = score
-//        println("Reporting Score \(score)")
-        scoreReporter.context = 0
-        GKScore.reportScores([scoreReporter], withCompletionHandler: { (error) -> Void in
-//            println("Completed Sending Score with Error: \(error)")
-        })
-    }
-    
-    func gameDidEnd(#score: Int?) {
-        var level:Int?
-        switch score {
-        case let x where x <= 2000:
-            level = 1
-        case let x where x <= 5000:
-            level = 2
-        default:
-            level = 3
-        }
-//        println("Scored \(score) at level \(level)")
-        if let reportingScore = score {
-            var myScore: Int64
-            myScore = Int64(reportingScore)
-            reportScore(myScore, leaderBoardID: gameCenterLeaderBoardID)
-            if let reportingLevel = level {
-                var myLevel = reportingLevel - 1
-                var myPercent:Double
-                myPercent = Double(myScore) % 100.00
-                var achievements = [String:Double]()
-                switch myLevel {
-                case 0:
-                    achievements["BlackjackLevel1"] = myPercent
-                    achievements["BlackjackLevel2"] = 0.00
-                case 1:
-                    achievements["BlackjackLevel1"] = 100.0
-                    achievements["BlackjackLevel2"] = myPercent
-                case 2:
-                    achievements["BlackjackLevel1"] = 100.0
-                    achievements["BlackjackLevel2"] = 100.00
-                default:
-                    println("Somebody have moved to higher levels!!!!")
-                }
-                reportAllAchievements(achievements)
-            }
-        }
-    }
-    
-    func reportAllAchievements(achievements:Dictionary<String, Double>) {
-        var myAchievements = [GKAchievement]()
-        for (identifier, percent) in achievements {
-            let achievement = GKAchievement(identifier: identifier)
-            achievement.percentComplete = percent
-//            println("Reporting achievement \(identifier) for \(percent)")
-            myAchievements.append(achievement)
-        }
-        GKAchievement.reportAchievements(myAchievements, withCompletionHandler: { (error) -> Void in
-//            println("Completed Sending Achievements with Error: \(error)")
-        })
-        
-    }
-
 
 }
 

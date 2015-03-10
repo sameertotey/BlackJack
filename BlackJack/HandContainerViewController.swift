@@ -225,14 +225,15 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     }
     
     func addLabelConstraints() {
-        let t1 = NSLayoutConstraint(item: label!, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0)
-        
-        labelConstraint = NSLayoutConstraint(item: label!, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame))
-        labelConstraint!.active = true
-        t1.active = true
-        view.addConstraint(labelConstraint!)
-        view.addConstraint(t1)
-        
+        if let label = self.label {
+            let t1 = NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0)
+            
+            labelConstraint = NSLayoutConstraint(item: label, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame))
+            labelConstraint!.active = true
+            t1.active = true
+            view.addConstraint(labelConstraint!)
+            view.addConstraint(t1)
+        }
     }
     
     func updateLabelConstraint(constantValue: CGFloat) {

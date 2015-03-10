@@ -88,7 +88,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
             println("Error: found number decks = \(gameConfiguration.numDecks)")
         }
         
-        redealThresholdLabel.text = "Redeal Threhold: \(gameConfiguration.redealThreshold)"
+        redealThresholdLabel.text = "Deck Penetration To: \(gameConfiguration.redealThreshold)"
         redealThresholdSlider.value = Float(gameConfiguration.redealThreshold)
         blackjackPayoutMultiplierLabel.text = "Blackjack Payout Multiple: \(gameConfiguration.multipleForPlayerBlackjack)"
         switch gameConfiguration.multipleForPlayerBlackjack {
@@ -277,7 +277,10 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case (2, 1):
             NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.resetPlayerScore, object: nil)
         case (2, 2):
-            println("Add sharing code here")
+            GKAchievement.resetAchievementsWithCompletionHandler({ error in
+                
+            })
+
         default:
             println("Do nothing for now")
         }
