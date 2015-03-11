@@ -361,7 +361,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
                             buttons.append(doubleDownButton)
                         }
                     } else if gameConfiguration.doublingDownAllowedOn9and10and11Only {
-                        if currentPlayerHand.value >= 9 && currentPlayerHand.value <= 11 {                                buttons.append(doubleDownButton)
+                        if currentPlayerHand.value >= 9 && currentPlayerHand.value <= 11 {
+                            buttons.append(doubleDownButton)
                             }
                     } else {
                         buttons.append(doubleDownButton)
@@ -538,6 +539,11 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         for index in 0..<3 {
             playerSplitHandsVC[index].reset()
             playerFinishedHandsVC[index].reset()
+        }
+        for subView in view.window!.rootViewController!.view!.subviews {
+            if subView is PlayingCardView {
+                subView.removeFromSuperview()
+            }
         }
     }
       

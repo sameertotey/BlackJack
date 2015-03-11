@@ -73,18 +73,18 @@ class GameKitHelper : NSObject {
             if let reportingLevel = level {
                 var myLevel = reportingLevel - 1
                 var myPercent:Double
-                myPercent = Double(myScore) % 200.00
+                myPercent = Double(myScore) % 100.00
                 var achievements = [String:Double]()
                 switch myLevel {
                 case 0:
-                    achievements["BlackjackLevel1"] = Double(myScore) / 2000
+                    achievements["BlackjackLevel1"] = Double(myScore) / 20
                     achievements["BlackjackLevel2"] = 0.00
                 case 1:
                     achievements["BlackjackLevel1"] = 100.0
-                    achievements["BlackjackLevel2"] = Double(myScore) / 5000
+                    achievements["BlackjackLevel2"] = Double(myScore) / 50
                 case 2:
                     achievements["BlackjackLevel1"] = 100.0
-                    achievements["BlackjackLevel2"] = 100.00
+                    achievements["BlackjackLevel2"] = 100.0
                 default:
                     println("Somebody have moved to higher levels!!!!")
                 }
