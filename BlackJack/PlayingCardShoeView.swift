@@ -56,11 +56,6 @@ class PlayingCardShoeView: UIView {
     }
     
     // MARK: - initializers
-    override init() {
-        super.init()
-        setup()
-        
-    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -97,15 +97,15 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         if let presentedVC = self.presentedViewController {
             dismissViewControllerAnimated(true, completion: nil)
         }
-        presentViewController(notification.object as UIViewController, animated: true, completion: nil)
+        presentViewController(notification.object as! UIViewController, animated: true, completion: nil)
     }
 
     func updateCardProgress(notification: NSNotification) {
-        var progress: NSNumber = notification.object as NSNumber
+        var progress: NSNumber = notification.object as! NSNumber
         cardShoeProgressView.setProgress(progress.floatValue, animated: true)
     }
     func setStatusMessage(notification: NSNotification) {
-        var message: String = notification.object as String
+        var message: String = notification.object as! String
         zoomStatusLabel(message)
     }
     
@@ -160,7 +160,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             switch identifier {
             case "Present Game Configuration":
                 if segue.destinationViewController is UINavigationController {
-                    let toVC = segue.destinationViewController as UINavigationController
+                    let toVC = segue.destinationViewController as! UINavigationController
 //                    toVC.modalPresentationStyle = .Custom
 //                    toVC.transitioningDelegate = self.modalTransitioningDelegate
                 }
@@ -425,7 +425,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         self.view.window?.rootViewController?.view?.userInteractionEnabled = false
         for subView in buttonContainerView.subviews {
             if subView is GameActionButton {
-                (subView as GameActionButton).hidden = true
+                (subView as! GameActionButton).hidden = true
             }
         }
     }

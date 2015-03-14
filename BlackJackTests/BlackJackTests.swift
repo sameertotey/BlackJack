@@ -9,11 +9,11 @@
 import UIKit
 import XCTest
 
-extension BlackjackCardShoe {
-    func newShoe(cards: [BlackjackCard]) {
-        self.cards = cards
-    }
-}
+//extension BlackjackCardShoe {
+//    func newShoe(cards: [BlackjackCard]) {
+//        self.cards = cards
+//    }
+//}
 
 class BlackJackTests: XCTestCase {
     var blackjackGame: BlackjackGame!
@@ -68,7 +68,7 @@ class BlackJackTests: XCTestCase {
         
         XCTAssert(blackjackGame.cardShoe.cards.count == 0, "There are not 0 cards")
 
-        blackjackGame.cardShoe.newShoe(cards)
+//        blackjackGame.cardShoe.newShoe(cards)
         
         XCTAssert(blackjackGame.cardShoe.cards.count == 7, "There are not 7 cards")
         

@@ -83,8 +83,8 @@ class AudioController: NSObject {
         var soundsArrayRaw: AnyObject? = soundsDictionary?.objectForKey("Sounds")
         
         if let soundsArray: AnyObject = soundsArrayRaw {
-            for soundItemDictionary in soundsArray as NSArray {
-                let dict = soundItemDictionary as Dictionary<String, String>
+            for soundItemDictionary in soundsArray as! NSArray {
+                let dict = soundItemDictionary as! Dictionary<String, String>
                 if let purpose = dict["Purpose"] {
                     var myGameSound = GameSound(rawValue: purpose)
                     if let gameSound = myGameSound {

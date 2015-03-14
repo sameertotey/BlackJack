@@ -20,9 +20,9 @@ func delay(#seconds: Double, completion:()->()) {
 }
 
 func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
-    let count = countElements(list)
-    for i in 0..<(count - 1) {
-        let j = Int(arc4random_uniform(UInt32(count - i))) + i
+    let numElements = count(list)
+    for i in 0..<(numElements - 1) {
+        let j = Int(arc4random_uniform(UInt32(numElements - i))) + i
         swap(&list[i], &list[j])
     }
     return list
@@ -49,7 +49,7 @@ extension Array {
 }
 
 class PlayingCardDeck<T: PlayingCard>: NSObject {
-    let cards: [T]
+    var cards: [T]
     
     override init() {
         self.cards = []
