@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Sameer Totey</title>
- <link href="http://www.sameertotey.com/atom.xml" rel="self"/>
- <link href="http://www.sameertotey.com/"/>
- <updated>2015-03-20T14:17:28-06:00</updated>
- <id>http://www.sameertotey.com</id>
+ <title>Black Jack</title>
+ <link href="http://www.sameertotey.com/BlackJack/atom.xml" rel="self"/>
+ <link href="http://www.sameertotey.com/BlackJack/"/>
+ <updated>2015-03-20T17:24:08-06:00</updated>
+ <id>http://www.sameertotey.com/BlackJack</id>
  <author>
    <name>Sameer Totey</name>
    <email></email>
@@ -13,11 +13,13 @@
 
  
  <entry>
-   <title>My First iOS App on the App Store</title>
-   <link href="http://www.sameertotey.com/2015/03/20/my-first-ios-app/"/>
+   <title>Introduction</title>
+   <link href="http://www.sameertotey.com/BlackJack/2015/03/20/Introduction/"/>
    <updated>2015-03-20T00:00:00-06:00</updated>
-   <id>http://www.sameertotey.com/2015/03/20/my-first-ios-app</id>
-   <content type="html">&lt;p&gt;I am very excited to report that my very first iOS app is now available on the &lt;a href=&quot;https://itunes.apple.com/us/app/blackjack-configurable/id975037070?ls=1&amp;amp;mt=8&quot;&gt;App Store&lt;/a&gt;. &lt;/p&gt;
+   <id>http://www.sameertotey.com/BlackJack/2015/03/20/Introduction</id>
+   <content type="html">&lt;h1&gt;Configurable Black Jack&lt;/h1&gt;
+
+&lt;p&gt;The Black Jack App is now availabe on the &lt;a href=&quot;https://itunes.apple.com/us/app/blackjack-configurable/id975037070?ls=1&amp;amp;mt=8&quot;&gt;App Store&lt;/a&gt;. &lt;/p&gt;
 
 &lt;p class=&quot;message&quot;&gt;
 Please use the game and review it on the App Store.
@@ -39,26 +41,24 @@ Please use the game and review it on the App Store.
 
 &lt;h3&gt;Future plans&lt;/h3&gt;
 
-&lt;p&gt;I plan to add more features to this game in the future releases, please stay tuned for updates. In the meanwhile visit the app&amp;#39;s &lt;a href=&quot;http://www.sameertotey.com/BlackJack/&quot;&gt;support site&lt;/a&gt; to learn how to play the game.&lt;/p&gt;
+&lt;p&gt;I plan to add more features to this game in the future releases, please stay tuned for updates. In the meanwhile, please read the various posts that explain the configuration options and how to play the game.&lt;/p&gt;
 
 &lt;hr&gt;
 </content>
  </entry>
  
  <entry>
-   <title>My Personal Journal</title>
-   <link href="http://www.sameertotey.com/2015/03/19/my-personal-journal/"/>
-   <updated>2015-03-19T00:00:00-06:00</updated>
-   <id>http://www.sameertotey.com/2015/03/19/my-personal-journal</id>
-   <content type="html">&lt;h2&gt;Welcome&lt;/h2&gt;
-
-&lt;p&gt;I have deciced to chronicle my personal observations about software development on this personal journal.&lt;/p&gt;
-
-&lt;p&gt;This blog was constructed using &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes.&lt;/p&gt;
+   <title>Credits</title>
+   <link href="http://www.sameertotey.com/BlackJack/2015/03/20/Credits/"/>
+   <updated>2015-03-20T00:00:00-06:00</updated>
+   <id>http://www.sameertotey.com/BlackJack/2015/03/20/Credits</id>
+   <content type="html">&lt;p&gt;This blog was constructed using &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes.&lt;/p&gt;
 
 &lt;p&gt;I have adapted the styles from &lt;a href=&quot;https://github.com/poole/hyde&quot;&gt;Hyde&lt;/a&gt;. Hyde is a brazen two-column Jekyll theme that pairs a prominent sidebar with uncomplicated content. It&amp;#39;s based on &lt;a href=&quot;http://getpoole.com&quot;&gt;Poole&lt;/a&gt;, the Jekyll butler. The overall concept of this blog is inspired from &lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;Jekyll now&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;The blog is hosted on &lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Various open source images are used for displaying cards.&lt;/p&gt;
 
 &lt;hr&gt;
 </content>
