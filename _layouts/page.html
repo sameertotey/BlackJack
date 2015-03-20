@@ -1,5 +1,13 @@
 ---
 layout: default
 ---
-{% include JB/setup %}
-{% include themes/bootstrap/page.html %}
+
+<div class="page">
+  <h1 class="page-title">{{ page.title }}</h1>
+  {{ content }}
+      <footer class="footer">
+          {% include svg-icons.html %}
+      </footer>
+</div>
+
+

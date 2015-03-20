@@ -1,4 +1,0 @@
-Blackjack
-==============
-
-Blackjack project repository
