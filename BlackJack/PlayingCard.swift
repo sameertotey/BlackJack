@@ -71,7 +71,7 @@ class PlayingCard: NSObject {
         return output
     }
     
-    init (rank: Rank, suit: Suit) {
+    required init (rank: Rank, suit: Suit) {
         self.rank = rank
         self.suit = suit
         super.init()
