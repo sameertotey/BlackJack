@@ -55,101 +55,101 @@ class GameConfiguration: NSObject {
     var enableSoundEffects = true
     
     override init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        numDecks = defaults.integerForKey(numDecksKey)
+        let defaults = UserDefaults.standard
+        numDecks = defaults.integer(forKey: numDecksKey)
         if  numDecks == 0 {
             numDecks = 6
         }
-        redealThreshold = defaults.integerForKey(redealThresholdKey)
+        redealThreshold = defaults.integer(forKey: redealThresholdKey)
         if redealThreshold == 0 {
             redealThreshold = 25
         }
-        multipleForPlayerBlackjack = defaults.doubleForKey(multipleForPlayerBlackjackKey)
+        multipleForPlayerBlackjack = defaults.double(forKey: multipleForPlayerBlackjackKey)
         if multipleForPlayerBlackjack == 0 {
             multipleForPlayerBlackjack = 1.5
         }
-        if let testValue: AnyObject = defaults.objectForKey(splitsAllowedKey) {
-            splitsAllowed = defaults.boolForKey(splitsAllowedKey)
+        if let _ = defaults.object(forKey: splitsAllowedKey) {
+            splitsAllowed = defaults.bool(forKey: splitsAllowedKey)
         } else {
             splitsAllowed = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(canSplitAcesKey) {
-            canSplitAces = defaults.boolForKey(canSplitAcesKey)
+        if let _ = defaults.object(forKey: canSplitAcesKey) {
+            canSplitAces = defaults.bool(forKey: canSplitAcesKey)
         } else {
             canSplitAces = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(onlyOneCardOnSplitAcesKey) {
-            onlyOneCardOnSplitAces = defaults.boolForKey(onlyOneCardOnSplitAcesKey)
+        if let _ = defaults.object(forKey: onlyOneCardOnSplitAcesKey) {
+            onlyOneCardOnSplitAces = defaults.bool(forKey: onlyOneCardOnSplitAcesKey)
         } else {
             onlyOneCardOnSplitAces = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(canSplitAny10CardsKey) {
-            canSplitAny10Cards = defaults.boolForKey(canSplitAny10CardsKey)
+        if let _ = defaults.object(forKey: canSplitAny10CardsKey) {
+            canSplitAny10Cards = defaults.bool(forKey: canSplitAny10CardsKey)
         } else {
             canSplitAny10Cards = false
         }
-        maxHandsWithSplits = defaults.integerForKey(maxHandsWithSplitsKey)
+        maxHandsWithSplits = defaults.integer(forKey: maxHandsWithSplitsKey)
         if maxHandsWithSplits == 0 {
             maxHandsWithSplits = 4
         }
-        if let testValue: AnyObject = defaults.objectForKey(doublingDownAllowedKey) {
-            doublingDownAllowed = defaults.boolForKey(doublingDownAllowedKey)
+        if let _ = defaults.object(forKey: doublingDownAllowedKey) {
+            doublingDownAllowed = defaults.bool(forKey: doublingDownAllowedKey)
         } else {
             doublingDownAllowed = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(doublingDownAllowedOn10and11OnlyKey) {
-            doublingDownAllowedOn10and11Only = defaults.boolForKey(doublingDownAllowedOn10and11OnlyKey)
+        if let _ = defaults.object(forKey: doublingDownAllowedOn10and11OnlyKey) {
+            doublingDownAllowedOn10and11Only = defaults.bool(forKey: doublingDownAllowedOn10and11OnlyKey)
         } else {
             doublingDownAllowedOn10and11Only = false
         }
-        if let testValue: AnyObject = defaults.objectForKey(doublingDownAllowedOn9and10and11OnlyKey) {
-            doublingDownAllowedOn9and10and11Only = defaults.boolForKey(doublingDownAllowedOn9and10and11OnlyKey)
+        if let _ = defaults.object(forKey: doublingDownAllowedOn9and10and11OnlyKey) {
+            doublingDownAllowedOn9and10and11Only = defaults.bool(forKey: doublingDownAllowedOn9and10and11OnlyKey)
         } else {
             doublingDownAllowedOn9and10and11Only = false
         }
-        if let testValue: AnyObject = defaults.objectForKey(insuranceAllowedKey) {
-            insuranceAllowed = defaults.boolForKey(insuranceAllowedKey)
+        if let _ = defaults.object(forKey: insuranceAllowedKey) {
+            insuranceAllowed = defaults.bool(forKey: insuranceAllowedKey)
         } else {
             insuranceAllowed = true
         }
-        surrenderAllowed = defaults.boolForKey(surrenderAllowedKey)
-        if let testValue: AnyObject = defaults.objectForKey(checkHoleCardForDealerBlackJackKey) {
-            checkHoleCardForDealerBlackJack = defaults.boolForKey(checkHoleCardForDealerBlackJackKey)
+        surrenderAllowed = defaults.bool(forKey: surrenderAllowedKey)
+        if let _ = defaults.object(forKey: checkHoleCardForDealerBlackJackKey) {
+            checkHoleCardForDealerBlackJack = defaults.bool(forKey: checkHoleCardForDealerBlackJackKey)
         } else {
             checkHoleCardForDealerBlackJack = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(dealerMustHitSoft17Key) {
-            dealerMustHitSoft17 = defaults.boolForKey(dealerMustHitSoft17Key)
+        if let _ = defaults.object(forKey: dealerMustHitSoft17Key) {
+            dealerMustHitSoft17 = defaults.bool(forKey: dealerMustHitSoft17Key)
         } else {
             dealerMustHitSoft17 = true
         }
-        minimumBet = defaults.doubleForKey(minimumBetKey)
+        minimumBet = defaults.double(forKey: minimumBetKey)
         if minimumBet == 0 {
             minimumBet = 5.0
         }
-        maximumBet = defaults.doubleForKey(maximumBetKey)
+        maximumBet = defaults.double(forKey: maximumBetKey)
         if maximumBet == 0 {
             maximumBet = 100.0
         }
         if maximumBet < minimumBet {
             maximumBet = minimumBet
         }
-        maxPlayers = defaults.integerForKey(maxPlayersKey)
+        maxPlayers = defaults.integer(forKey: maxPlayersKey)
         if maxPlayers == 0 {
             maxPlayers = 1
         }
-        if let testValue: AnyObject = defaults.objectForKey(autoStandOnPlayer21Key) {
-            autoStandOnPlayer21 = defaults.boolForKey(autoStandOnPlayer21Key)
+        if let _ = defaults.object(forKey: autoStandOnPlayer21Key) {
+            autoStandOnPlayer21 = defaults.bool(forKey: autoStandOnPlayer21Key)
         } else {
             autoStandOnPlayer21 = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(autoWagerPreviousBetKey) {
-            autoWagerPreviousBet = defaults.boolForKey(autoWagerPreviousBetKey)
+        if let _ = defaults.object(forKey: autoWagerPreviousBetKey) {
+            autoWagerPreviousBet = defaults.bool(forKey: autoWagerPreviousBetKey)
         } else {
             autoWagerPreviousBet = true
         }
-        if let testValue: AnyObject = defaults.objectForKey(enableSoundEffectsKey) {
-            enableSoundEffects = defaults.boolForKey(enableSoundEffectsKey)
+        if let _ = defaults.object(forKey: enableSoundEffectsKey) {
+            enableSoundEffects = defaults.bool(forKey: enableSoundEffectsKey)
         } else {
             enableSoundEffects = true
         }
@@ -157,27 +157,27 @@ class GameConfiguration: NSObject {
     }
     
     func save() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(numDecks, forKey: numDecksKey)
-        defaults.setInteger(redealThreshold, forKey: redealThresholdKey)
-        defaults.setDouble(multipleForPlayerBlackjack, forKey: multipleForPlayerBlackjackKey)
-        defaults.setBool(splitsAllowed, forKey: splitsAllowedKey)
-        defaults.setBool(canSplitAces, forKey: canSplitAcesKey)
-        defaults.setBool(onlyOneCardOnSplitAces, forKey: onlyOneCardOnSplitAcesKey)
-        defaults.setBool(canSplitAny10Cards, forKey: canSplitAny10CardsKey)
-        defaults.setInteger(maxHandsWithSplits, forKey: maxHandsWithSplitsKey)
-        defaults.setBool(doublingDownAllowed, forKey: doublingDownAllowedKey)
-        defaults.setBool(doublingDownAllowedOn10and11Only, forKey: doublingDownAllowedOn10and11OnlyKey)
-        defaults.setBool(doublingDownAllowedOn9and10and11Only, forKey: doublingDownAllowedOn9and10and11OnlyKey)
-        defaults.setBool(insuranceAllowed, forKey: insuranceAllowedKey)
-        defaults.setBool(surrenderAllowed, forKey: surrenderAllowedKey)
-        defaults.setBool(checkHoleCardForDealerBlackJack, forKey: checkHoleCardForDealerBlackJackKey)
-        defaults.setDouble(minimumBet, forKey: minimumBetKey)
-        defaults.setDouble(maximumBet, forKey: maximumBetKey)
-        defaults.setInteger(maxPlayers, forKey: maxPlayersKey)
-        defaults.setBool(autoStandOnPlayer21, forKey: autoStandOnPlayer21Key)
-        defaults.setBool(autoWagerPreviousBet, forKey: autoWagerPreviousBetKey)
-        defaults.setBool(enableSoundEffects, forKey: enableSoundEffectsKey)
+        let defaults = UserDefaults.standard
+        defaults.set(numDecks, forKey: numDecksKey)
+        defaults.set(redealThreshold, forKey: redealThresholdKey)
+        defaults.set(multipleForPlayerBlackjack, forKey: multipleForPlayerBlackjackKey)
+        defaults.set(splitsAllowed, forKey: splitsAllowedKey)
+        defaults.set(canSplitAces, forKey: canSplitAcesKey)
+        defaults.set(onlyOneCardOnSplitAces, forKey: onlyOneCardOnSplitAcesKey)
+        defaults.set(canSplitAny10Cards, forKey: canSplitAny10CardsKey)
+        defaults.set(maxHandsWithSplits, forKey: maxHandsWithSplitsKey)
+        defaults.set(doublingDownAllowed, forKey: doublingDownAllowedKey)
+        defaults.set(doublingDownAllowedOn10and11Only, forKey: doublingDownAllowedOn10and11OnlyKey)
+        defaults.set(doublingDownAllowedOn9and10and11Only, forKey: doublingDownAllowedOn9and10and11OnlyKey)
+        defaults.set(insuranceAllowed, forKey: insuranceAllowedKey)
+        defaults.set(surrenderAllowed, forKey: surrenderAllowedKey)
+        defaults.set(checkHoleCardForDealerBlackJack, forKey: checkHoleCardForDealerBlackJackKey)
+        defaults.set(minimumBet, forKey: minimumBetKey)
+        defaults.set(maximumBet, forKey: maximumBetKey)
+        defaults.set(maxPlayers, forKey: maxPlayersKey)
+        defaults.set(autoStandOnPlayer21, forKey: autoStandOnPlayer21Key)
+        defaults.set(autoWagerPreviousBet, forKey: autoWagerPreviousBetKey)
+        defaults.set(enableSoundEffects, forKey: enableSoundEffectsKey)
         defaults.synchronize()
     }
 }
