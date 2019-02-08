@@ -30,27 +30,27 @@ class GameAnimatedLabel: UIView {
         
         let labelLayer = label.layer
         labelLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-        labelLayer.backgroundColor = UIColor.clearColor().CGColor
+        labelLayer.backgroundColor = UIColor.clear.cgColor
         //set the background color
         let viewLayer = self.layer
-        viewLayer.backgroundColor = UIColor.clearColor().CGColor
+        viewLayer.backgroundColor = UIColor.clear.cgColor
         clipsToBounds = true
         
         gradientLayer.frame = CGRect(x: -bounds.size.width, y: bounds.origin.y, width: 3 * bounds.size.width, height: bounds.size.height)
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         
-        var colors: [AnyObject] = [
-            UIColor.grayColor().CGColor,
-            UIColor.greenColor().CGColor,
-            UIColor.orangeColor().CGColor,
-            UIColor.cyanColor().CGColor,
-            UIColor.redColor().CGColor,
-            UIColor.yellowColor().CGColor
+        let colors: [CGColor] = [
+            UIColor.gray.cgColor,
+            UIColor.green.cgColor,
+            UIColor.orange.cgColor,
+            UIColor.cyan.cgColor,
+            UIColor.red.cgColor,
+            UIColor.yellow.cgColor
         ]
         gradientLayer.colors = colors
         
-        var locations: [AnyObject] = [
+        let locations: [NSNumber] = [
             0.0,
             0.0,
             0.0,
@@ -59,7 +59,7 @@ class GameAnimatedLabel: UIView {
             0.0
         ]
         gradientLayer.locations = locations
-        layer.insertSublayer(gradientLayer, atIndex: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
         layer.addSublayer(labelLayer)
     }
     
@@ -70,10 +70,10 @@ class GameAnimatedLabel: UIView {
         gradientAnimation.toValue = [0.2, 0.33, 0.55, 0.70, 0.88, 1.0]
         gradientAnimation.duration = duration
         gradientAnimation.repeatCount = repeatCount
-        gradientAnimation.removedOnCompletion = false
-        gradientAnimation.fillMode = kCAFillModeRemoved
+        gradientAnimation.isRemovedOnCompletion = false
+        gradientAnimation.fillMode = CAMediaTimingFillMode.removed
         
-        gradientLayer.addAnimation(gradientAnimation, forKey: nil)
+        gradientLayer.add(gradientAnimation, forKey: nil)
         
         if let backgroundColor = labelBackground {
             var delayInerval = duration as Double
