@@ -60,7 +60,6 @@ class PlayingCardDeck<T: PlayingCard> : NSObject {
             for rawRank in 2...14 {
                 self.cards.append(T(rank: T.Rank(rawValue: rawRank)!, suit: T.Suit(rawValue: rawSuit)!))
             }
-            
         }
     }
     
