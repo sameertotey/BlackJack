@@ -40,7 +40,7 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             holeCardFlipRequired = false
             animating = true
             if holeCardView != nil {
-                holeCardView!.userInteractionEnabled = true
+                holeCardView!.isUserInteractionEnabled = true
                 holeCardView!.tag = 1
                 if let constraint = holecardOffsetConstraint {
                     constraint.constant = CGFloat(holeCardView!.tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth))
@@ -86,8 +86,8 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             else if gameOverRequired {
                 gameCompleted()
             } else if displayCardQueue.count > 0  {
-                let playingCardView = createCard(displayCardQueue.removeAtIndex(0))
-                displayCard(playingCardView)
+                let playingCardView = createCard(card: displayCardQueue.remove(at: 0))
+                displayCard(playingCardView: playingCardView)
             } else if labelDisplayNeeded {
                 displayLabel()
             }
@@ -102,22 +102,22 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
     
     func addUpCardToDealerHand(card: BlackjackCard) {
 //        println("added dealer up card \(card)")
-        upCardView = createCard(card)
+        upCardView = createCard(card: card)
         animating = true
         let cardFrame = upCardView!.frame
-        var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
+        let cardShoeRect = view.convert(cardFrame, from: cardShoeContainer)
         
-        let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-        let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
+        let smallFrame = CGRect(x:15, y:cardShoeContainer!.bounds.size.height - 40, width:60, height:40)
+        let smallFrameConverted = view.window!.rootViewController!.view!.convert(smallFrame, from: cardShoeContainer)
         upCardView!.frame = smallFrameConverted
         self.view.window!.rootViewController!.view!.addSubview(upCardView!)
         
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.upCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
+            self.upCardView!.frame = CGRect(x:smallFrameConverted.origin.x, y:smallFrameConverted.origin.y + 50, width:smallFrameConverted.size.width, height:smallFrameConverted.size.height)
             }) { _ in
-                UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
                     self.upCardView!.frame = cardShoeRect
-                    self.pullCardFromShoe(self.upCardView!)
+                    self.pullCardFromShoe(cardView: self.upCardView!)
                     }, completion: { _ in
                                 self.animating = false
                             }
@@ -137,34 +137,33 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
     func displayHoleCard() {
         holeCardDisplayNeeded = false
         animating = true
-        holeCardView = createCard(holeCard!)
-        holeCardView!.userInteractionEnabled = false
+        holeCardView = createCard(card: holeCard!)
+        holeCardView!.isUserInteractionEnabled = false
         originalHoleCardFrame = holeCardView!.frame
         
-        let newFrame = CGRectMake(self.view.bounds.width / cardWidthDivider, 0, self.view.bounds.width / cardWidthDivider, self.view.bounds.height)
+        let newFrame = CGRect(x:self.view.bounds.width / cardWidthDivider, y:0, width:self.view.bounds.width / cardWidthDivider, height:self.view.bounds.height)
         holeCardView!.frame = newFrame
 
         
         let holeCardCenter = holeCardView!.center
         
         let cardFrame = upCardView!.frame
-        var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
+        var cardShoeRect = view.convert(cardFrame, from: cardShoeContainer)
         
-        let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-        let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
+        let smallFrame = CGRect(x:15, y:cardShoeContainer!.bounds.size.height - 40, width:60, height:40)
+        let smallFrameConverted = view.window!.rootViewController!.view!.convert(smallFrame, from: cardShoeContainer)
         holeCardView!.frame = smallFrameConverted
         self.requiredCardCenter = holeCardCenter
         self.view.window!.rootViewController!.view!.addSubview(self.holeCardView!)
-        UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut , animations: {
-            self.holeCardView!.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut , animations: {
+            self.holeCardView!.frame = CGRect(x:smallFrameConverted.origin.x, y:smallFrameConverted.origin.y + 50, width:smallFrameConverted.size.width, height:smallFrameConverted.size.height)
             }, completion: { _ in
-                UIView.animateWithDuration( 0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                UIView.animate( withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
                     self.holeCardView!.frame = cardShoeRect
-                    self.pullCardFromShoe(self.holeCardView!)
+                    self.pullCardFromShoe(cardView: self.holeCardView!)
                     }, completion: { _ in
-                        
                         self.requiredCardCenter = nil
-                        UIView.transitionWithView(self.upCardView!, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                        UIView.transition(with: self.upCardView!, duration: 0.3, options: [.curveEaseOut , .transitionFlipFromLeft], animations: {
                             self.upCardView!.faceUp = true
                             }, completion: { _ in
                                 //                                                delay(seconds: 0.2) {
@@ -185,17 +184,17 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             gameOverRequired = false
         }
         animating = true
-        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut , animations: {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut , animations: {
             self.holeCardView!.frame = self.originalHoleCardFrame!
             }, completion: { _ in
-                UIView.transitionWithView(self.holeCardView!, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                UIView.transition(with: self.holeCardView!, duration: 0.2, options: [.curveEaseOut , .transitionFlipFromLeft], animations: {
                     self.holeCardView!.faceUp = true
                     }, completion: { _ in
 //                        self.revealRemainingCards(2)
                         self.labelDisplayNeeded = true
                         self.animating = false
                 })
-        } )
+        })
     }
 
     
@@ -207,31 +206,31 @@ class DealerHandContainerViewController: HandContainerViewController, DealerObse
             } else {
                 label!.removeFromSuperview()
             }
-            label!.setTranslatesAutoresizingMaskIntoConstraints(false)
-            label!.textAlignment = NSTextAlignment.Center
+            label!.translatesAutoresizingMaskIntoConstraints = false
+            label!.textAlignment = NSTextAlignment.center
             label!.text = self.dealerScoreText
             switch self.dealerScoreText {
             case "Busted!":
-                label!.backgroundColor = UIColor.greenColor()
+                label!.backgroundColor = UIColor.green
             case "Blackjack!":
-                label!.backgroundColor = UIColor.orangeColor()
+                label!.backgroundColor = UIColor.orange
             default:
-                label!.backgroundColor = UIColor.yellowColor()
-                label!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                label!.backgroundColor = UIColor.yellow
+                label!.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
             }
             label!.alpha = 0.0
             label!.sizeToFit()
-            label!.frame = CGRectMake(0, 0, label!.bounds.size.width, label!.bounds.size.height)
-            let myX = CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame)
+            label!.frame = CGRect(x:0, y:0, width:label!.bounds.size.width, height:label!.bounds.size.height)
+            let myX = self.cardViews[self.cardViews.count - 1].frame.maxX
             self.view.addSubview(label!)
-            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
                 self.label!.alpha = 1.0
-                self.label!.frame = CGRectMake(myX, 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
+                self.label!.frame = CGRect(x:myX, y:0, width:self.label!.bounds.size.width, height:self.label!.bounds.size.height)
                 }, completion: { _ in
                     self.addLabelConstraints()
-                    self.view.window!.rootViewController!.view!.userInteractionEnabled = true
+                    self.view.window!.rootViewController!.view!.isUserInteractionEnabled = true
                     self.animating = false
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.dealerHandOver, object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.dealerHandOver), object: nil)
             })
             labelDisplayNeeded = false
         }
