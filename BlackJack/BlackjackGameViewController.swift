@@ -31,23 +31,23 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
             switch currentBet {
             case let x where x < gameConfiguration.minimumBet:
                 statusLabel.text = "Minimum bet: \(gameConfiguration.minimumBet)"
-                dealNewButton.hidden = true
+                dealNewButton.isHidden = true
             case let x where x > gameConfiguration.maximumBet:
                 statusLabel.text = "Maximum bet: \(gameConfiguration.maximumBet)"
                 currentBet = gameConfiguration.maximumBet
-                dealNewButton.hidden = false
+                dealNewButton.isHidden = false
             case let x where x >= gameConfiguration.minimumBet:
                 statusLabel.text = "Ready to Deal"
 //                rebetButton.hidden = true
-                dealNewButton.hidden = false
+                dealNewButton.isHidden = false
             default:
-                println("Default")
+                print("Default")
             }
-            currentBetButton.setTitle("\(currentBet)", forState: .Normal)
+            currentBetButton.setTitle("\(currentBet)", for: .normal)
             currentBetButton.animate()
             let difference = currentBet - oldValue
             if difference > 0 {
-                if !currentPlayer.bet(difference) {
+                if !currentPlayer.bet(amount: difference) {
                     statusLabel.text = "Not enough bankroll"
                     currentBet = oldValue
                 }
@@ -62,7 +62,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         currentPlayer = Player(name: "Sameer")
         currentPlayer.observer = self
         currentPlayer.delegate = blackjackGame
-        playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", forState: .Normal)
+        playerBankRollButton.setTitle("\(currentPlayer.bankRoll)", for: .normal)
         theDealer = Dealer()
         setGameConfiguration()
         theDealer.cardSource = blackjackGame
@@ -78,15 +78,15 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         gameKitHelper = GameKitHelper()
         gameKitHelper?.authenticateLocalPlayer()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCardProgress:", name: NotificationMessages.cardShoeContentStatus, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gameCompleted", name: NotificationMessages.dealerHandOver, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setStatusMessage:", name: NotificationMessages.setStatus, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setPlayerReady", name: NotificationMessages.setPlayerReady, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "resetPlayerScore", name: NotificationMessages.resetPlayerScore, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCardProgress(notification:)), name: NSNotification.Name(rawValue: NotificationMessages.cardShoeContentStatus), object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("gameCompleted")), name: NSNotification.Name(rawValue: NotificationMessages.dealerHandOver), object: nil)
+        NotificationCenter.defaultCenter.addObserver(self, selector: "setStatusMessage:", name: NSNotification.Name(rawValue: NotificationMessages.setStatus), object: nil)
+        NotificationCenter.defaultCenter.addObserver(self, selector: "setPlayerReady", name: NSNotification.Name(rawValue: NotificationMessages.setPlayerReady), object: nil)
+        NotificationCenter.defaultCenter.addObserver(self, selector: "resetPlayerScore", name: NSNotification.Name(rawValue: NotificationMessages.resetPlayerScore), object: nil)
         // listen to Game Center authentication requests
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showAuthenticationViewController:", name: presentGameCenterAuthenticationVeiwController, object: nil)
+        NotificationCenter.defaultCenter.addObserver(self, selector: "showAuthenticationViewController:", name: NSNotification.Name(rawValue: presentGameCenterAuthenticationVeiwController), object: nil)
 
-        startObservingBankroll(currentPlayer)
+        startObservingBankroll(player: currentPlayer)
     }
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -100,8 +100,8 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         presentViewController(notification.object as! UIViewController, animated: true, completion: nil)
     }
 
-    func updateCardProgress(notification: NSNotification) {
-        var progress: NSNumber = notification.object as! NSNumber
+    @objc func updateCardProgress(notification: NSNotification) {
+        let progress: NSNumber = notification.object as! NSNumber
         cardShoeProgressView.setProgress(progress.floatValue, animated: true)
     }
     func setStatusMessage(notification: NSNotification) {

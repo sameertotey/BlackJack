@@ -11,12 +11,7 @@ import Foundation
 //
 // Util delay function
 //
-func delay(seconds: Double, completion:@escaping ()->Void) {
-//    let popTime = dispatch_time(dispatch_time_t(DispatchTime.now()), Int64( Double(NSEC_PER_SEC) * seconds ))
-//
-//    dispatch_after(popTime, dispatch_get_main_queue()) {
-//        completion()
-//    }
+func delay(seconds: Double, completion:@escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
         completion()
     }
