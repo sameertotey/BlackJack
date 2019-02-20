@@ -59,11 +59,12 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         setupCurrentValues()
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SaveFromConfiguration" {
             gameConfiguration.save()
         }
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -85,7 +86,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 8:
             numDecksSegmentedControl.selectedSegmentIndex = 4
         default:
-            println("Error: found number decks = \(gameConfiguration.numDecks)")
+            print("Error: found number decks = \(gameConfiguration.numDecks)")
         }
         
         redealThresholdLabel.text = "Deck Penetration To: \(gameConfiguration.redealThreshold)"
@@ -99,13 +100,13 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 1.5:
             blackjackPayoutMultiplierSegmentedControl.selectedSegmentIndex = 0
         default:
-            println("Error: found Blackjack payout = \(gameConfiguration.multipleForPlayerBlackjack)")
+            print("Error: found Blackjack payout = \(gameConfiguration.multipleForPlayerBlackjack)")
         }
 
-        splitsAllowedSwitch.on = gameConfiguration.splitsAllowed
-        canSplitAcesSwitch.on = gameConfiguration.canSplitAces
-        onlyOneCardForSplitAcesSwitch.on = gameConfiguration.onlyOneCardOnSplitAces
-        any10ValueCardSplitAllowedSwitch.on = gameConfiguration.canSplitAny10Cards
+        splitsAllowedSwitch.isOn = gameConfiguration.splitsAllowed
+        canSplitAcesSwitch.isOn = gameConfiguration.canSplitAces
+        onlyOneCardForSplitAcesSwitch.isOn = gameConfiguration.onlyOneCardOnSplitAces
+        any10ValueCardSplitAllowedSwitch.isOn = gameConfiguration.canSplitAny10Cards
         maxHandsAfterSplitsLabel.text = "Max Hands After Splits: \(gameConfiguration.maxHandsWithSplits)"
         switch gameConfiguration.maxHandsWithSplits {
         case 2:
@@ -115,31 +116,31 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 4:
             maxHandsAfterSplitsSegmentedControl.selectedSegmentIndex = 2
         default:
-            println("Error: found max hands after splits = \(gameConfiguration.maxHandsWithSplits)")
+            print("Error: found max hands after splits = \(gameConfiguration.maxHandsWithSplits)")
         }
-        doubleDownAllowedSwitch.on = gameConfiguration.doublingDownAllowed
-        doubleDownOnlyOn10and11Switch.on = gameConfiguration.doublingDownAllowedOn10and11Only
-        doubleDownOnlyOn9and10and11Switch.on = gameConfiguration.doublingDownAllowedOn9and10and11Only
-        insuranceAllowedSwitch.on = gameConfiguration.insuranceAllowed
-        surrenderAllowedSwitch.on = gameConfiguration.surrenderAllowed
-        checkHoleCardSwitch.on = gameConfiguration.checkHoleCardForDealerBlackJack
-        dealerMustHitSoft17Switch.on = gameConfiguration.dealerMustHitSoft17
+        doubleDownAllowedSwitch.isOn = gameConfiguration.doublingDownAllowed
+        doubleDownOnlyOn10and11Switch.isOn = gameConfiguration.doublingDownAllowedOn10and11Only
+        doubleDownOnlyOn9and10and11Switch.isOn = gameConfiguration.doublingDownAllowedOn9and10and11Only
+        insuranceAllowedSwitch.isOn = gameConfiguration.insuranceAllowed
+        surrenderAllowedSwitch.isOn = gameConfiguration.surrenderAllowed
+        checkHoleCardSwitch.isOn = gameConfiguration.checkHoleCardForDealerBlackJack
+        dealerMustHitSoft17Switch.isOn = gameConfiguration.dealerMustHitSoft17
         minimumBetAmountTextField.text = "\(gameConfiguration.minimumBet)"
         maximumBetAmountTextField.text = "\(gameConfiguration.maximumBet)"
-        autoStandOnPlayer21Switch.on = gameConfiguration.autoStandOnPlayer21
-        autoWagerPreviousBetSwitch.on = gameConfiguration.autoWagerPreviousBet
-        enableSoundEffectsSwitch.on = gameConfiguration.enableSoundEffects
+        autoStandOnPlayer21Switch.isOn = gameConfiguration.autoStandOnPlayer21
+        autoWagerPreviousBetSwitch.isOn = gameConfiguration.autoWagerPreviousBet
+        enableSoundEffectsSwitch.isOn = gameConfiguration.enableSoundEffects
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 3
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         switch section {
@@ -167,7 +168,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 4:
             gameConfiguration.numDecks = 8
         default:
-            println("Error index received for numDecks")
+            print("Error index received for numDecks")
         }
         numDecksLabel.text = "Number of Decks: \(gameConfiguration.numDecks)"
     }
@@ -181,7 +182,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 2:
             gameConfiguration.multipleForPlayerBlackjack = 1.0
         default:
-            println("Error index received for blackjack payout multiplier")
+            print("Error index received for blackjack payout multiplier")
         }
         blackjackPayoutMultiplierLabel.text = "Blackjack Payout Multiple: \(gameConfiguration.multipleForPlayerBlackjack)"
     }
@@ -201,7 +202,7 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         case 2:
             gameConfiguration.maxHandsWithSplits = 4
         default:
-            println("Error index received for max hands after split")
+            print("Error index received for max hands after split")
         }
         maxHandsAfterSplitsLabel.text = "Max Hands After Splits: \(gameConfiguration.maxHandsWithSplits)"
     }
@@ -209,33 +210,33 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     @IBAction func SwitchValueChanged(sender: UISwitch) {
         switch sender {
         case doubleDownAllowedSwitch:
-            gameConfiguration.doublingDownAllowed = sender.on
+            gameConfiguration.doublingDownAllowed = sender.isOn
         case splitsAllowedSwitch:
-            gameConfiguration.splitsAllowed = sender.on
+            gameConfiguration.splitsAllowed = sender.isOn
         case insuranceAllowedSwitch:
-            gameConfiguration.insuranceAllowed = sender.on
+            gameConfiguration.insuranceAllowed = sender.isOn
         case surrenderAllowedSwitch:
-            gameConfiguration.surrenderAllowed = sender.on
+            gameConfiguration.surrenderAllowed = sender.isOn
         case checkHoleCardSwitch:
-            gameConfiguration.checkHoleCardForDealerBlackJack = sender.on
+            gameConfiguration.checkHoleCardForDealerBlackJack = sender.isOn
         case dealerMustHitSoft17Switch:
-            gameConfiguration.dealerMustHitSoft17 = sender.on
+            gameConfiguration.dealerMustHitSoft17 = sender.isOn
         case canSplitAcesSwitch:
-            gameConfiguration.canSplitAces = sender.on
+            gameConfiguration.canSplitAces = sender.isOn
         case onlyOneCardForSplitAcesSwitch:
-            gameConfiguration.onlyOneCardOnSplitAces = sender.on
+            gameConfiguration.onlyOneCardOnSplitAces = sender.isOn
         case any10ValueCardSplitAllowedSwitch:
-            gameConfiguration.canSplitAny10Cards = sender.on
+            gameConfiguration.canSplitAny10Cards = sender.isOn
         case doubleDownOnlyOn10and11Switch:
-            gameConfiguration.doublingDownAllowedOn10and11Only = sender.on
+            gameConfiguration.doublingDownAllowedOn10and11Only = sender.isOn
         case doubleDownOnlyOn9and10and11Switch:
-            gameConfiguration.doublingDownAllowedOn9and10and11Only = sender.on
+            gameConfiguration.doublingDownAllowedOn9and10and11Only = sender.isOn
         case autoStandOnPlayer21Switch:
-            gameConfiguration.autoStandOnPlayer21 = sender.on
+            gameConfiguration.autoStandOnPlayer21 = sender.isOn
         case autoWagerPreviousBetSwitch:
-            gameConfiguration.autoWagerPreviousBet = sender.on
+            gameConfiguration.autoWagerPreviousBet = sender.isOn
         case enableSoundEffectsSwitch:
-            gameConfiguration.enableSoundEffects = sender.on
+            gameConfiguration.enableSoundEffects = sender.isOn
         default: break
         }
     }
@@ -243,18 +244,18 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
     
     // MARK: UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         switch textField {
         case minimumBetAmountTextField:
-            if let number = NSNumberFormatter().numberFromString(textField.text) {
+            if let number = NumberFormatter().number(from: textField.text!) {
                 gameConfiguration.minimumBet = number.doubleValue
                 if gameConfiguration.minimumBet > gameConfiguration.maximumBet {
                     gameConfiguration.minimumBet = gameConfiguration.maximumBet
                 }
             }
         case maximumBetAmountTextField:
-            if let number = NSNumberFormatter().numberFromString(textField.text) {
+            if let number = NumberFormatter().number(from: textField.text!) {
                 gameConfiguration.maximumBet = number.doubleValue
                 if gameConfiguration.maximumBet < gameConfiguration.minimumBet {
                     gameConfiguration.maximumBet = gameConfiguration.minimumBet
@@ -268,37 +269,37 @@ class GameConfigurationControllerTableViewController: UITableViewController, UIT
         return true
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // 
-//        println("Did select row \(indexPath.section) \(indexPath.row)")
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        //
+        //        println("Did select row \(indexPath.section) \(indexPath.row)")
         switch (indexPath.section, indexPath.row) {
         case (2, 0):
-            displayGameCenterVC("Blackjack")
+            displayGameCenterVC(leaderBoardID: "Blackjack")
         case (2, 1):
-            NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.resetPlayerScore, object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.resetPlayerScore), object: nil)
         case (2, 2):
-            GKAchievement.resetAchievementsWithCompletionHandler({ error in
+            GKAchievement.resetAchievements(completionHandler: { error in
                 
             })
 
         default:
-            println("Do nothing for now")
+            print("Do nothing for now")
         }
     }
     
     func displayGameCenterVC(leaderBoardID:String) {
         let gameCenterViewController = GKGameCenterViewController()
         gameCenterViewController.gameCenterDelegate = self
-        gameCenterViewController.viewState = .Leaderboards
+        gameCenterViewController.viewState = .leaderboards
         gameCenterViewController.leaderboardIdentifier = leaderBoardID
-        presentViewController(gameCenterViewController, animated: true, completion: nil)
+        present(gameCenterViewController, animated: true, completion: nil)
     }
 
     // MARK: - GKGameCenterDelegate
     
-    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
 //        println("Game Center View Controller Did Finish")
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     /*
