@@ -10,9 +10,7 @@ import UIKit
 
 class BaseTransitionAnimator: NSObject {
     
-
     var duration = 0.5
-    
     var presenting = true
     
     var initialScale: CGFloat = 0.001
@@ -22,9 +20,8 @@ class BaseTransitionAnimator: NSObject {
     
     // implement common methods here
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
-
     
 }

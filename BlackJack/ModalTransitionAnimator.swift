@@ -10,28 +10,28 @@ import UIKit
 
 class ModalTransitionAnimator: BaseTransitionAnimator, UIViewControllerAnimatedTransitioning {
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         // all animations take place here, force unwrap the view controller
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
                 
-        let containerView = transitionContext.containerView()
+        let containerView = transitionContext.containerView
         
-        let animationDuration = transitionDuration(transitionContext)
+        let animationDuration = transitionDuration(using: transitionContext)
         
         if presenting {
-            fromViewController.view.userInteractionEnabled = false
-            toViewController.view.transform = CGAffineTransformMakeScale(initialScale, initialScale)
-            toViewController.view.layer.shadowColor = UIColor.blackColor().CGColor
-            toViewController.view.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+            fromViewController.view.isUserInteractionEnabled = false
+            toViewController.view.transform = CGAffineTransform(scaleX: initialScale, y: initialScale)
+            toViewController.view.layer.shadowColor = UIColor.black.cgColor
+            toViewController.view.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
             toViewController.view.layer.shadowOpacity = 0.3
             toViewController.view.layer.cornerRadius = 4.0
             toViewController.view.clipsToBounds = true
             
             containerView.addSubview(toViewController.view)
             
-            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                toViewController.view.transform = CGAffineTransformMakeScale(self.finalScale, self.finalScale)
+            UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+                toViewController.view.transform = CGAffineTransform(scaleX: self.finalScale, y: self.finalScale)
                 containerView.addSubview(toViewController.view)
                 fromViewController.view.alpha = 0.5
                 }, completion: { (finished) -> Void in
@@ -39,11 +39,11 @@ class ModalTransitionAnimator: BaseTransitionAnimator, UIViewControllerAnimatedT
             })
 
         } else {
-            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                fromViewController.view.transform = CGAffineTransformMakeScale(self.initialScale, self.initialScale)
+            UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+                fromViewController.view.transform = CGAffineTransform(scaleX: self.initialScale, y: self.initialScale)
                 toViewController.view.alpha = 1.0
                 }, completion: { (finished) -> Void in
-                    toViewController.view.userInteractionEnabled = true
+                    toViewController.view.isUserInteractionEnabled = true
                     fromViewController.view.removeFromSuperview()
                     transitionContext.completeTransition(finished)
             })
@@ -52,9 +52,11 @@ class ModalTransitionAnimator: BaseTransitionAnimator, UIViewControllerAnimatedT
         
     }
     
-    func animationEnded(transitionCompleted: Bool) {
+    func animationEnded(_ transitionCompleted: Bool) {
         // cleanup after animation ended
     }
     
-      
+    override func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return super.transitionDuration(using: transitionContext)
+    }
 }
