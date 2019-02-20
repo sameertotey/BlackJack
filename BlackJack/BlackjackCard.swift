@@ -37,7 +37,7 @@ class BlackjackCard: PlayingCard {
         return output
     }
     
-    override init (rank: Rank, suit: Suit) {
+    required init (rank: Rank, suit: Suit) {
         super.init(rank: rank, suit: suit)
     }
 }

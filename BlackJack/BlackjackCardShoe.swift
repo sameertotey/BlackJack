@@ -49,9 +49,9 @@ class BlackjackCardShoe: NSObject {
         return nil
     }
     
-    func drawCardAt(index: Int) -> BlackjackCard? {
+    func drawCardAt(_ index: Int) -> BlackjackCard? {
         if cards.count > index {
-            return cards.removeAtIndex(index)
+            return cards.remove(at:index)
         }
         return nil
     }
@@ -62,6 +62,6 @@ class BlackjackCardShoe: NSObject {
     
     func sendNotification() {
         let contentStatus = Float(initialCount - cards.count) / Float(initialCount)
-        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.cardShoeContentStatus, object: contentStatus)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.cardShoeContentStatus), object: contentStatus)
     }
 }
