@@ -42,7 +42,7 @@ class AudioController: NSObject {
             }
         }
         
-        func setSoundFileID(#soundID: SystemSoundID) {
+        func setSoundFileID(_ soundID: SystemSoundID) {
             switch self {
             case .Won:
                 GameSounds.won = soundID
@@ -78,22 +78,22 @@ class AudioController: NSObject {
     }
     
     override init() {
-        let path = NSBundle.mainBundle().pathForResource("Sounds", ofType: "plist")
+        let path = Bundle.main.path(forResource: "Sounds", ofType: "plist")
         let soundsDictionary = NSDictionary(contentsOfFile: path!)
-        var soundsArrayRaw: AnyObject? = soundsDictionary?.objectForKey("Sounds")
+        let soundsArrayRaw: AnyObject? = soundsDictionary?.object(forKey: "Sounds") as AnyObject
         
         if let soundsArray: AnyObject = soundsArrayRaw {
             for soundItemDictionary in soundsArray as! NSArray {
                 let dict = soundItemDictionary as! Dictionary<String, String>
                 if let purpose = dict["Purpose"] {
-                    var myGameSound = GameSound(rawValue: purpose)
+                    let myGameSound = GameSound(rawValue: purpose)
                     if let gameSound = myGameSound {
                         var gameSoundID = gameSound.soundFile
                         let urlName = dict["Name"]
                         let urlExtension = dict["Extension"]
-                        let soundURL = NSBundle.mainBundle().URLForResource(urlName!, withExtension: urlExtension)
-                        AudioServicesCreateSystemSoundID(soundURL, &gameSoundID)
-                        gameSound.setSoundFileID(soundID: gameSoundID)
+                        let soundURL = Bundle.main.url(forResource: urlName!, withExtension: urlExtension)
+                        AudioServicesCreateSystemSoundID(soundURL! as CFURL, &gameSoundID)
+                        gameSound.setSoundFileID(gameSoundID)
                     }
                 }
             }
