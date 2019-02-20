@@ -11,7 +11,7 @@ import Foundation
 
 class Player: NSObject {
     var name: String?
-    dynamic var bankRoll = 0.0
+    @objc dynamic var bankRoll = 0.0
     var currentBet = 0.0
     var gameConfiguration: GameConfiguration?
     var insuranceAvailable: Bool = false {
@@ -28,7 +28,7 @@ class Player: NSObject {
     
     weak var delegate: CardPlayerDelegate? {
         didSet {
-            delegate?.registerPlayer(self)
+            delegate?.registerPlayer(player: self)
         }
     }
     
@@ -59,8 +59,8 @@ class Player: NSObject {
     
     func addCardToCurrentHand(card: BlackjackCard) {
         currentHand!.cards.append(card)
-        observer?.addCardToCurrentHand(card)
-        observer?.currentHandStatusUpdate(currentHand!)
+        observer?.addCardToCurrentHand(card: card)
+        observer?.currentHandStatusUpdate(hand: currentHand!)
     }
     
     func hit() {
@@ -72,11 +72,11 @@ class Player: NSObject {
         if currentHand!.handState == .Active {
             if let card = delegate?.getCard() {
 //                println("Player hit for the card \(card)")
-                addCardToCurrentHand(card)
+                addCardToCurrentHand(card: card)
             }
         }
         previousAction = .Hit
-        delegate?.updated(self)
+        delegate?.updated(player: self)
     }
     
     func stand() {
@@ -89,7 +89,7 @@ class Player: NSObject {
             currentHand!.handState = .Stood
         }
         previousAction = .Stand
-        delegate?.updated(self)
+        delegate?.updated(player: self)
     }
     
     func split() {
@@ -101,25 +101,25 @@ class Player: NSObject {
         if currentHand!.handState == .Active {
             if (bankRoll - currentBet) >= 0.0 {
                 bankRoll -= currentBet
-                var newHand = BlackjackHand()
+                let newHand = BlackjackHand()
                 newHand.bet = currentBet
-                var secondCard = currentHand!.cards.removeLast()
+                let secondCard = currentHand!.cards.removeLast()
                 currentHand!.initialCardPair = false
                 newHand.cards.append(secondCard)
                 newHand.split = true
                 currentHand!.split = true
                 hands.append(newHand)
-                observer?.addnewlySplitHand(secondCard)
-                sendNotification("Splitting the Hand")
+                observer?.addnewlySplitHand(card: secondCard)
+                sendNotification(message: "Splitting the Hand")
                 if let card = delegate?.getCard() {
-                    addCardToCurrentHand(card)
+                    addCardToCurrentHand(card: card)
                 }
                 // If the split hand was aces - consult game configuration and act accordingly
                 if secondCard.rank == .Ace {
                     if gameConfiguration != nil {
                         if gameConfiguration!.onlyOneCardOnSplitAces {
 //                            println("split of aces being handled")
-                            sendNotification("Split Aces")
+                            sendNotification(message: "Split Aces")
                             advanceToNextHand()
                         }
                     }
@@ -127,12 +127,12 @@ class Player: NSObject {
                 // If the hand state is not active advance to next hand??
                 if currentHand!.handState == .Stood {
 //                    println("Advancing to next hand")
-                    sendNotification("Auto stand on 21")
+                    sendNotification(message: "Auto stand on 21")
                     advanceToNextHand()
                 }
             } else {
-                sendNotification("Cannot Split - not enough bankroll")
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
+                sendNotification(message: "Cannot Split - not enough bankroll")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setPlayerReady), object: nil)
             }
         }
         previousAction = .Split
@@ -140,10 +140,10 @@ class Player: NSObject {
     
     func advanceToNextHand() {
         if currentHandIndex < hands.count - 1 {
-            currentHandIndex++
+            currentHandIndex += 1
             currentHand = hands[currentHandIndex]
             observer?.switchHands()
-            sendNotification("Moving to the next split hand")
+            sendNotification(message: "Moving to the next split hand")
         }
     }
     
@@ -159,13 +159,13 @@ class Player: NSObject {
                 currentHand!.bet += currentBet
                 if let card = delegate?.getCard() {
                     currentHand!.doubled = true
-                    addCardToCurrentHand(card)
+                    addCardToCurrentHand(card: card)
                 }
-                delegate?.updated(self)
-                sendNotification("Doubled your bet")
+                delegate?.updated(player: self)
+                sendNotification(message: "Doubled your bet")
             } else {
-                sendNotification("Cannot Double - not enough bankroll")
-                NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
+                sendNotification(message: "Cannot Double - not enough bankroll")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setPlayerReady), object: nil)
             }
         }
         previousAction = .DoubleDown
@@ -181,16 +181,16 @@ class Player: NSObject {
         previousAction = .BuyInsurance
         if (bankRoll - currentBet * 0.5 ) >= 0.0 {
             bankRoll -= currentBet * 0.5
-            delegate?.insured(self)
-            sendNotification("Insurance bet made")
+            delegate?.insured(player: self)
+            sendNotification(message: "Insurance bet made")
         }
     }
     
     func declineInsurance() {
-        sendNotification("Insurance declined")
+        sendNotification(message: "Insurance declined")
         previousAction = .DeclineInsurance
-        delegate?.declinedInsurance(self)
-        delegate?.updated(self)
+        delegate?.declinedInsurance(player: self)
+        delegate?.updated(player: self)
     }
     
     func surrenderOptionOffered() {
@@ -198,15 +198,15 @@ class Player: NSObject {
     }
     
     func sendNotification(message: String) {
-        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setStatus), object: message)
     }
     
 
     func surrenderHand() {
-        sendNotification("Surrendered the bet")
+        sendNotification(message: "Surrendered the bet")
         previousAction = .Surrender
         currentHand!.handState = .Surrendered
-        delegate?.updated(self)
+        delegate?.updated(player: self)
     }
     
     override init() {
@@ -216,6 +216,6 @@ class Player: NSObject {
     convenience init(name: String) {
         self.init()
         self.name = name
-        delegate?.registerPlayer(self)
+        delegate?.registerPlayer(player: self)
     }
 }

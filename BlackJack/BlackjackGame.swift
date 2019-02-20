@@ -132,7 +132,7 @@ class BlackjackGame: NSObject, PlayingCardGame, CardPlayerDelegate {
     }
 
     func sendNotification(message: String) {
-        NotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setStatus), object: message)
     }
 
     func drawACard() -> BlackjackCard {

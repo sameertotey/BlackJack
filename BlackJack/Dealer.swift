@@ -26,38 +26,38 @@ class Dealer: NSObject {
                     player.createNewCurrentHand()
                 }
                 let card = cardSource!.drawACard()
-                player.addCardToCurrentHand(card)
+                player.addCardToCurrentHand(card: card)
             }
             let card = cardSource!.drawACard()
             if i == 0 {
                 upCard = card
                 self.hand!.cards.append(card)
-                observer?.addUpCardToDealerHand(card)
+                observer?.addUpCardToDealerHand(card: card)
             } else {
                 holeCard = card
                 self.hand!.cards.append(card)
-                observer?.addHoleCardToDealerHand(card)
+                observer?.addHoleCardToDealerHand(card: card)
             }
         }
         if hand!.handState != .NaturalBlackjack {
-            offerSurrender(players)
+            offerSurrender(players: players)
         }
         if upCard.rank.values.first == 10 {
-            checkForDealerBlackjack(players)
+            checkForDealerBlackjack(players: players)
         } else if upCard.rank == .Ace {
-            offerInsurance(players)
+            offerInsurance(players: players)
         }
      }
     
     func sendNotification(message: String) {
-        NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setStatus, object: message)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setStatus), object: message)
     }
 
     func checkForDealerBlackjack(players: [Player]) {
         // if we have no hole card rule in game options then we should skip this step
         if gameConfiguration!.checkHoleCardForDealerBlackJack {
             if hand!.handState == .NaturalBlackjack {
-                sendNotification("Dealer Blackjack!")
+                sendNotification(message: "Dealer Blackjack!")
                 // we have to have special payout here
                 for player in players {
                     switch player.currentHand!.handState {
