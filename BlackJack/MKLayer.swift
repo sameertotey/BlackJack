@@ -29,7 +29,7 @@ enum MKTimingFunction {
     }
 }
 
-enum MKRippleLocation {
+@objc enum MKRippleLocation: Int {
     case Center
     case Left
     case Right

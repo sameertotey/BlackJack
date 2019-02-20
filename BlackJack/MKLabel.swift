@@ -20,8 +20,8 @@ class MKLabel: UILabel {
         }
     }
     @IBInspectable var aniDuration: Float = 0.65
-    @IBInspectable var circleAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable var backgroundAniTimingFunction: MKTimingFunction = .Linear
+    var circleAniTimingFunction: MKTimingFunction = .Linear
+    var backgroundAniTimingFunction: MKTimingFunction = .Linear
     @IBInspectable var backgroundAniEnabled: Bool = true {
         didSet {
             if !backgroundAniEnabled {
@@ -38,18 +38,18 @@ class MKLabel: UILabel {
     @IBInspectable var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
-            mkLayer.setMaskLayerCornerRadius(cornerRadius)
+            mkLayer.setMaskLayerCornerRadius(cornerRadius: cornerRadius)
         }
     }
     // color
     @IBInspectable var circleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
-            mkLayer.setCircleLayerColor(circleLayerColor)
+            mkLayer.setCircleLayerColor(color: circleLayerColor)
         }
     }
     @IBInspectable var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
-            mkLayer.setBackgroundLayerColor(backgroundLayerColor)
+            mkLayer.setBackgroundLayerColor(color: backgroundLayerColor)
         }
     }
     override var bounds: CGRect {
@@ -60,7 +60,7 @@ class MKLabel: UILabel {
     private lazy var mkLayer: MKLayer = MKLayer(superLayer: self.layer)
        
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setup()
     }
     
@@ -70,26 +70,26 @@ class MKLabel: UILabel {
     }
   
     private func setup() {
-        mkLayer.setCircleLayerColor(circleLayerColor)
-        mkLayer.setBackgroundLayerColor(backgroundLayerColor)
-        mkLayer.setMaskLayerCornerRadius(cornerRadius)
+        mkLayer.setCircleLayerColor(color: circleLayerColor)
+        mkLayer.setBackgroundLayerColor(color: backgroundLayerColor)
+        mkLayer.setMaskLayerCornerRadius(cornerRadius: cornerRadius)
     }
     
     func animateRipple(location: CGPoint? = nil) {
         if let point = location {
-            mkLayer.didChangeTapLocation(point)
+            mkLayer.didChangeTapLocation(location: point)
         } else if rippleLocation == .TapLocation {
             rippleLocation = .Center
         }
         
-        mkLayer.animateScaleForCircleLayer(0.65, toScale: 1.0, timingFunction: circleAniTimingFunction, duration: CFTimeInterval(aniDuration))
-        mkLayer.animateAlphaForBackgroundLayer(backgroundAniTimingFunction, duration: CFTimeInterval(aniDuration))
+        mkLayer.animateScaleForCircleLayer(fromScale: 0.65, toScale: 1.0, timingFunction: circleAniTimingFunction, duration: CFTimeInterval(aniDuration))
+        mkLayer.animateAlphaForBackgroundLayer(timingFunction: backgroundAniTimingFunction, duration: CFTimeInterval(aniDuration))
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        super.touchesBegan(touches as Set<NSObject>, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         if let firstTouch = (touches as NSSet).anyObject() as? UITouch {
-            let location = firstTouch.locationInView(self)
+            let location = firstTouch.location(in: self)
             animateRipple(location: location)
         }
     }

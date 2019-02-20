@@ -27,7 +27,7 @@ class GameActionButton: UIButton {
     }
     @IBInspectable var backgroundLayerCornerRadius: CGFloat = 0.0 {
         didSet {
-            mkLayer.setBackgroundLayerCornerRadius(backgroundLayerCornerRadius)
+            mkLayer.setBackgroundLayerCornerRadius(cornerRadius: backgroundLayerCornerRadius)
         }
     }
     // animations
@@ -40,25 +40,25 @@ class GameActionButton: UIButton {
         }
     }
     @IBInspectable var aniDuration: Float = 0.65
-    @IBInspectable var circleAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable var backgroundAniTimingFunction: MKTimingFunction = .Linear
-    @IBInspectable var shadowAniTimingFunction: MKTimingFunction = .EaseOut
+    var circleAniTimingFunction: MKTimingFunction = .Linear
+    var backgroundAniTimingFunction: MKTimingFunction = .Linear
+    var shadowAniTimingFunction: MKTimingFunction = .EaseOut
     
     @IBInspectable var cornerRadius: CGFloat = 2.5 {
         didSet {
             layer.cornerRadius = cornerRadius
-            mkLayer.setMaskLayerCornerRadius(cornerRadius)
+            mkLayer.setMaskLayerCornerRadius(cornerRadius: cornerRadius)
         }
     }
     // color
     @IBInspectable var circleLayerColor: UIColor = UIColor(white: 0.45, alpha: 0.5) {
         didSet {
-            mkLayer.setCircleLayerColor(circleLayerColor)
+            mkLayer.setCircleLayerColor(color: circleLayerColor)
         }
     }
     @IBInspectable var backgroundLayerColor: UIColor = UIColor(white: 0.75, alpha: 0.25) {
         didSet {
-            mkLayer.setBackgroundLayerColor(backgroundLayerColor)
+            mkLayer.setBackgroundLayerColor(color: backgroundLayerColor)
         }
     }
     override var bounds: CGRect {
@@ -76,7 +76,7 @@ class GameActionButton: UIButton {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setupLayer()
     }
     
@@ -84,26 +84,26 @@ class GameActionButton: UIButton {
     private func setupLayer() {
         adjustsImageWhenHighlighted = false
         self.cornerRadius = 2.5
-        mkLayer.setBackgroundLayerColor(backgroundLayerColor)
-        mkLayer.setCircleLayerColor(circleLayerColor)
+        mkLayer.setBackgroundLayerColor(color: backgroundLayerColor)
+        mkLayer.setCircleLayerColor(color: circleLayerColor)
     }
     
     // MARK - location tracking methods
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         if rippleLocation == .TapLocation {
-            mkLayer.didChangeTapLocation(touch.locationInView(self))
+            mkLayer.didChangeTapLocation(location: touch.location(in: self))
         }
         animate()
-        return super.beginTrackingWithTouch(touch, withEvent: event)
+        return super.beginTracking(touch, with: event)
     }
     
     func animate() {
         // circleLayer animation
-        mkLayer.animateScaleForCircleLayer(0.45, toScale: 1.0, timingFunction: circleAniTimingFunction, duration: CFTimeInterval(aniDuration))
+        mkLayer.animateScaleForCircleLayer(fromScale: 0.45, toScale: 1.0, timingFunction: circleAniTimingFunction, duration: CFTimeInterval(aniDuration))
         
         // backgroundLayer animation
         if backgroundAniEnabled {
-            mkLayer.animateAlphaForBackgroundLayer(backgroundAniTimingFunction, duration: CFTimeInterval(aniDuration))
+            mkLayer.animateAlphaForBackgroundLayer(timingFunction: backgroundAniTimingFunction, duration: CFTimeInterval(aniDuration))
         }
         
         // shadow animation for self
@@ -114,7 +114,7 @@ class GameActionButton: UIButton {
             //if mkType == .Flat {
             //    mkLayer.animateMaskLayerShadow()
             //} else {
-            mkLayer.animateSuperLayerShadow(10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: CFTimeInterval(aniDuration))
+            mkLayer.animateSuperLayerShadow(fromRadius: 10, toRadius: shadowRadius, fromOpacity: 0, toOpacity: shadowOpacity, timingFunction: shadowAniTimingFunction, duration: CFTimeInterval(aniDuration))
             //}
         }
 
