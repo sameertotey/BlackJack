@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerHandContainerViewController: HandContainerViewController, UIDynamicAnimatorDelegate {
+class PlayerHandContainerViewController: HandContainerViewController {
     private var playerScoreText = ""
     private var resultLabel: UILabel?
     var playerHandIndex: Int? {
@@ -51,8 +51,8 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
 
     func addCardToPlayerHand(card: BlackjackCard) {
          if !busyNow() {
-            let playingCardView = createCard(card)
-            displayCard(playingCardView)
+            let playingCardView = createCard(card: card)
+            displayCard(playingCardView: playingCardView)
         } else {
                 displayCardQueue.append(card)
         }
@@ -62,13 +62,13 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
         if !busyNow()  {
             if displayCardQueue.count > 0  {
 
-                let playingCardView = createCard(displayCardQueue.removeAtIndex(0))
-                displayCard(playingCardView)
+                let playingCardView = createCard(card: displayCardQueue.remove(at: 0))
+                displayCard(playingCardView: playingCardView)
             } else if labelDisplayNeeded {
                 displayLabel()
             }  else if resultDisplayNeeded{
                 if savedResultState != nil {
-                    displayResult(savedResultState!)
+                    displayResult(resultState: savedResultState!)
                 }
             }
         }
@@ -82,31 +82,31 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
             } else {
                 label!.removeFromSuperview()
             }
-            label!.setTranslatesAutoresizingMaskIntoConstraints(false)
-            label!.textAlignment = NSTextAlignment.Center
+            label!.translatesAutoresizingMaskIntoConstraints = false
+            label!.textAlignment = NSTextAlignment.center
             label!.text = self.playerScoreText
             switch self.playerScoreText {
             case "Busted!":
-                label!.backgroundColor = UIColor.greenColor()
+                label!.backgroundColor = UIColor.green
             case "Blackjack!":
-                label!.backgroundColor = UIColor.orangeColor()
+                label!.backgroundColor = UIColor.orange
             default:
-                label!.backgroundColor = UIColor.yellowColor()
-                label!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+                label!.backgroundColor = UIColor.yellow
+                label!.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
             }
             label!.alpha = 0.0
             label!.sizeToFit()
-            label!.frame = CGRectMake(0, 0, label!.bounds.size.width, label!.bounds.size.height)
-            let myX = CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame)
+            label!.frame = CGRect(x: 0, y: 0, width: label!.bounds.size.width, height: label!.bounds.size.height)
+            let myX = CGRect(origin: self.cardViews[self.cardViews.count - 1].frame.origin, size: self.cardViews[self.cardViews.count - 1].frame.size).maxX
             self.view.addSubview(label!)
-            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
+            UIView.animate( withDuration: 0.2, delay: 0.0, options: [.curveEaseOut], animations: {
                 self.label!.alpha = 1.0
-                self.label!.frame = CGRectMake(myX, 0, self.label!.bounds.size.width, self.label!.bounds.size.height)
+                self.label!.frame = CGRect(x: myX, y: 0, width: self.label!.bounds.size.width, height: self.label!.bounds.size.height)
                 }, completion: { _ in
                     self.addLabelConstraints()
-                    self.view.window!.rootViewController!.view!.userInteractionEnabled = true
+                    self.view.window!.rootViewController!.view!.isUserInteractionEnabled = true
                     self.animating = false
-                    NSNotificationCenter.defaultCenter().postNotificationName(NotificationMessages.setPlayerReady, object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationMessages.setPlayerReady), object: nil)
 
             })
             labelDisplayNeeded = false
@@ -150,7 +150,7 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
     
     func removeFirstCard() -> BlackjackCard? {
         if cards.count > 0 {
-            let card = cards.removeAtIndex(0)
+            let card = cards.remove(at: 0)
             return card
         } else {
             return nil
@@ -170,44 +170,44 @@ class PlayerHandContainerViewController: HandContainerViewController, UIDynamicA
         switch resultState {
         case .Won:
             resultLabel!.text = "😃"
-            resultLabel!.backgroundColor = UIColor.greenColor()
+            resultLabel!.backgroundColor = UIColor.green
         case .Lost:
             resultLabel!.text = "😢"
-            resultLabel!.backgroundColor = UIColor.orangeColor()
+            resultLabel!.backgroundColor = UIColor.orange
         case .Tied:
             resultLabel!.text = "😑"
-            resultLabel!.backgroundColor = UIColor.grayColor()
+            resultLabel!.backgroundColor = UIColor.gray
         case .NaturalBlackjack:
             resultLabel!.text = "💰"
-            resultLabel!.backgroundColor = UIColor.yellowColor()
+            resultLabel!.backgroundColor = UIColor.yellow
         case .Surrendered:
             resultLabel!.text = "⚐"
-            resultLabel!.backgroundColor = UIColor.redColor()
+            resultLabel!.backgroundColor = UIColor.red
         case .Stood:
-            println("Stood")
+            print("Stood")
         case .Active:
-            println("Active")
+            print("Active")
         default:
-            println("unknown result")
+            print("unknown result")
         }
-        resultLabel!.textAlignment = NSTextAlignment.Center
-        resultLabel!.font = UIFont.systemFontOfSize(30)
+        resultLabel!.textAlignment = NSTextAlignment.center
+        resultLabel!.font = UIFont.systemFont(ofSize: 30)
         
         resultLabel!.alpha = 0.0
         resultLabel!.sizeToFit()
         
         var myX = view.bounds.width / 2
         if cardViews.count > 0 {
-            myX = CGRectGetMaxX(cardViews[cardViews.count - 1].frame) / 2
+            myX = CGRect(origin: cardViews[cardViews.count - 1].frame.origin, size: cardViews[cardViews.count - 1].frame.size).maxX / 2
         }
         let myY = view.bounds.height / 2
         self.view.addSubview(resultLabel!)
-        UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveEaseOut], animations: {
                 self.resultLabel!.alpha = 1.0
-                self.resultLabel!.center = CGPointMake(myX, myY)
+                self.resultLabel!.center = CGPoint(x: myX, y: myY)
             }, completion: { _ in
                 self.animating = false
-                self.view.window!.rootViewController!.view!.userInteractionEnabled = true
+                self.view.window!.rootViewController!.view!.isUserInteractionEnabled = true
         })
     }
     
