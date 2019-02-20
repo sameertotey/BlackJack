@@ -57,14 +57,14 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     }
     
     func reset() {
-        heightConstraints.removeAll(keepCapacity: false)
-        widthConstraints.removeAll(keepCapacity: false)
-        leftOffsetConstraints.removeAll(keepCapacity: false)
+        heightConstraints.removeAll(keepingCapacity: false)
+        widthConstraints.removeAll(keepingCapacity: false)
+        leftOffsetConstraints.removeAll(keepingCapacity: false)
         for subview in view.subviews {
             subview.removeFromSuperview()
         }
         cardViews.removeAll()
-        cards.removeAll(keepCapacity: false)
+        cards.removeAll(keepingCapacity: false)
         displayCardQueue.removeAll()
         labelDisplayNeeded = false
         label = nil
@@ -85,8 +85,8 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
    func createCard(card: BlackjackCard) -> PlayingCardView {
         let cardWidth = CGFloat(self.view.bounds.width / cardWidthDivider)
         let xOffset = cardWidth * CGFloat(cardViews.count) / numberOfCardsPerWidth
-        let playingCardView = PlayingCardView(frame: CGRectMake(xOffset, 0, cardWidth, self.view.bounds.height))
-        playingCardView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let playingCardView = PlayingCardView(frame: CGRect(x: xOffset, y: 0, width: cardWidth, height: self.view.bounds.height))
+        playingCardView.translatesAutoresizingMaskIntoConstraints = false
         playingCardView.tag = cardViews.count
         playingCardView.card = card
         playingCardView.faceUp = false
@@ -100,21 +100,21 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         if cardShoeContainer != nil {
             let cardFrame = playingCardView.frame
             //            requiredCardCenter = playingCardView.center
-            var cardShoeRect = view.convertRect(cardFrame, fromView: cardShoeContainer)
+            var cardShoeRect = view.convert(cardFrame, from: cardShoeContainer)
             
-            let smallFrame = CGRectMake(15, cardShoeContainer!.bounds.size.height - 40, 60, 40)
-            let smallFrameConverted = view.window!.rootViewController!.view!.convertRect(smallFrame, fromView: cardShoeContainer)
+            let smallFrame = CGRect(x: 15, y: cardShoeContainer!.bounds.size.height - 40, width: 60, height: 40)
+            let smallFrameConverted = view.window!.rootViewController!.view!.convert(smallFrame, from: cardShoeContainer)
             playingCardView.frame = smallFrameConverted
             self.view.window!.rootViewController!.view!.addSubview(playingCardView)
             
-            UIView.animateWithDuration(0.2, delay: 0.0, options: .CurveEaseOut, animations: {
-                playingCardView.frame = CGRectMake(smallFrameConverted.origin.x, smallFrameConverted.origin.y + 50, smallFrameConverted.size.width, smallFrameConverted.size.height)
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveEaseOut], animations: {
+                playingCardView.frame = CGRect(x: smallFrameConverted.origin.x, y: smallFrameConverted.origin.y + 50, width: smallFrameConverted.size.width, height: smallFrameConverted.size.height)
                 }) { _ in
-                    UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+                    UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseOut], animations: {
                         playingCardView.frame = cardShoeRect
-                        self.pullCardFromShoe(playingCardView)
+                        self.pullCardFromShoe(cardView: playingCardView)
                         }, completion: { _ in
-                            UIView.transitionWithView(playingCardView, duration: 0.2, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                            UIView.transition(with: playingCardView, duration: 0.2, options: [.curveEaseOut, .transitionFlipFromLeft], animations: {
                                 playingCardView.faceUp = true
                                 }, completion: { _ in
                                     self.animating = false
@@ -124,12 +124,12 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
                     )}
         } else {
             view.addSubview(playingCardView)
-            addConstraints(playingCardView, holeCard: false)
+            addConstraints(cardView: playingCardView, holeCard: false)
             playingCardView.alpha = 0
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseOut], animations: {
                 playingCardView.alpha = 1.0
                 }, completion: {_ in
-                    UIView.transitionWithView(playingCardView, duration: 0.3, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+                    UIView.transition(with: playingCardView, duration: 0.3, options: [.curveEaseOut, .transitionFlipFromLeft], animations: {
                         playingCardView.faceUp = true
                         
                         }) { _ in
@@ -142,15 +142,15 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     }
 
     func pullCardFromShoe(cardView: PlayingCardView) {
-        if contains(cardViews, cardView) {
+        if cardViews.contains(cardView) {
             if self.animator == nil {
                 self.animator = UIDynamicAnimator(referenceView: self.view.window!.rootViewController!.view!)
                 self.animator?.delegate = self
             }
-            self.pushBehavior = UIPushBehavior(items: [cardView], mode: .Instantaneous)
-            self.pushBehavior!.pushDirection = CGVectorMake(-0.2, 0.4)
+            self.pushBehavior = UIPushBehavior(items: [cardView], mode: .instantaneous)
+            self.pushBehavior!.pushDirection = CGVector(dx: -0.2, dy: 0.4)
             self.pushBehavior!.magnitude = -0.1
-            self.animator!.addBehavior(self.pushBehavior)
+            self.animator!.addBehavior(self.pushBehavior!)
             
             var myCenter: CGPoint?
             var holecard = false
@@ -160,14 +160,14 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
                 cardView.tag = Int(numberOfCardsPerWidth)
                 holecard = true
             } else {
-                myCenter = view.convertPoint(cardView.center, toView: cardShoeContainer)
+                myCenter = view.convert(cardView.center, to: cardShoeContainer)
             }
             
-            let point = self.view.convertPoint(myCenter!, toView: self.view.window!.rootViewController!.view!)
+            let point = self.view.convert(myCenter!, to: self.view.window!.rootViewController!.view!)
             
-            self.snapBehavior = UISnapBehavior(item: cardView, snapToPoint: point)
+            self.snapBehavior = UISnapBehavior(item: cardView, snapTo: point)
             self.snapBehavior!.damping = 0.9
-            self.animator!.addBehavior(self.snapBehavior)
+            self.animator!.addBehavior(self.snapBehavior!)
             isHoleCard = holecard
             currentCardView = cardView
         } else {
@@ -180,41 +180,41 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
             return true
         }
         if let myAnimator = animator {
-            if myAnimator.running {
+            if myAnimator.isRunning {
                 return true
             }
         }
         return false
     }
 
-    func dynamicAnimatorDidPause(animator: UIDynamicAnimator) {
+    func dynamicAnimatorDidPause(_ animator: UIDynamicAnimator) {
         currentCardView!.removeFromSuperview()
         self.view.addSubview(currentCardView!)
-        self.addConstraints(currentCardView!, holeCard: isHoleCard!)
+        self.addConstraints(cardView: currentCardView!, holeCard: isHoleCard!)
         isAnimatorOn = false
         animator.removeAllBehaviors()
         finishedDynamicAnimating()
     }
     
-    func dynamicAnimatorWillResume(animator: UIDynamicAnimator) {
+    func dynamicAnimatorWillResume(_ animator: UIDynamicAnimator) {
         isAnimatorOn = true
         
     }
 
     func addConstraints(cardView: PlayingCardView, holeCard: Bool = false) {
 //        NSLayoutConstraint.constraintsWithVisualFormat("H:|-10-[top]-10-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary)
-        let h1 = NSLayoutConstraint(item: cardView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0, constant: view.bounds.size.height)
-        let w1 = NSLayoutConstraint(item: cardView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0, constant: view.bounds.size.width / cardWidthDivider)
-        let t1 = NSLayoutConstraint(item: cardView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0)
+        let h1 = NSLayoutConstraint(item: cardView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: view.bounds.size.height)
+        let w1 = NSLayoutConstraint(item: cardView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: view.bounds.size.width / cardWidthDivider)
+        let t1 = NSLayoutConstraint(item: cardView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
         
-        let l1 = NSLayoutConstraint(item: cardView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: CGFloat(cardView.tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth)))
+        let l1 = NSLayoutConstraint(item: cardView, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: CGFloat(cardView.tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth)))
         if holeCard {
             holecardOffsetConstraint = l1
         }
-        h1.active = true
-        t1.active = true
-        w1.active = true
-        l1.active = true
+        h1.isActive = true
+        t1.isActive = true
+        w1.isActive = true
+        l1.isActive = true
         heightConstraints.append(h1)
         widthConstraints.append(w1)
         leftOffsetConstraints.append(l1)
@@ -226,11 +226,11 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
     
     func addLabelConstraints() {
         if let label = self.label {
-            let t1 = NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0)
+            let t1 = NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
             
-            labelConstraint = NSLayoutConstraint(item: label, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: CGRectGetMaxX(self.cardViews[self.cardViews.count - 1].frame))
-            labelConstraint!.active = true
-            t1.active = true
+            labelConstraint = NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: view, attribute: .left, multiplier: 1, constant: CGRect(origin: self.cardViews[self.cardViews.count - 1].frame.origin, size: self.cardViews[self.cardViews.count - 1].frame.size).maxX)
+            labelConstraint!.isActive = true
+            t1.isActive = true
             view.addConstraint(labelConstraint!)
             view.addConstraint(t1)
         }
@@ -251,12 +251,12 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         for constraint in widthConstraints {
             constraint.constant = view.bounds.size.width / cardWidthDivider
         }
-        for (index,constraint) in enumerate(leftOffsetConstraints) {
+        for (index,constraint) in leftOffsetConstraints.enumerated() {
             constraint.constant = CGFloat(cardViews[index].tag) * view.bounds.size.width /  (CGFloat(cardWidthDivider) * CGFloat(numberOfCardsPerWidth))
             lastCardOffsetConstraint = constraint
         }
         if lastCardOffsetConstraint != nil {
-            updateLabelConstraint(lastCardOffsetConstraint!.constant + view.bounds.size.width / cardWidthDivider)
+            updateLabelConstraint(constantValue: lastCardOffsetConstraint!.constant + view.bounds.size.width / cardWidthDivider)
         }
     }
 
