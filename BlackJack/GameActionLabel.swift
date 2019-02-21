@@ -12,7 +12,7 @@ class GameActionLabel: MKLabel {
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         let originalSize = super.sizeThatFits(self.frame.size)
-        return CGSize(x: max(originalSize.width, originalSize.height) + 20, width: max(originalSize.width, height: originalSize.height) + 20)
+        return CGSize(width: max(originalSize.width, originalSize.height) + 20, height: max(originalSize.width, originalSize.height) + 20)
     }
     
     override func draw(_ rect: CGRect) {

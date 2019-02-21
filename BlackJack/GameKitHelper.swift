@@ -28,7 +28,7 @@ class GameKitHelper : NSObject {
 //        println("Authenticate Local Player called")
         let localPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = {(viewController, error) in
-            self.lastError = error! as NSError
+            self.lastError = error as NSError?
             if viewController != nil {
                 self.authenticationVC = viewController
                 let notification = NSNotification(name: NSNotification.Name(rawValue: presentGameCenterAuthenticationVeiwController), object: viewController)
