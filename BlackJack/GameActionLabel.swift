@@ -10,12 +10,12 @@ import UIKit
 
 class GameActionLabel: MKLabel {
 
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
         let originalSize = super.sizeThatFits(self.frame.size)
-        return CGSizeMake(max(originalSize.width, originalSize.height) + 20, max(originalSize.width, originalSize.height) + 20)
+        return CGSize(x: max(originalSize.width, originalSize.height) + 20, width: max(originalSize.width, height: originalSize.height) + 20)
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         let scaleFactor: CGFloat = 0.5
         let cornerRadius: CGFloat = 10.0
@@ -29,25 +29,25 @@ class GameActionLabel: MKLabel {
 
         let roundedRect = UIBezierPath(roundedRect:self.bounds, cornerRadius:cornerRadius)
 //        roundedRect.addClip()
-        UIColor.whiteColor().setFill()
+        UIColor.white.setFill()
         UIRectFill(self.bounds)
 //        println(self.bounds)
 //        println(self.frame)
-        UIColor.blackColor().setStroke()
+        UIColor.black.setStroke()
         roundedRect.stroke()
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .Center
+        paragraphStyle.alignment = .center
         
-        var cornerFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        cornerFont = cornerFont.fontWithSize(cornerFont.pointSize * scaleFactor)
+        var cornerFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        cornerFont = cornerFont.withSize(cornerFont.pointSize * scaleFactor)
         
-        let cornerText = NSAttributedString(string: "\(self.text!)", attributes:[NSFontAttributeName : cornerFont, NSParagraphStyleAttributeName : paragraphStyle])
+        let cornerText = NSAttributedString(string: "\(self.text!)", attributes:[NSAttributedString.Key.font : cornerFont, NSAttributedString.Key.paragraphStyle : paragraphStyle])
         
         var textBounds = CGRect()
-        textBounds.origin = CGPointMake(10.0, 10.0)
+        textBounds.origin = CGPoint(x: 10.0, y: 10.0)
         textBounds.size = cornerText.size()
-        cornerText.drawInRect(textBounds)
+        cornerText.draw(in: textBounds)
 
 //        println("Ended drawing")
 

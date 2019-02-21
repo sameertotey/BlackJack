@@ -23,7 +23,7 @@ class PlayingCardView: UIView {
         didSet {
             setNeedsDisplay()
             if faceUp != oldValue {
-                AudioController.play(.CardDraw)   
+                AudioController.play(gameSound: .CardDraw)
             }
         }
     }
@@ -38,8 +38,8 @@ class PlayingCardView: UIView {
     
     func setup () {
         backgroundColor = nil
-        opaque = false
-        contentMode = .Redraw
+        isOpaque = false
+        contentMode = .redraw
         cornerScaleFactor = CGFloat (CGFloat(self.bounds.size.height) / CGFloat(cornerFixedFontStandardHeight))
         /*
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -48,23 +48,23 @@ class PlayingCardView: UIView {
         let view = nib.instantiateWithOwner(self, options: nil)[0] as UIView
         */
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "cardTapped:")
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "cardLongPressed:")
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("cardLongPressed:")))
         self.addGestureRecognizer(longPressGestureRecognizer)
     }
 
     func cardTapped(sender: UITapGestureRecognizer) {
-        if sender.state == .Ended {
+        if sender.state == .ended {
             // handling code
-            UIView.transitionWithView(self, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+            UIView.transition(with: self, duration: 0.25, options: [.curveEaseOut, .transitionFlipFromLeft], animations: {
                 self.faceUp = !self.faceUp
                 }, completion: nil)
         }
     }
     
     func cardLongPressed(sender: UILongPressGestureRecognizer) {
-        if sender.state == .Ended {
+        if sender.state == .ended {
             // handling code
-            UIView.transitionWithView(self, duration: 0.25, options: .CurveEaseOut | .TransitionFlipFromLeft, animations: {
+            UIView.transition(with: self, duration: 0.25, options: [.curveEaseOut, .transitionFlipFromLeft], animations: {
                 self.faceUp = !self.faceUp
                 }, completion: nil)
         }
@@ -73,7 +73,7 @@ class PlayingCardView: UIView {
     // MARK: - initializers
        
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setup()
     }
     
@@ -88,48 +88,48 @@ class PlayingCardView: UIView {
     }
     
     // MARK: - drawing
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
 
         let roundedRect = UIBezierPath(roundedRect:self.bounds, cornerRadius:cornerRadius)
         roundedRect.addClip()
-        UIColor.whiteColor().setFill()
+        UIColor.white.setFill()
         UIRectFill(self.bounds)
-        UIColor.blackColor().setStroke()
+        UIColor.black.setStroke()
         roundedRect.stroke()
         
         if self.faceUp {
             if let fullCardImage = UIImage(named: "\(card.rank.shortDescription)\(card.suit.rawValue)") {
-                fullCardImage.drawInRect(bounds)
+                fullCardImage.draw(in: bounds)
             } else {
                 if let faceImage = UIImage(named: "Face-\(card.rank.shortDescription)\(card.suit.rawValue)") {
-                    let imageRect = CGRectInset(bounds, bounds.size.width * (1.0 - faceCardScaleFactor), bounds.size.height * (1.0 - faceCardScaleFactor))
-                    faceImage.drawInRect(imageRect)
+                    let imageRect = bounds.insetBy(dx: bounds.size.width * (1.0 - faceCardScaleFactor), dy: bounds.size.height * (1.0 - faceCardScaleFactor))
+                    faceImage.draw(in: imageRect)
                 } else {
                     drawAllPips()
                 }
                 drawCorners()
             }
         } else {
-            UIImage(named: "cardback-red")?.drawInRect(bounds)
+            UIImage(named: "cardback-red")?.draw(in: bounds)
         }
     }
     
     func drawCorners() {
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .Center
+        paragraphStyle.alignment = .center
         
-        var cornerFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        cornerFont = cornerFont.fontWithSize(cornerFont.pointSize * cornerScaleFactor)
+        var cornerFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        cornerFont = cornerFont.withSize(cornerFont.pointSize * cornerScaleFactor)
         
-        let cornerText = NSAttributedString(string: "\(card.rank.shortDescription)\n\(card.suit.rawValue)", attributes:[NSFontAttributeName : cornerFont, NSParagraphStyleAttributeName : paragraphStyle])
+        let cornerText = NSAttributedString(string: "\(card.rank.shortDescription)\n\(card.suit.rawValue)", attributes:[NSAttributedString.Key.font : cornerFont, NSAttributedString.Key.paragraphStyle : paragraphStyle])
         
         var textBounds = CGRect()
-        textBounds.origin = CGPointMake(cornerOffset, cornerOffset)
+        textBounds.origin = CGPoint(x: cornerOffset, y: cornerOffset)
         textBounds.size = cornerText.size()
-        cornerText.drawInRect(textBounds)
+        cornerText.draw(in: textBounds)
         
         pushContextAndRotateUpsideDown()
-        cornerText.drawInRect(textBounds)
+        cornerText.draw(in: textBounds)
         popContext()
     }
 
@@ -146,30 +146,30 @@ class PlayingCardView: UIView {
         let row4 = [BlackjackCard.Rank.Four, .Five, .Six, .Seven, .Eight, .Nine, .Ten]
         let row5 = [BlackjackCard.Rank.Nine, .Ten]
 
-        if contains(row1, card.rank) {
+        if row1.contains(card.rank) {
             drawPips(horizontalOffset: 0, verticalOffset: 0, mirroredVertically: false)
         }
         
-        if contains(row2, card.rank) {
+        if row2.contains(card.rank) {
             drawPips(horizontalOffset: pipHorizontalOffset, verticalOffset: 0, mirroredVertically: false)
         }
         
-        if contains(row3, card.rank) {
+        if row3.contains(card.rank) {
             drawPips(horizontalOffset: 0, verticalOffset: pipVerticalOffset2, mirroredVertically: card.rank != .Seven)
         }
 
-        if contains(row4, card.rank) {
+        if row4.contains(card.rank) {
             drawPips(horizontalOffset: pipHorizontalOffset, verticalOffset: pipVerticalOffset3, mirroredVertically: true)
         }
         
-        if contains(row5, card.rank) {
+        if row5.contains(card.rank) {
             drawPips(horizontalOffset: pipHorizontalOffset, verticalOffset: pipVerticalOffset1, mirroredVertically: true)
         }
 
         
     }
     
-    func drawPips(#horizontalOffset: CGFloat, verticalOffset: CGFloat, mirroredVertically: Bool) {
+    func drawPips(horizontalOffset: CGFloat, verticalOffset: CGFloat, mirroredVertically: Bool) {
         switch (mirroredVertically) {
         case true:
             drawPip(horizontalOffset, verticalOffset, true)
@@ -180,24 +180,24 @@ class PlayingCardView: UIView {
     }
     
     
-    func drawPip(horizontalOffset: CGFloat, _ verticalOffset: CGFloat, _ upsideDown: Bool) {
+    func drawPip(_ horizontalOffset: CGFloat, _ verticalOffset: CGFloat, _ upsideDown: Bool) {
         let pipFontScaleFactor: CGFloat = 0.012
 
         if upsideDown {
             pushContextAndRotateUpsideDown()
         }
         
-        let middle = CGPointMake(bounds.size.width / 2.0, bounds.size.height / 2.0)
-        var pipFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-        pipFont = pipFont.fontWithSize(pipFont.pointSize * bounds.size.width * pipFontScaleFactor)
-        let attributedSuit = NSAttributedString(string: card.suit.rawValue, attributes: [NSFontAttributeName: pipFont])
+        let middle = CGPoint(x: bounds.size.width / 2.0, y: bounds.size.height / 2.0)
+        var pipFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        pipFont = pipFont.withSize(pipFont.pointSize * bounds.size.width * pipFontScaleFactor)
+        let attributedSuit = NSAttributedString(string: card.suit.rawValue, attributes: [NSAttributedString.Key.font: pipFont])
         let pipSize = attributedSuit.size()
-        var pipOrigin = CGPointMake(middle.x - pipSize.width / 2.0 - horizontalOffset * bounds.size.width, middle.y - pipSize.height / 2.0 - verticalOffset * bounds.size.height)
-        attributedSuit.drawAtPoint(pipOrigin)
+        var pipOrigin = CGPoint(x: middle.x - pipSize.width / 2.0 - horizontalOffset * bounds.size.width, y: middle.y - pipSize.height / 2.0 - verticalOffset * bounds.size.height)
+        attributedSuit.draw(at: pipOrigin)
         
         if horizontalOffset > 0 {
             pipOrigin.x += horizontalOffset * 2.0 * bounds.size.width
-            attributedSuit.drawAtPoint(pipOrigin)
+            attributedSuit.draw(at: pipOrigin)
         }
         
         if upsideDown {
@@ -209,13 +209,13 @@ class PlayingCardView: UIView {
     
     func pushContextAndRotateUpsideDown() {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
-        CGContextTranslateCTM(context, bounds.size.width, bounds.size.height)
-        CGContextRotateCTM(context, CGFloat(M_PI))
+        context!.saveGState()
+        context!.translateBy(x: bounds.size.width, y: bounds.size.height)
+        context!.rotate(by: CGFloat(Double.pi))
     }
     
     func popContext() {
-        CGContextRestoreGState(UIGraphicsGetCurrentContext())
+        UIGraphicsGetCurrentContext()!.restoreGState()
     }
 
 }
