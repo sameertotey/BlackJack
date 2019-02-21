@@ -434,7 +434,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
     
     
-    @IBAction func playerActionButtonTouchUpInside(sender: GameActionButton) {
+    @IBAction func playerActionButtonTouchUpInside(_ sender: GameActionButton) {
         if readyForNextAction() {
             switch sender {
             case chip1Button:
@@ -550,7 +550,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
       
-    @IBAction func hitButtonTouchUpInside(sender: UIButton) {
+    @IBAction func hitButtonTouchUpInside(_ sender: UIButton) {
         performHit()
      }
     
@@ -562,7 +562,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
    
-    @IBAction func standButtonTouchUpInside(sender: UIButton) {
+    @IBAction func standButtonTouchUpInside(_ sender: UIButton) {
         performStand()
      }
     
@@ -574,7 +574,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
-    @IBAction func doubleButtonTouchUpInside(sender: UIButton) {
+    @IBAction func doubleButtonTouchUpInside(_ sender: UIButton) {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.doubleDown()
@@ -582,7 +582,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
      }
 
-    @IBAction func splitHandButtonTouchUpInside(sender: UIButton) {
+    @IBAction func splitHandButtonTouchUpInside(_ sender: UIButton) {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.split()
@@ -590,7 +590,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
-    @IBAction func surrenderButtonTouchUpInside(sender: UIButton) {
+    @IBAction func surrenderButtonTouchUpInside(_ sender: UIButton) {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.surrenderHand()
@@ -598,7 +598,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
-    @IBAction func buyInsuranceButtonTouchUpInside(sender: UIButton) {
+    @IBAction func buyInsuranceButtonTouchUpInside(_ sender: UIButton) {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.buyInsurance()
@@ -606,7 +606,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
         }
     }
     
-    @IBAction func declineInsuranceButtonTouchUpInside(sender: UIButton) {
+    @IBAction func declineInsuranceButtonTouchUpInside(_ sender: UIButton) {
         if readyForNextAction() {
             hideAllPlayerButtons()
             currentPlayer.declineInsurance()
@@ -799,20 +799,20 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
     }
    
     
-    @IBAction func cardShoeLongPressed(sender: UILongPressGestureRecognizer) {
+    @IBAction func cardShoeLongPressed(_ sender: UILongPressGestureRecognizer) {
 //        println("Card shoe was long pressed")
         if sender.state == .ended  && blackjackGame.gameState == .Deal {
             blackjackGame.getNewShoe()
         }
     }
-    @IBAction func doubleTappedView(sender: UITapGestureRecognizer) {
+    @IBAction func doubleTappedView(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended && blackjackGame.gameState == .Players {
 //            println("Double tapped the view")
             performHit()
         }
     }
     
-    @IBAction func swipedTheViewUp(sender: UISwipeGestureRecognizer) {
+    @IBAction func swipedTheViewUp(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended  && blackjackGame.gameState == .Deal  {
 //            println("swiped  the view UP")
             deal()
@@ -820,7 +820,7 @@ class BlackjackGameViewController: UIViewController, CardPlayerObserver, UIDynam
 
     }
     
-    @IBAction func swipedTheView(sender: UISwipeGestureRecognizer) {
+    @IBAction func swipedTheView(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended && blackjackGame.gameState == .Players {
 //            println("swiped  the view")
             performStand()
