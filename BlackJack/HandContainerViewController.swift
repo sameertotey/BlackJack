@@ -100,7 +100,7 @@ class HandContainerViewController: UIViewController, UIDynamicAnimatorDelegate {
         if cardShoeContainer != nil {
             let cardFrame = playingCardView.frame
             //            requiredCardCenter = playingCardView.center
-            var cardShoeRect = view.convert(cardFrame, from: cardShoeContainer)
+            let cardShoeRect = view.convert(cardFrame, from: cardShoeContainer)
             
             let smallFrame = CGRect(x: 15, y: cardShoeContainer!.bounds.size.height - 40, width: 60, height: 40)
             let smallFrameConverted = view.window!.rootViewController!.view!.convert(smallFrame, from: cardShoeContainer)
